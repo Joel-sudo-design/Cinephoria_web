@@ -1,7 +1,0 @@
--- 1. Mettre date_debut au dernier mercredi
-UPDATE film
-SET date_debut = DATE_SUB(CURDATE(), INTERVAL (WEEKDAY(CURDATE()) + 5) % 7 DAY);
-
--- 2. Mettre date_fin = date_debut + 7 jours
-UPDATE film
-SET date_fin = DATE_ADD(date_debut, INTERVAL 7 DAY);
