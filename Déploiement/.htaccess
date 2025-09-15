@@ -1,6 +1,0 @@
-RewriteEngine on
-RedirectMatch 307 ^/$ /accueil/
-RewriteCond %{REQUEST_URI} !^Cinephoria/public/
-RewriteRule ^(.*)$ Cinephoria/public/$1 [L]
-RewriteCond %{HTTPS} !=on
-RewriteRule .* https://%{HTTP_HOST}/accueil [R=301,L]
