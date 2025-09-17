@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Cinephoria.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Cinephoria.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -399,15 +397,7 @@
       <workItem from="1743348165960" duration="58000" />
       <workItem from="1743350515218" duration="22000" />
       <workItem from="1758030271164" duration="715000" />
-      <workItem from="1758096263759" duration="2968000" />
-    </task>
-    <task id="LOCAL-00208" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1736160703491</created>
-      <option name="number" value="00208" />
-      <option name="presentableId" value="LOCAL-00208" />
-      <option name="project" value="LOCAL" />
-      <updated>1736160703491</updated>
+      <workItem from="1758096263759" duration="3292000" />
     </task>
     <task id="LOCAL-00209" summary="Modif">
       <option name="closed" value="true" />
@@ -793,7 +783,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743348180835</updated>
     </task>
-    <option name="localTasksCounter" value="257" />
+    <task id="LOCAL-00257" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758099340069</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1758099340070</updated>
+    </task>
+    <option name="localTasksCounter" value="258" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
