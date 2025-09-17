@@ -1,0 +1,60 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_ENV: dev
+    container_name: symfony_app
+    volumes:
+      - .:/var/www/Cinephoria_web:delegated
+      - public_build:/var/www/Cinephoria_web/public/build
+      - /var/www/Cinephoria_web/vendor
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+      - mongodb
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  db:
+    image: mariadb:10.11.6
+    container_name: symfony_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cinephoria
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  mongodb_data:
+  public_build:
