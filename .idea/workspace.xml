@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid">
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -397,31 +403,7 @@
       <workItem from="1743350515218" duration="22000" />
       <workItem from="1758030271164" duration="715000" />
       <workItem from="1758096263759" duration="5372000" />
-      <workItem from="1758114114533" duration="1751000" />
-    </task>
-    <task id="LOCAL-00213" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1736533642999</created>
-      <option name="number" value="00213" />
-      <option name="presentableId" value="LOCAL-00213" />
-      <option name="project" value="LOCAL" />
-      <updated>1736533643000</updated>
-    </task>
-    <task id="LOCAL-00214" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1736589989310</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1736589989311</updated>
-    </task>
-    <task id="LOCAL-00215" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1736616433997</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1736616433998</updated>
+      <workItem from="1758114114533" duration="2538000" />
     </task>
     <task id="LOCAL-00216" summary="Modif">
       <option name="closed" value="true" />
@@ -791,7 +773,31 @@
       <option name="project" value="LOCAL" />
       <updated>1758115579848</updated>
     </task>
-    <option name="localTasksCounter" value="262" />
+    <task id="LOCAL-00262" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758115877718</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1758115877718</updated>
+    </task>
+    <task id="LOCAL-00263" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758115895313</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1758115895313</updated>
+    </task>
+    <task id="LOCAL-00264" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758115907914</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1758115907914</updated>
+    </task>
+    <option name="localTasksCounter" value="265" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
