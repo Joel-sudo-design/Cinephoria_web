@@ -56,6 +56,9 @@ http://localhost:8081
 - utilisateur : `symfony`
 - mot de passe : `symfony`
 
+Les données sont insérées en **une seule transaction** grâce au fichier `transaction_sql.sql`.  
+➡️ Les films auront automatiquement une **date de début fixée au dernier mercredi**.
+
 ---
 
 ## Utilisation
