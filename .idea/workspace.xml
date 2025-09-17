@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid">
+      <change afterPath="$PROJECT_DIR$/transaction.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -397,15 +398,7 @@
       <workItem from="1743350515218" duration="22000" />
       <workItem from="1758030271164" duration="715000" />
       <workItem from="1758096263759" duration="5372000" />
-      <workItem from="1758114114533" duration="895000" />
-    </task>
-    <task id="LOCAL-00211" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1736530973987</created>
-      <option name="number" value="00211" />
-      <option name="presentableId" value="LOCAL-00211" />
-      <option name="project" value="LOCAL" />
-      <updated>1736530973987</updated>
+      <workItem from="1758114114533" duration="1441000" />
     </task>
     <task id="LOCAL-00212" summary="Modif">
       <option name="closed" value="true" />
@@ -791,7 +784,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758114694271</updated>
     </task>
-    <option name="localTasksCounter" value="260" />
+    <task id="LOCAL-00260" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758115198732</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1758115198732</updated>
+    </task>
+    <option name="localTasksCounter" value="261" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
