@@ -1,6 +1,5 @@
 START TRANSACTION;
 
--- Dernier mercredi strictement avant aujourd'hui
 SET @last_wednesday = DATE_SUB(
   CURDATE(),
   INTERVAL (CASE WHEN DAYOFWEEK(CURDATE()) = 4 THEN 7 ELSE (DAYOFWEEK(CURDATE()) + 3) % 7 END) DAY
