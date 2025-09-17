@@ -1,97 +1,88 @@
-# Cinéphoria
+# Cinephoria
 
-Voici une application Symfony pour présenter les films du cinéma "Le Cinéporia". 
+Application Symfony pour présenter les films du cinéma **"Le Cinéphoria"**.
 
-- En tant qu'administrateur on peut ajouter et supprimer des nouveaux films, des séances, créer des comptes pour les employés, modifier les mots de passe des comptes employés et afficher le nombre de réservations par film sur 1 semaine. 
-- En tant qu'employé il est possible de gérer des nouveaux films comme les administrateurs et valider les avis. 
-- Pour les visiteurs il est possible de créer un compte pour réserver en ligne avec accès aux commandes une fois authentifié (utilisateur).  
+- **Administrateur** : ajouter/supprimer des films et des séances, créer des comptes employés, modifier les mots de passe, afficher les statistiques (nombre de réservations par film sur 1 semaine).
+- **Employé** : gérer des films et valider les avis.
+- **Visiteur** : créer un compte, réserver en ligne, accéder à ses commandes une fois connecté.
 
-Ce projet utilise Symfony pour le backend.
-HTML5, CSS, Bootstrap, JS avec JQuerry, AJAX avec AXIOS pour le frontend.
-MySQL pour la base de données relationnelle et MongoDB pour la base de donnée NoSQL.
-XAMPP pour le déploiement en local.
+Backend : Symfony (PHP 8.2)  
+Frontend : HTML5, CSS, Bootstrap, JS (jQuery, Axios)  
+Bases de données : MariaDB (SQL) + MongoDB (NoSQL)  
+Déploiement local : **Docker**
 
-Lien vers le site : https://cinephoria.joeldermont.fr
-
----
-
-## Table des Matières
-
-1. [Aperçu](#aperçu)
-2. [Prérequis](#prérequis)
-3. [Installation et Configuration](#installation-et-configuration)
-4. [Utilisation](#utilisation)
-5. [Auteur](#auteur)
+Lien en ligne : https://cinephoria.joeldermont.fr
 
 ---
 
 ## Aperçu
 
 ![Aperçu de l'application](aperçu.png)
-  
+
 ---
 
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
+Avant de commencer, installez :
 
-- [XAMPP](https://www.apachefriends.org/) - Serveur local incluant Apache et MySQL.
-- [MongoDB](https://www.mongodb.com/try/download/community) - Base de données NoSQL utilisée dans ce projet.
-- [Composer](https://getcomposer.org/) - Gestionnaire de dépendances pour PHP.
-- [PHP 8.1 ou supérieur](https://windows.php.net/download) - Version recommandée pour Symfony.
-- [Node.js](https://nodejs.org/) - Plateforme JavaScript requise pour gérer les dépendances.
-- [Yarn](https://classic.yarnpkg.com/en/docs/install) - Gestionnaire de paquets pour les ressources front-end.
-- [Git](https://git-scm.com/) - Outil de gestion de version.
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Git](https://git-scm.com/)
 
 ---
 
 ## Installation et Configuration
 
-Exécutez les commandes suivantes pour installer et configurer le projet :
+Clonez le dépôt :
 
+```bash
+git clone https://github.com/Joel-sudo-design/Cinephoria_web.git
+cd Cinephoria_web
 ```
 
-## Placer les fichiers dans le dossier XAMPP
-Placez les fichiers `index.php` et `.htaccess` dans le répertoire `C:\xampp\htdocs`.
+Construisez et lancez les conteneurs :
 
-# Clonez le dépôt Git dans C:\xampp\htdocs\Cinephoria
-git clone https://github.com/Joel-sudo-design/Cinephoria.git
-
-# Accédez au répertoire du projet
-cd C:\xampp\htdocs\Cinephoria
-
-# Installez les dépendances nécessaires
-composer install
-
-# Modifier le fichier .env avec vos informations (serveur mail et mot de passe MySQL)
-Pour l'envoi des mails il faudra également modifier l'address dans les controleurs 'RegistrationController', 'ContactController' et la fonction processSendingPasswordResetEmail dans 'AdministrationController'.
-
-# Compilez les ressources front-end (CSS, JavaScript, images)
-yarn build
-
-# Créez la base de données et exécutez les migrations
-php bin/console doctrine:database:create
-php bin/console make:migration
-php bin/console doctrine:migrations:migrate
-
-# Importer la transaction_sql.sql avec phpMyAdmin
-
+```bash
+docker compose up -d --build
 ```
+
+Le premier démarrage va :
+- Installer les dépendances PHP (`composer install`) si besoin
+- Créer et migrer la base MariaDB
+- Installer les dépendances front (`yarn install`) et builder les assets
+
+Importer les données SQL initiales via **phpMyAdmin** :  
+http://localhost:8081
+- hôte : `db`
+- utilisateur : `symfony`
+- mot de passe : `symfony`
 
 ---
 
 ## Utilisation
 
-Ouvrez le panneau de contrôle XAMPP et lancez les services Apache et MySQL.  
-Dans votre navigateur, ouvrez l'URL suivante pour accéder à l'application :  
-http://localhost
+- Application : http://localhost
+- phpMyAdmin (MariaDB) : http://localhost:8081
+- Mongo Express : http://localhost:8082
+- MailHog : http://localhost:8025
+
+Logs applicatifs :
+```bash
+docker compose logs -f app
+```
+
+Accès au shell du conteneur Symfony :
+```bash
+docker compose exec app bash
+```
+
+Arrêter l’environnement :
+```bash
+docker compose down
+```
 
 ---
 
 ## Auteur
 
 Joël DERMONT  
-Développeur principal - [Profil GitHub de Joël DERMONT](https://github.com/Joel-sudo-design)
-
-
-
+Développeur principal - [Profil GitHub](https://github.com/Joel-sudo-design)

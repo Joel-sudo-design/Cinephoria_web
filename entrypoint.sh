@@ -13,6 +13,11 @@ fi
 echo "Création de la base si besoin"
 php bin/console doctrine:database:create --if-not-exists || true
 
+if ! ls -1 migrations/*.php >/dev/null 2>&1; then
+  echo "Aucune migration trouvée -> doctrine:schema:create (fallback dev)"
+  php bin/console doctrine:schema:create
+fi
+
 echo "Migration de la base si besoin"
 php bin/console doctrine:migrations:migrate --no-interaction || true
 

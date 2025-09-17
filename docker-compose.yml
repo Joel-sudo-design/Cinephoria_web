@@ -15,9 +15,13 @@ services:
     depends_on:
       - db
       - mongodb
+      - mailhog
     environment:
       APP_ENV: dev
       APP_DEBUG: 1
+      MAILER_DSN: smtp://mailhog:1025
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DB: cinephoria
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -38,10 +42,32 @@ services:
   mongodb:
     image: mongo:6
     container_name: mongo
+    restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    ports:
+      - "8082:8081"
+    depends_on:
+      - mongodb
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    restart: always
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
