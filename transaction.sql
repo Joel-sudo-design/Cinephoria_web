@@ -6,6 +6,8 @@ SET @last_wednesday = DATE_SUB(
 );
 SET @last_wednesday_plus6 = DATE_ADD(@last_wednesday, INTERVAL 6 DAY);
 
+INSERT INTO user (email, roles, password, password_must_change, username, firstname, name, is_verified, api_token) VALUES ('admin@cinephoria.fr', '["ROLE_ADMIN"]', '$2y$13$KIXQKk3aVbC7gHtqV1zZyeEiz6z1E3hYQ4qBZQq3C95gWGBQoe5Oq', 0, 'admin', 'Admin', 'Cinéphoria', 1, NULL);
+
 INSERT INTO cinema (id, name) VALUES
                                   (1, 'Toulouse'),
                                   (2, 'Nantes'),
@@ -135,20 +137,5 @@ FROM seance s
                    ON sc.seance_id = s.id AND sc.cinema_id = c.cinema_id
 WHERE sc.seance_id IS NULL
   AND s.date BETWEEN CURDATE() AND DATE(CONCAT(YEAR(CURDATE()), '-12-31'));
-
-INSERT INTO seance_cinema (seance_id, cinema_id)
-SELECT
-    seances.id AS seance_id,
-    cinemas.cinema_id
-FROM
-    (SELECT id FROM seance) AS seances
-        CROSS JOIN
-    (SELECT 1 AS cinema_id UNION ALL
-     SELECT 2 UNION ALL
-     SELECT 3 UNION ALL
-     SELECT 4 UNION ALL
-     SELECT 5 UNION ALL
-     SELECT 6 UNION ALL
-     SELECT 7) AS cinemas;
 
 COMMIT;
