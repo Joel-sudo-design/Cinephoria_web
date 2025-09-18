@@ -28,6 +28,36 @@ Avant de commencer, installez :
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Git](https://git-scm.com/)
 
+### Activer et installer WSL2 (Windows uniquement)
+
+Si vous êtes sur **Windows**, activez **WSL2** (Windows Subsystem for Linux) pour une meilleure compatibilité Docker/Symfony :
+
+1. Activez WSL et la virtualisation :
+   ```powershell
+   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+   ```
+
+2. Installez la mise à jour du noyau Linux (si besoin) :  
+   https://aka.ms/wsl2kernel
+
+3. Définissez WSL2 comme version par défaut :
+   ```powershell
+   wsl --set-default-version 2
+   ```
+
+4. Installez une distribution Linux depuis le **Microsoft Store** (ex : Ubuntu 22.04 LTS).
+
+5. Vérifiez que tout fonctionne :
+   ```powershell
+   wsl --list --verbose
+   ```
+
+6. Activez **l’intégration Docker avec WSL2** :
+    - Ouvrez **Docker Desktop**
+    - Allez dans **Settings > Resources > WSL Integration**
+    - Activez votre distribution (ex : Ubuntu-22.04)
+
 ---
 
 ## Installation et Configuration
