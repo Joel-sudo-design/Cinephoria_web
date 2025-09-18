@@ -28,7 +28,7 @@ services:
   db:
     image: mariadb:10.11.6
     container_name: symfony_db
-    restart: always
+    restart: no
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: cinephoria
@@ -42,7 +42,7 @@ services:
   mongodb:
     image: mongo:6
     container_name: mongo
-    restart: always
+    restart: no
     ports:
       - "27017:27017"
     volumes:
@@ -51,7 +51,7 @@ services:
   mongo-express:
     image: mongo-express:latest
     container_name: mongo_express
-    restart: always
+    restart: no
     environment:
       ME_CONFIG_MONGODB_SERVER: mongodb
       ME_CONFIG_BASICAUTH_USERNAME: admin
@@ -64,7 +64,7 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     container_name: mailhog
-    restart: always
+    restart: no
     ports:
       - "1025:1025"
       - "8025:8025"
