@@ -33,7 +33,7 @@ RUN chmod +x /wait-for-it.sh
 
 WORKDIR /var/www/Cinephoria_web
 
-# Dépendances PHP (conditionnelles)
+# Dépendances PHP
 COPY composer.json composer.lock ./
 RUN if [ "$APP_ENV" = "prod" ]; then \
       composer install --no-dev --optimize-autoloader --no-scripts; \
@@ -77,4 +77,7 @@ RUN chmod +x /wait-for-it.sh
 WORKDIR /var/www/Cinephoria_web
 EXPOSE 80
 
-ENTRYPOINT ["/var/www/Cinephoria_web/entrypoint.sh"]
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
+    && chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

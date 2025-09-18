@@ -2,3 +2,5 @@ node_modules
 vendor
 var
 build
+.env.local
+.env.test
