@@ -9,7 +9,7 @@ Application Symfony pour présenter les films du cinéma **"Le Cinéphoria"**.
 Backend : Symfony (PHP 8.2)  
 Frontend : HTML5, CSS, Bootstrap, JS (jQuery, Axios)  
 Bases de données : MariaDB (SQL) + MongoDB (NoSQL)  
-Déploiement local : **Docker**
+Déploiement local : Docker
 
 Lien en ligne : https://cinephoria.joeldermont.fr
 
