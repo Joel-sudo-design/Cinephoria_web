@@ -28,16 +28,11 @@ if [ ! -d node_modules ] || [ yarn.lock -nt node_modules ]; then
   yarn install
 fi
 
-if [ ! -f public/build/entrypoints.json ] || [ yarn.lock -nt public/build/entrypoints.json ]; then
-  echo "Build des assets"
-  ./node_modules/.bin/encore dev
-else
-  echo "Assets à jour, pas de rebuild"
-fi
+echo "Build des assets"
+yarn build
 
 echo "Ajustement des permissions"
 chown -R www-data:www-data var public || true
-
 
 echo "Lancement du serveur apache"
 exec apache2-foreground
