@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid">
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transaction.sql" beforeDir="false" afterPath="$PROJECT_DIR$/transaction.sql" afterDir="false" />
     </list>
@@ -224,11 +226,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\joeld\Cinephoria_web" />
       <recent name="C:\xampp\htdocs\Cinephoria" />
       <recent name="C:\xampp\htdocs\Cinephoria\templates\reservation" />
       <recent name="C:\xampp\htdocs\Cinephoria\templates\commandes" />
       <recent name="C:\xampp\htdocs\Cinephoria\templates" />
-      <recent name="C:\xampp\htdocs\Cinephoria\templates\employe" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\Cinephoria\config" />
@@ -537,15 +539,8 @@
       <workItem from="1758114114533" duration="3499000" />
       <workItem from="1758176764460" duration="10432000" />
       <workItem from="1758264034235" duration="7540000" />
-      <workItem from="1758271644983" duration="6736000" />
-    </task>
-    <task id="LOCAL-00231" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1737032904870</created>
-      <option name="number" value="00231" />
-      <option name="presentableId" value="LOCAL-00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1737032904870</updated>
+      <workItem from="1758271644983" duration="8611000" />
+      <workItem from="1758295062406" duration="3837000" />
     </task>
     <task id="LOCAL-00232" summary="Modif">
       <option name="closed" value="true" />
@@ -931,7 +926,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758277784684</updated>
     </task>
-    <option name="localTasksCounter" value="280" />
+    <task id="LOCAL-00280" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758278516737</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1758278516737</updated>
+    </task>
+    <option name="localTasksCounter" value="281" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

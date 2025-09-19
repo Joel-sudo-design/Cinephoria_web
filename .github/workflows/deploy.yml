@@ -1,0 +1,104 @@
+name: CI-CD Prod
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+# Empêche les déploiements concurrents
+concurrency:
+  group: "deploy-prod"
+  cancel-in-progress: false
+
+env:
+  IMAGE_NAME: ghcr.io/joel-sudo-design/cinephoria_web/app
+
+jobs:
+  build-and-push:
+    name: Build & Push image to GHCR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+            type=sha
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            APP_ENV=prod
+
+  deploy:
+    name: Deploy to server (SSH + docker compose)
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    steps:
+      - name: Checkout (to get compose and Caddyfile)
+        uses: actions/checkout@v4
+
+      - name: SSH deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script_stop: true
+          envs: GITHUB_TOKEN
+          script: |
+            set -e
+
+            mkdir -p /opt/cinephoria
+
+            # 1) Écrire l'environnement de prod depuis le secret
+            # (le secret PROD_ENV doit contenir le .env prod au format KEY=VALUE)
+            cat > /opt/cinephoria/.env <<'EOF'
+            ${{ secrets.PROD_ENV }}
+            EOF
+
+            # 2) Déployer/mettre à jour les fichiers d'orchestration
+            cat > /opt/cinephoria/docker-compose.prod.yml <<'EOF'
+            $(cat docker-compose.prod.yml)
+            EOF
+
+            cat > /opt/cinephoria/Caddyfile <<'EOF'
+            $(cat Caddyfile)
+            EOF
+
+            cd /opt/cinephoria
+
+            # 3) Login GHCR pour que le serveur puisse pull l'image
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+            # 4) Pull des images et (re)lancement sans interruption
+            docker compose -f docker-compose.prod.yml --env-file .env pull
+            docker compose -f docker-compose.prod.yml --env-file .env up -d
+
+            # 5) Optionnel : nettoyage des images dangling
+            docker image prune -f

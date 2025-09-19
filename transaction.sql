@@ -1,3 +1,6 @@
+USE cinephoria;
+SET NAMES utf8mb4;
+
 START TRANSACTION;
 
 SET @last_wednesday = DATE_SUB(
