@@ -93,38 +93,43 @@ VALUES
 
 INSERT INTO film_cinema (film_id, cinema_id) VALUES (1, 1), (1, 2), (1, 3), (2, 2), (2, 4), (3, 1), (3, 3), (3, 5), (4, 1), (4, 4), (5, 2), (5, 5), (5, 6), (6, 1), (6, 6), (7, 2), (7, 7), (8, 3), (8, 6), (9, 4), (9, 7), (10, 1), (10, 5), (11, 3), (11, 7), (12, 2), (12, 4), (13, 5), (13, 6), (14, 1), (14, 7);
 
-WITH RECURSIVE days AS (
-    SELECT f.id AS film_id, f.date_debut AS d, f.date_fin
-    FROM film f
-    UNION ALL
-    SELECT film_id, DATE_ADD(d, INTERVAL 1 DAY), date_fin
-    FROM days
-    WHERE DATE_ADD(d, INTERVAL 1 DAY) <= date_fin
-)
-
-INSERT INTO seance (heure_debut, heure_fin, price, salle_id, date, film_id)
-SELECT r.heure_debut, r.heure_fin, r.price, r.salle_id, d.d AS date, d.film_id
-FROM (
+INSERT INTO seance (heure_debut, heure_fin, price, salle_id, `date`, film_id)
+SELECT r.heure_debut,
+       r.heure_fin,
+       r.price,
+       r.salle_id,
+       DATE_ADD(f.date_debut, INTERVAL n.day_offset DAY),
+       f.id
+FROM film f
+         JOIN (
+    SELECT (a.n + b.n*10 + c.n*100) AS day_offset
+    FROM (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+          UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a
+             CROSS JOIN (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+                         UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
+             CROSS JOIN (SELECT 0 n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+                         UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) c
+) n
+         JOIN (
     SELECT 1 AS salle_id, '08:00:00' AS heure_debut, '10:00:00' AS heure_fin, 10 AS price
     UNION ALL SELECT 2, '10:30:00','12:30:00',12
     UNION ALL SELECT 3, '14:00:00','16:00:00',15
     UNION ALL SELECT 4, '19:00:00','21:00:00',12
-    ) r
-    JOIN days d
-    LEFT JOIN seance s
-ON s.date = d.d AND s.salle_id = r.salle_id AND s.film_id = d.film_id
-WHERE s.id IS NULL;
+) r
+         LEFT JOIN seance s
+                   ON s.`date`   = DATE_ADD(f.date_debut, INTERVAL n.day_offset DAY)
+                       AND s.salle_id = r.salle_id
+                       AND s.film_id  = f.id
+WHERE n.day_offset <= DATEDIFF(f.date_fin, f.date_debut)
+  AND s.id IS NULL;
 
 INSERT INTO seance_cinema (seance_id, cinema_id)
-SELECT s.id, c.cinema_id
+SELECT s.id, fc.cinema_id
 FROM seance s
-         CROSS JOIN (
-    SELECT 1 AS cinema_id UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL
-    SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7
-) c
+         JOIN film_cinema fc ON fc.film_id = s.film_id
          LEFT JOIN seance_cinema sc
-                   ON sc.seance_id = s.id AND sc.cinema_id = c.cinema_id
+                   ON sc.seance_id = s.id AND sc.cinema_id = fc.cinema_id
 WHERE sc.seance_id IS NULL
-  AND s.date BETWEEN CURDATE() AND DATE(CONCAT(YEAR(CURDATE()), '-12-31'));
+  AND s.`date` BETWEEN CURDATE() AND DATE(CONCAT(YEAR(CURDATE()), '-12-31'));
 
 COMMIT;
