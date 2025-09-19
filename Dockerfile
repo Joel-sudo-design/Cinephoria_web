@@ -4,7 +4,7 @@
 FROM php:8.2-apache AS builder
 
 # Build arg pour composer conditionnel
-ARG APP_ENV=prod
+ARG APP_ENV=dev
 
 # Apache
 RUN a2enmod rewrite
