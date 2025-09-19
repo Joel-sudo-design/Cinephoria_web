@@ -10,9 +10,12 @@ ARG APP_ENV=prod
 RUN a2enmod rewrite
 
 # Dépendances système
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev zip unzip git curl gnupg2 ca-certificates libssl-dev pkg-config \
-    && rm -rf /var/lib/apt/lists/*
+    libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+ && docker-php-ext-configure gd --with-freetype --with-jpeg \
+ && docker-php-ext-install -j"$(nproc)" gd \
+ && rm -rf /var/lib/apt/lists/*
 
 # Extensions PHP
 RUN docker-php-ext-install zip pdo pdo_mysql
@@ -53,9 +56,12 @@ ARG APP_ENV=prod
 
 RUN a2enmod rewrite
 
-RUN apt-get update && apt-get install -y \
-    libzip-dev libssl-dev pkg-config \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libzip-dev \
+    libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+ && docker-php-ext-configure gd --with-freetype --with-jpeg \
+ && docker-php-ext-install -j"$(nproc)" gd \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install zip pdo pdo_mysql
 RUN pecl install mongodb && docker-php-ext-enable mongodb
