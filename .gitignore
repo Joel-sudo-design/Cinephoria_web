@@ -3,8 +3,9 @@
 /public/.htaccess
 /var/
 /vendor/
-/.env.local
+/.env.prod
 /.env.test
 /.env.local.php
 /public/ticket_image
 /.idea/
+/docker-compose.prod.ymldocker-compose.prod.yml
