@@ -6,8 +6,6 @@ SET @last_wednesday = DATE_SUB(
 );
 SET @last_wednesday_plus6 = DATE_ADD(@last_wednesday, INTERVAL 6 DAY);
 
-INSERT INTO user (email, roles, password, password_must_change, username, firstname, name, is_verified, api_token) VALUES ('admin@cinephoria.fr', '["ROLE_ADMIN"]', '$2y$13$KIXQKk3aVbC7gHtqV1zZyeEiz6z1E3hYQ4qBZQq3C95gWGBQoe5Oq', 0, 'admin', 'Admin', 'Cinéphoria', 1, NULL);
-
 INSERT INTO cinema (id, name) VALUES
                                   (1, 'Toulouse'),
                                   (2, 'Nantes'),
