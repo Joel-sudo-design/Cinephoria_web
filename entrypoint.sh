@@ -4,20 +4,15 @@ set -e
 echo "Attente du port 3306..."
 /wait-for-it.sh db:3306 -t 30
 
-echo "Création de la base si besoin"
-php bin/console doctrine:database:create --if-not-exists || true
+echo "Création de la base si nécessaire..."
+php bin/console doctrine:database:create --if-not-exists
 
-if php bin/console dbal:run-sql "SHOW TABLES" 2>/dev/null | grep -qE '[[:alnum:]_]'; then
-  echo "Base non vide -> on lance les migrations"
-  php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration || true
+if ls migrations/*.php >/dev/null 2>&1; then
+  echo "Migrations détectées → on les applique"
+  php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 else
-  if ls -1 migrations/*.php >/dev/null 2>&1; then
-    echo "Migrations détectées -> migrate"
-    php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration || true
-  else
-    echo "DB vide et aucune migration -> schema:create"
-    php bin/console doctrine:schema:create || true
-  fi
+  echo "Aucune migration → création du schéma direct"
+  php bin/console doctrine:schema:create --no-interaction
 fi
 
 echo "Execution des autres scripts"
