@@ -1,9 +1,4 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Inter', sans-serif;
-}
+html, body {margin: 0;padding: 0; height: 100%; font-family: 'Inter', sans-serif;overflow: hidden;}
 
 /* Scrollbar Thumb et Track */
 *::-webkit-scrollbar-thumb {
@@ -121,11 +116,11 @@ footer #navbarBottom .nav-link {
 }
 
 #container-accueil, #container-contact {
-  position: relative;
-  top: 6rem;
-  bottom: 8rem;
-  height: calc(100% - 14rem);
-  overflow: auto;
+    position: fixed;
+    top: 6rem;
+    bottom: 8rem;
+    left: 0; right: 0;
+    overflow: auto;
 }
 
 /* Boutons avec flèches arrondies */
@@ -142,14 +137,6 @@ footer #navbarBottom .nav-link {
   transition: opacity 0.3s ease;
   border: none;
   z-index: 1;
-}
-
-.custom-prev {
-  left: -60px;
-}
-
-.custom-next {
-  right: -60px;
 }
 
 .custom-prev:hover, .custom-next:hover {
@@ -176,6 +163,27 @@ footer #navbarBottom .nav-link {
   padding: 5px;
   transform: rotate(-45deg);
   border-radius: 4px;
+}
+
+/* Carousel page accueil */
+#carouselExample { padding: 0 60px;}
+
+#carouselExample .carousel-inner .row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#carouselExample .carousel-inner .image-carousel {
+    flex: 0 0 calc(100% / 7);
+    max-width: calc(100% / 7);
+}
+
+#carouselExample .image-carousel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 2 / 3;
 }
 
 /* Page Inscription/Nouveau compte */
@@ -1415,14 +1423,10 @@ footer #navbarBottom .nav-link {
 /* Media queries */
 
 @media (max-width: 1400px) {
-
   #welcome {
     font-size: 3.5rem;
   }
 
-  #carouselExample {
-    width: 60% !important;
-  }
 }
 
 @media (max-width: 1200px) {
@@ -1431,9 +1435,6 @@ footer #navbarBottom .nav-link {
     font-size: 3.5rem;
   }
 
-  #carouselExample {
-    width: 60% !important;
-  }
 }
 
 @media (max-width: 1200px) and (orientation: landscape) {
@@ -1447,27 +1448,17 @@ footer #navbarBottom .nav-link {
     font-size: 2.5rem;
   }
 
-  #carouselExample {
-    width: 60% !important;
-  }
 }
 
 @media (max-width: 992px) {
+    #container-accueil, #container-contact { top:4rem; bottom:4rem; }
 
-  .border-register-img {
-    display: none;
-  }
+    .border-register-img {
+        display: none;
+    }
 
   #welcome {
     font-size: 3rem;
-  }
-
-  #container-accueil, #container-contact{
-    position: relative;
-    top: 4rem;
-    bottom: 4rem;
-    height: calc(100% - 8rem);
-    overflow: auto;
   }
 
   #navbarTop {
@@ -1477,24 +1468,12 @@ footer #navbarBottom .nav-link {
   #navbarBottom {
     height: 4rem !important;
   }
-
-  #carouselExample {
-    width: 50% !important;
-  }
 }
 
 @media (max-width: 992px) and (orientation: landscape) {
 
   #reservation-filter {
     top:4rem !important;
-  }
-
-  #container-films-mobile {
-    position: relative;
-    top: 9rem ;
-    bottom: 8rem;
-    height: calc(100% - 13rem);
-    overflow: auto;
   }
 
   .container-films {
@@ -1529,10 +1508,6 @@ footer #navbarBottom .nav-link {
   #navbarBottom {
     height: 4rem !important;
   }
-
-  #carouselExample {
-    width: 50% !important;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1545,24 +1520,12 @@ footer #navbarBottom .nav-link {
     font-size: 2.5rem;
   }
 
-  #container-accueil, #container-contact{
-    position: relative;
-    top: 4rem;
-    bottom: 4rem;
-    height: calc(100% - 8rem);
-    overflow: auto;
-  }
-
   #navbarTop {
     height: 4rem !important;
   }
 
   #navbarBottom {
     height: 4rem !important;
-  }
-
-  #carouselExample {
-    width: 50% !important;
   }
 }
 
@@ -1576,14 +1539,6 @@ footer #navbarBottom .nav-link {
     font-size: 2rem;
   }
 
-  #container-accueil, #container-contact{
-    position: relative;
-    top: 4rem;
-    bottom: 4rem;
-    height: calc(100% - 8rem);
-    overflow: auto;
-  }
-
   #navbarTop {
     height: 4rem !important;
   }
@@ -1591,24 +1546,12 @@ footer #navbarBottom .nav-link {
   #navbarBottom {
     height: 4rem !important;
   }
-
-  #carouselExample {
-    width: 50% !important;
-  }
 }
 
 @media (max-width: 576px) {
 
   #reservation-mobile {
     padding: 0.5rem !important;
-  }
-
-  #container-films-mobile {
-    position: relative;
-    top: 9rem ;
-    bottom: 8rem;
-    height: calc(100% - 13rem);
-    overflow: auto;
   }
 
   #legende-siege {
@@ -1649,11 +1592,6 @@ footer #navbarBottom .nav-link {
     flex-wrap: wrap;
   }
 
-  .carousel-inner .row {
-    display: flex;
-    flex-direction: column;
-  }
-
   .custom-checkbox .checkbox-label {
     flex-direction: column;
   }
@@ -1682,7 +1620,4 @@ footer #navbarBottom .nav-link {
     height: 4rem !important;
   }
 
-  #carouselExample {
-    width: 50% !important;
-  }
 }

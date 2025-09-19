@@ -62,36 +62,6 @@ axios.defaults.withCredentials = true;
         // Appel de la fonction pour configurer le comportement des navbar
         configureNavbarBehavior();
 
-        // Page accueil
-        function resizeCarrousel() {
-            const carousel = document.getElementById('carouselExample');
-            const imageContainers = carousel.querySelectorAll('.carousel-inner .image-carousel');
-            const totalImages = imageContainers.length;
-
-            let newWidth = 75; // Largeur de base pour 7 images
-
-            // Si moins de 7 images, ajuster la largeur proportionnellement
-            if (totalImages < 7) {
-                newWidth = 75 * (totalImages / 7); // Proportionnellement à 75%
-            }
-
-            // Appliquer la nouvelle largeur au carrousel
-            carousel.style.width = `${newWidth}%`;
-
-            // Calculer la largeur des images pour qu'elles tiennent sur une ligne
-            const imageWidthPercentage = 100 / Math.min(totalImages, 7); // Max 7 images par ligne
-
-            imageContainers.forEach((container) => {
-                const image = container.querySelector('img');
-                if (image) {
-                    container.style.flex = `0 0 ${imageWidthPercentage}%`; // Ajuster la largeur
-                    image.style.width = '100%'; // S'assurer que l'image remplit son conteneur
-                    image.style.height = 'auto'; // Conserver les proportions
-                    image.style.objectFit = 'cover'; // Ajuster l'image au conteneur sans déformation
-                }
-            });
-        }
-
         // Page Films
         // Fonction pour affichage du badge age minimum
         function displayAgeBadge(film) {
@@ -3952,23 +3922,19 @@ axios.defaults.withCredentials = true;
 
         // Lancement des fonctions au chargement des pages
         const pathFunctions = {
-            '/accueil': [resizeCarrousel],
             '/films': [film, menuFilms],
             '/reservation': [reservation],
             '/mon_espace/connexion': [initializeFormFeatures],
             '/mon_espace/inscription': [initializeFormFeatures],
             '/mon_espace/reset-password/reset': [initializeFormFeatures],
-            '/utilisateur/accueil': [resizeCarrousel],
             '/utilisateur/films': [film, menuFilms],
             '/utilisateur/reservation': [reservation],
             '/utilisateur/mon_espace/commandes': [handleFilmRating],
-            '/employe/accueil': [resizeCarrousel],
             '/employe/films': [film, menuFilms],
             '/employe/reservation': [reservation],
             '/employe/administration': [filmEmploye],
             '/employe/administration/avis': [validateAvis],
             '/employe/mon_espace/commandes': [handleFilmRating],
-            '/administrateur/accueil': [resizeCarrousel],
             '/administrateur/films': [film, menuFilms],
             '/administrateur/reservation': [reservation],
             '/administrateur/administration': [filmAdmin],

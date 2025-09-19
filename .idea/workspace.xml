@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transaction.sql" beforeDir="false" afterPath="$PROJECT_DIR$/transaction.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -536,15 +538,7 @@
       <workItem from="1758096263759" duration="5372000" />
       <workItem from="1758114114533" duration="3499000" />
       <workItem from="1758176764460" duration="10432000" />
-      <workItem from="1758264034235" duration="156000" />
-    </task>
-    <task id="LOCAL-00225" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1736754188671</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1736754188671</updated>
+      <workItem from="1758264034235" duration="5718000" />
     </task>
     <task id="LOCAL-00226" summary="Modif">
       <option name="closed" value="true" />
@@ -930,7 +924,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758188560734</updated>
     </task>
-    <option name="localTasksCounter" value="274" />
+    <task id="LOCAL-00274" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758264205592</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1758264205592</updated>
+    </task>
+    <option name="localTasksCounter" value="275" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
