@@ -52,8 +52,6 @@ COPY . .
 ##########################
 FROM php:8.2-apache
 
-ARG APP_ENV=prod
-
 RUN a2enmod rewrite
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
