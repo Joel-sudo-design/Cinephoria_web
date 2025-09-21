@@ -1,11 +1,12 @@
-cinephoria.joeldermont.fr {
+:80 {
+    root * /var/www/Cinephoria_web/public
     encode zstd gzip
-    reverse_proxy app:80
 
-    header {
-        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-        X-Content-Type-Options "nosniff"
-        X-Frame-Options "DENY"
-        Referrer-Policy "no-referrer-when-downgrade"
+    @home {
+        path_regexp home ^/$
     }
+    redir @home /accueil 302
+
+    php_fastcgi app:9000
+    file_server
 }

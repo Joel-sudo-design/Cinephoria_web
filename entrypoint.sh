@@ -1,38 +1,40 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "Attente du port 3306..."
-/wait-for-it.sh db:3306 -t 30
+/wait-for-it.sh db:3306 -t 60
 
 echo "Création de la base si nécessaire..."
 php bin/console doctrine:database:create --if-not-exists
+php bin/console doctrine:migrations:sync-metadata-storage --no-interaction || true
 
-if ls migrations/*.php >/dev/null 2>&1; then
-  echo "Migrations détectées → on les applique"
+if find migrations -maxdepth 1 -type f -name '*.php' | grep -q .; then
   php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 else
-  echo "Aucune migration → on vérifie si le schéma existe déjà"
-  if php bin/console doctrine:schema:validate >/dev/null 2>&1; then
-    echo "Schéma déjà présent → rien à faire"
+  if [ "${APP_ENV:-dev}" != "prod" ]; then
+    echo "Aucune migration trouvée → création/synchro du schéma en DEV"
+    php bin/console doctrine:schema:update --force --no-interaction
   else
-    echo "Pas de schéma → création du schéma"
-    php bin/console doctrine:schema:create --no-interaction
+    echo "Aucune migration trouvée en PROD → on ne touche pas au schéma"
   fi
 fi
 
-echo "Execution des autres scripts"
+echo "Exécution des scripts post-install"
 composer run-script post-install-cmd || true
 
-if [ ! -d node_modules ] || [ yarn.lock -nt node_modules ]; then
-  echo "DEV: (re)installation des dépendances front"
-  yarn install
+if [ "${APP_ENV:-dev}" != "prod" ]; then
+  if [ ! -d node_modules ] || [ yarn.lock -nt node_modules ]; then
+    echo "DEV: (re)installation des dépendances front"
+    yarn install
+  fi
+  echo "Build des assets"
+  yarn build
+else
+  echo "PROD: assets déjà buildés dans l'image"
 fi
-
-echo "Build des assets"
-yarn build
 
 echo "Ajustement des permissions"
 chown -R www-data:www-data var public || true
 
-echo "Lancement du serveur apache"
-exec apache2-foreground
+echo "Lancement de PHP-FPM"
+exec php-fpm -F

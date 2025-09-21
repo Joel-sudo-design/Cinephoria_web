@@ -1,4 +1,17 @@
 services:
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./:/var/www/Cinephoria_web:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
   app:
     build:
       context: .
@@ -10,8 +23,6 @@ services:
       - .:/var/www/Cinephoria_web:delegated
       - public_build:/var/www/Cinephoria_web/public/build
       - /var/www/Cinephoria_web/vendor
-    ports:
-      - "80:80"
     depends_on:
       - db
       - mongodb
@@ -26,7 +37,7 @@ services:
       - "host.docker.internal:host-gateway"
 
   db:
-    image: mariadb:10.11.6
+    image: mariadb:11
     container_name: symfony_db
     restart: no
     environment:
@@ -40,7 +51,7 @@ services:
       - db_data:/var/lib/mysql
 
   mongodb:
-    image: mongo:6
+    image: mongo:7
     container_name: mongo
     restart: no
     ports:
@@ -84,3 +95,5 @@ volumes:
   db_data:
   mongodb_data:
   public_build:
+  caddy_data:
+  caddy_config:
