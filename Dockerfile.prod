@@ -1,13 +1,9 @@
 ##########################
 # Stage 1 : Builder
 ##########################
-FROM php:8.2-apache AS builder
+FROM php:8.2-fpm AS builder
 
-# Build arg pour composer conditionnel
 ARG APP_ENV=prod
-
-# Apache
-RUN a2enmod rewrite
 
 # Dépendances système
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -29,8 +25,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# VHost + wait-for-it
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+# wait-for-it
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
@@ -46,9 +41,9 @@ COPY . .
 ##########################
 # Stage 2 : Image finale
 ##########################
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
-RUN a2enmod rewrite
+WORKDIR /var/www/Cinephoria_web
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
@@ -60,7 +55,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN docker-php-ext-install zip pdo pdo_mysql
 RUN pecl install mongodb && docker-php-ext-enable mongodb
 
-# Node + Yarn (build des assets au runtime via entrypoint)
+# Node + Yarn (si tu veux rebuild assets runtime en dev/prod)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g yarn
@@ -79,15 +74,14 @@ RUN { \
 COPY --from=builder /var/www/Cinephoria_web /var/www/Cinephoria_web
 COPY --from=builder /usr/bin/composer /usr/bin/composer
 
-# VHost + wait-for-it
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+# wait-for-it
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
-WORKDIR /var/www/Cinephoria_web
-EXPOSE 80
+EXPOSE 9000
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
     && chmod +x /usr/local/bin/entrypoint.sh
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

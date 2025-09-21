@@ -6,10 +6,13 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./Caddyfile.prod:/etc/caddy/Caddyfile:ro
+      - ./:/var/www/Cinephoria_web:ro
       - caddy_data:/data
       - caddy_config:/config
-    networks: [web]
+    networks: [web, backend]
+    depends_on:
+      - app
 
   app:
     image: ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG:-latest}
@@ -25,21 +28,16 @@ services:
         condition: service_started
       mongo:
         condition: service_started
-    networks: [web, backend]
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost/ || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
+    networks: [backend]
 
   db:
     image: mariadb:11
     restart: unless-stopped
     environment:
-      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MARIADB_DATABASE: ${MYSQL_DATABASE}
-      MARIADB_USER: ${MYSQL_USER}
-      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
     networks: [backend]
@@ -51,7 +49,6 @@ services:
       - mongodb_data:/data/db
     networks: [backend]
 
-  # OUTILS D'ADMIN — accessibles SEULEMENT via tunnel SSH
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5
     restart: unless-stopped
@@ -61,7 +58,7 @@ services:
       UPLOAD_LIMIT: 128M
     networks: [backend]
     ports:
-      - "127.0.0.1:8081:80"   # http://localhost:8081 via tunnel
+      - "127.0.0.1:8081:80"
 
   mongo-express:
     image: mongo-express:1.0.2-20
@@ -72,7 +69,7 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: ${ME_PASS}
     networks: [backend]
     ports:
-      - "127.0.0.1:8082:8081" # http://localhost:8082 via tunnel
+      - "127.0.0.1:8082:8081"
     depends_on:
       - mongo
 

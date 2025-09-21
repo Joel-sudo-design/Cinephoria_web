@@ -3,7 +3,6 @@
 ##########################
 FROM php:8.2-fpm AS builder
 
-# Build arg pour composer conditionnel
 ARG APP_ENV=dev
 
 # Dépendances système + extensions PHP nécessaires au build
