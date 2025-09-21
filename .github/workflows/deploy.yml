@@ -5,7 +5,6 @@ on:
     branches: ["main"]
   workflow_dispatch: {}
 
-# Empêche les déploiements concurrents
 concurrency:
   group: "deploy-prod"
   cancel-in-progress: false
@@ -62,6 +61,16 @@ jobs:
       - name: Checkout (to get compose and Caddyfile)
         uses: actions/checkout@v4
 
+      - name: Upload compose & Caddyfile
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "docker-compose.prod.yml,Caddyfile"
+          target: "/opt/cinephoria/"
+
       - name: SSH deploy
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -76,29 +85,15 @@ jobs:
 
             mkdir -p /opt/cinephoria
 
-            # 1) Écrire l'environnement de prod depuis le secret
-            # (le secret PROD_ENV doit contenir le .env prod au format KEY=VALUE)
             cat > /opt/cinephoria/.env <<'EOF'
             ${{ secrets.PROD_ENV }}
             EOF
 
-            # 2) Déployer/mettre à jour les fichiers d'orchestration
-            cat > /opt/cinephoria/docker-compose.prod.yml <<'EOF'
-            $(cat docker-compose.prod.yml)
-            EOF
-
-            cat > /opt/cinephoria/Caddyfile <<'EOF'
-            $(cat Caddyfile)
-            EOF
-
             cd /opt/cinephoria
 
-            # 3) Login GHCR pour que le serveur puisse pull l'image
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
-            # 4) Pull des images et (re)lancement sans interruption
             docker compose -f docker-compose.prod.yml --env-file .env pull
             docker compose -f docker-compose.prod.yml --env-file .env up -d
 
-            # 5) Optionnel : nettoyage des images dangling
             docker image prune -f
