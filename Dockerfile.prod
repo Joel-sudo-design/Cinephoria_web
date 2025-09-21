@@ -1,0 +1,74 @@
+# ---- Stage build (composer + assets) ----
+FROM php:8.2-apache AS builder
+ARG APP_ENV=prod
+WORKDIR /var/www/Cinephoria_web
+
+RUN a2enmod rewrite
+
+# PHP extensions nécessaires
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git zip unzip libzip-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+ && docker-php-ext-configure gd --with-freetype --with-jpeg \
+ && docker-php-ext-install -j"$(nproc)" zip pdo pdo_mysql gd \
+ && pecl install mongodb && docker-php-ext-enable mongodb \
+ && rm -rf /var/lib/apt/lists/*
+
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Préparer vendor (prod = no-dev) SANS scripts (bin/console pas encore là)
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --prefer-dist --no-interaction --no-progress
+
+# Copier le code applicatif
+COPY . .
+
+# Maintenant que le code est là, on optimise l'autoload
+RUN composer dump-autoload --optimize --no-interaction --no-dev
+
+# Build d’assets si package.json existe (sinon ignoré)
+RUN if [ -f package.json ]; then \
+      curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+      apt-get update && apt-get install -y --no-install-recommends nodejs && \
+      npm i -g yarn && \
+      yarn install --frozen-lockfile || yarn install && \
+      (yarn build || npm run build || true) && \
+      rm -rf /var/lib/apt/lists/* ; \
+    fi
+
+# ---- Stage runtime (léger) ----
+FROM php:8.2-apache
+WORKDIR /var/www/Cinephoria_web
+
+RUN a2enmod rewrite
+
+# Extensions runtime
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpng16-16 libjpeg62-turbo libfreetype6 \
+ && docker-php-ext-install -j"$(nproc)" pdo pdo_mysql \
+ && pecl install mongodb && docker-php-ext-enable mongodb \
+ && rm -rf /var/lib/apt/lists/*
+
+# OPcache (prod)
+RUN { \
+  echo "opcache.enable=1"; \
+  echo "opcache.enable_cli=1"; \
+  echo "opcache.jit=1255"; \
+  echo "opcache.jit_buffer_size=64M"; \
+  echo "opcache.memory_consumption=256"; \
+  echo "opcache.max_accelerated_files=20000"; \
+} > /usr/local/etc/php/conf.d/opcache.ini
+
+# VHost + scripts (reprend tes fichiers locaux)
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh && chmod +x /usr/local/bin/entrypoint.sh
+
+# Code + vendor + build depuis le builder
+COPY --from=builder /var/www/Cinephoria_web /var/www/Cinephoria_web
+RUN chown -R www-data:www-data /var/www/Cinephoria_web
+
+EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
