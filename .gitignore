@@ -5,6 +5,7 @@
 /vendor/
 /.env.prod
 /.env.test
+/.env.localtest
 /.env.local.php
 /public/ticket_image
 /.idea/
