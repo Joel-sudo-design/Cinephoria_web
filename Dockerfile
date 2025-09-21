@@ -38,11 +38,7 @@ WORKDIR /var/www/Cinephoria_web
 
 # Dépendances PHP
 COPY composer.json composer.lock ./
-RUN if [ "$APP_ENV" = "prod" ]; then \
-      composer install --no-dev --optimize-autoloader --no-scripts; \
-    else \
-      composer install --no-interaction --prefer-dist --no-scripts; \
-    fi
+RUN composer install --no-interaction --prefer-dist --no-scripts
 
 # Code source
 COPY . .
