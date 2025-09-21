@@ -11,8 +11,13 @@ if ls migrations/*.php >/dev/null 2>&1; then
   echo "Migrations détectées → on les applique"
   php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 else
-  echo "Aucune migration → création du schéma direct"
-  php bin/console doctrine:schema:create --no-interaction
+  echo "Aucune migration → on vérifie si le schéma existe déjà"
+  if php bin/console doctrine:schema:validate >/dev/null 2>&1; then
+    echo "Schéma déjà présent → rien à faire"
+  else
+    echo "Pas de schéma → création du schéma"
+    php bin/console doctrine:schema:create --no-interaction
+  fi
 fi
 
 echo "Execution des autres scripts"
