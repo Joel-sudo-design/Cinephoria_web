@@ -9,29 +9,24 @@ php bin/console doctrine:database:create --if-not-exists
 php bin/console doctrine:migrations:sync-metadata-storage --no-interaction || true
 
 if find migrations -maxdepth 1 -type f -name '*.php' | grep -q .; then
+  echo "Migrations détectées → on les applique"
   php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 else
-  if [ "${APP_ENV:-dev}" != "prod" ]; then
-    echo "Aucune migration trouvée → création/synchro du schéma en DEV"
+  if [ ! -f var/.schema_bootstrapped ]; then
+    echo "Aucune migration → bootstrap du schéma (dev & prod)"
     php bin/console doctrine:schema:update --force --no-interaction
+    touch var/.schema_bootstrapped
   else
-    echo "Aucune migration trouvée en PROD → on ne touche pas au schéma"
+    echo "Schéma déjà bootstrappé → rien à faire"
   fi
 fi
 
 echo "Exécution des scripts post-install"
 composer run-script post-install-cmd || true
 
-if [ "${APP_ENV:-dev}" != "prod" ]; then
-  if [ ! -d node_modules ] || [ yarn.lock -nt node_modules ]; then
-    echo "DEV: (re)installation des dépendances front"
-    yarn install
-  fi
-  echo "Build des assets"
-  yarn build
-else
-  echo "PROD: assets déjà buildés dans l'image"
-fi
+echo "Installation front (yarn install) et build des assets (yarn build)"
+yarn install
+yarn build
 
 echo "Ajustement des permissions"
 chown -R www-data:www-data var public || true
