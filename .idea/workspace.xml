@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid" />
+    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Upgrade cross-spawn et nanoid">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -538,15 +540,7 @@
       <workItem from="1758295062406" duration="6087000" />
       <workItem from="1758357512781" duration="141000" />
       <workItem from="1758357698245" duration="2096000" />
-      <workItem from="1758445310251" duration="5966000" />
-    </task>
-    <task id="LOCAL-00238" summary="Modif">
-      <option name="closed" value="true" />
-      <created>1737133836476</created>
-      <option name="number" value="00238" />
-      <option name="presentableId" value="LOCAL-00238" />
-      <option name="project" value="LOCAL" />
-      <updated>1737133836477</updated>
+      <workItem from="1758445310251" duration="6317000" />
     </task>
     <task id="LOCAL-00239" summary="Modif">
       <option name="closed" value="true" />
@@ -932,7 +926,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758451248737</updated>
     </task>
-    <option name="localTasksCounter" value="287" />
+    <task id="LOCAL-00287" summary="Upgrade cross-spawn et nanoid">
+      <option name="closed" value="true" />
+      <created>1758451323618</created>
+      <option name="number" value="00287" />
+      <option name="presentableId" value="LOCAL-00287" />
+      <option name="project" value="LOCAL" />
+      <updated>1758451323618</updated>
+    </task>
+    <option name="localTasksCounter" value="288" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
