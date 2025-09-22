@@ -71,7 +71,7 @@ jobs:
           overwrite: true
           rm: true
 
-      - name: SSH deploy (sudo docker)
+      - name: SSH deploy
         uses: appleboy/ssh-action@v1.2.0
         env:
           PROD_ENV: ${{ secrets.PROD_ENV }}
@@ -99,8 +99,16 @@ jobs:
             fi
 
             cp -f docker-compose.prod.yml docker-compose.yml
+            rm -f docker-compose.prod.yml
 
             $COMPOSE --env-file .env config -q
             $COMPOSE --env-file .env pull
+            sudo docker volume create app_public >/dev/null
+            set -a && . .env 2>/dev/null || true && set +a
+            APP_IMAGE="ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG:-latest}"
+            sudo docker run --rm \
+            -v app_public:/target \
+            "$APP_IMAGE" \
+            sh -c 'rm -rf /target/* && cp -a /var/www/Cinephoria_web/public/. /target/'
             $COMPOSE --env-file .env up -d --remove-orphans
             sudo docker image prune -f || true

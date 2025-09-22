@@ -7,9 +7,9 @@ services:
       - "443:443"
     volumes:
       - ./Caddyfile.prod:/etc/caddy/Caddyfile:ro
-      - app_code:/var/www/Cinephoria_web:ro
       - caddy_data:/data
       - caddy_config:/config
+      - app_public:/var/www/Cinephoria_web/public:ro
     networks: [web, backend]
     depends_on:
       - app
@@ -23,8 +23,6 @@ services:
       MONGODB_URL: ${MONGODB_URL}
       MONGODB_DB: ${MONGODB_DB}
       MAILER_DSN: ${MAILER_DSN}
-    volumes:
-      - app_code:/var/www/Cinephoria_web
     depends_on:
       db:
         condition: service_started
@@ -84,4 +82,4 @@ volumes:
   mongodb_data: {}
   caddy_data: {}
   caddy_config: {}
-  app_code: {}
+  app_public: {}

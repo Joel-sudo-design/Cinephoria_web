@@ -1,12 +1,3 @@
 /node_modules/
-/public/build/
-/public/.htaccess
 /var/
 /vendor/
-/.env.prod
-/.env.test
-/.env.localtest
-/.env.local.php
-/public/ticket_image
-/.idea/
-
