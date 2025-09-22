@@ -6,7 +6,7 @@
 parameters:
     env(MONGODB_URL): ''
     env(MONGODB_DB): ''
-    films_images_directory: 'http://localhost'
+    films_images_directory: 'https://localhost'
 services:
     Symfony\Component\Security\Core\User\UserProviderInterface:
         alias: security.user.provider.concrete.app_user_provider
