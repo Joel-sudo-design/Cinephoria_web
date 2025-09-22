@@ -118,47 +118,42 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script_stop: true
           envs: GITHUB_TOKEN
-        # Déploiement verbeux et solide
-        # - écrit .env sécurisé
-        # - vérifie fichiers
-        # - login GHCR en root
-        # - up -d avec --pull always et --remove-orphans
-        script: |
-          set -Eeuo pipefail
-          set -x
-
-          APP_DIR="/home/debian/apps/cinephoria"
-          COMPOSE_FILE="docker-compose.prod.yml"
-
-          cd "$APP_DIR"
-
-          # .env sécurisé (contenu multiligne depuis secret)
-          umask 177
-          cat > .env <<'EOF'
-          ${{ secrets.PROD_ENV }}
-          EOF
-          chmod 600 .env
-
-          # Sanity checks
-          test -f "$COMPOSE_FILE" || { echo "Compose manquant: $COMPOSE_FILE"; exit 2; }
-          test -f "Caddyfile"     || { echo "Caddyfile manquant"; exit 2; }
-
-          # Login GHCR (root, car on appelle sudo docker)
-          echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-
-          # docker compose (ou docker-compose si legacy)
-          if sudo docker compose version >/dev/null 2>&1; then
-            COMPOSE="sudo docker compose"
-          elif command -v docker-compose >/dev/null 2>&1; then
-            COMPOSE="sudo docker-compose"
-          else
-            echo "Erreur: ni 'docker compose' ni 'docker-compose' n'est installé." >&2
-            exit 1
-          fi
-
-          # Déploiement
-          $COMPOSE -f "$COMPOSE_FILE" --env-file .env up -d --pull always --remove-orphans
-
-          # Contrôles & nettoyage
-          $COMPOSE ps
-          sudo docker image prune -f || true
+          script: |
+            set -Eeuo pipefail
+            set -x
+  
+            APP_DIR="/home/debian/apps/cinephoria"
+            COMPOSE_FILE="docker-compose.prod.yml"
+  
+            cd "$APP_DIR"
+  
+            # .env sécurisé (contenu multiligne depuis secret)
+            umask 177
+            cat > .env <<'EOF'
+            ${{ secrets.PROD_ENV }}
+            EOF
+            chmod 600 .env
+  
+            # Sanity checks
+            test -f "$COMPOSE_FILE" || { echo "Compose manquant: $COMPOSE_FILE"; exit 2; }
+            test -f "Caddyfile"     || { echo "Caddyfile manquant"; exit 2; }
+  
+            # Login GHCR (root, car on appelle sudo docker)
+            echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+  
+            # docker compose (ou docker-compose si legacy)
+            if sudo docker compose version >/dev/null 2>&1; then
+              COMPOSE="sudo docker compose"
+            elif command -v docker-compose >/dev/null 2>&1; then
+              COMPOSE="sudo docker-compose"
+            else
+              echo "Erreur: ni 'docker compose' ni 'docker-compose' n'est installé." >&2
+              exit 1
+            fi
+  
+            # Déploiement
+            $COMPOSE -f "$COMPOSE_FILE" --env-file .env up -d --pull always --remove-orphans
+  
+            # Contrôles & nettoyage
+            $COMPOSE ps
+            sudo docker image prune -f || true
