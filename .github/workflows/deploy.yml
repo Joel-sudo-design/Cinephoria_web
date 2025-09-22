@@ -61,6 +61,18 @@ jobs:
       - name: Checkout (to get compose and Caddyfile)
         uses: actions/checkout@v4
 
+      - name: Ensure remote dir exists (no sudo needed)
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script_stop: true
+          script: |
+            set -Eeuo pipefail
+            mkdir -p "$HOME/apps/cinephoria"
+
       - name: Upload compose & Caddyfile
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -69,7 +81,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "docker-compose.prod.yml,Caddyfile"
-          target: "/opt/cinephoria/"
+          target: "/home/${{ secrets.SSH_USER }}/apps/cinephoria/"
+          overwrite: true
+          rm: true
+          debug: true
 
       - name: SSH deploy
         uses: appleboy/ssh-action@v1.2.0
@@ -81,19 +96,24 @@ jobs:
           script_stop: true
           envs: GITHUB_TOKEN
           script: |
-            set -e
+            set -Eeuo pipefail
+            cd "$HOME/apps/cinephoria"
 
-            mkdir -p /opt/cinephoria
-
-            cat > /opt/cinephoria/.env <<'EOF'
+            # Écrit le .env (multiligne) et restreint ses permissions
+            umask 177
+            cat > .env <<'EOF'
             ${{ secrets.PROD_ENV }}
             EOF
+            chmod 600 .env
 
-            cd /opt/cinephoria
-
+            # Docker login GHCR avec le token du workflow
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
+            # Pull + (re)création
             docker compose -f docker-compose.prod.yml --env-file .env pull
             docker compose -f docker-compose.prod.yml --env-file .env up -d
+
+            # Optionnel: recharger Caddy si le Caddyfile est monté dans le conteneur
+            # docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile || true
 
             docker image prune -f
