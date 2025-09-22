@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -548,15 +545,7 @@
       <workItem from="1758524480322" duration="2612000" />
       <workItem from="1758530555947" duration="10451000" />
       <workItem from="1758542407802" duration="12000" />
-      <workItem from="1758542850889" duration="87000" />
-    </task>
-    <task id="LOCAL-00266" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1758116804221</created>
-      <option name="number" value="00266" />
-      <option name="presentableId" value="LOCAL-00266" />
-      <option name="project" value="LOCAL" />
-      <updated>1758116804221</updated>
+      <workItem from="1758542850889" duration="99000" />
     </task>
     <task id="LOCAL-00267" summary="Upgrade cross-spawn et nanoid">
       <option name="closed" value="true" />
@@ -942,7 +931,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758540919960</updated>
     </task>
-    <option name="localTasksCounter" value="315" />
+    <task id="LOCAL-00315" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758542943290</created>
+      <option name="number" value="00315" />
+      <option name="presentableId" value="LOCAL-00315" />
+      <option name="project" value="LOCAL" />
+      <updated>1758542943291</updated>
+    </task>
+    <option name="localTasksCounter" value="316" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
