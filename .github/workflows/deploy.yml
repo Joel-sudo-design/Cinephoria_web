@@ -84,8 +84,9 @@ jobs:
           target: "/home/debian/apps/cinephoria/"
           overwrite: true
           rm: true
+          debug: true
 
-      - name: SSH deploy (sudo docker)
+      - name: SSH deploy (sudo docker, debug)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -96,29 +97,48 @@ jobs:
           envs: GITHUB_TOKEN
           script: |
             set -Eeuo pipefail
-            cd /home/debian/apps/cinephoria
+            set -x
 
-            # .env sécurisé
+            APP_DIR="/home/debian/apps/cinephoria"
+            COMPOSE_FILE="docker-compose.prod.yml"
+
+            # Vérifs dossiers/fichiers
+            ls -la "$APP_DIR" || true
+            mkdir -p "$APP_DIR"
+            cd "$APP_DIR"
+            test -f "$COMPOSE_FILE" || { echo "Compose manquant: $COMPOSE_FILE"; exit 2; }
+            test -f "Caddyfile"     || { echo "Caddyfile manquant"; exit 2; }
+
+            # .env (sécurisé)
             umask 177
             cat > .env <<'EOF'
             ${{ secrets.PROD_ENV }}
             EOF
             chmod 600 .env
+            head -n 1 .env || true
 
-            # Login GHCR
-            echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-
-            # docker compose (ou docker-compose si legacy)
+            # Vérifier docker côté root + compose dispo
+            sudo docker version
             if sudo docker compose version >/dev/null 2>&1; then
               COMPOSE="sudo docker compose"
             elif command -v docker-compose >/dev/null 2>&1; then
               COMPOSE="sudo docker-compose"
             else
-              echo "Erreur: ni 'docker compose' ni 'docker-compose' n'est installé." >&2
-              exit 1
+              echo "Ni 'docker compose' ni 'docker-compose' pour root." >&2
+              sudo ls -l /usr/lib/docker/cli-plugins || true
+              sudo ls -l /usr/libexec/docker/cli-plugins || true
+              exit 3
             fi
 
-            $COMPOSE -f docker-compose.prod.yml --env-file .env pull
-            $COMPOSE -f docker-compose.prod.yml --env-file .env up -d
+            # Login GHCR en root
+            echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
-            sudo docker image prune -f
+            # Déploiement
+            $COMPOSE -f "$COMPOSE_FILE" --env-file .env up -d --pull always --remove-orphans
+
+            # Contrôles
+            $COMPOSE ps
+            sudo docker image prune -f || true
+
+            echo "DEPLOY OK"
+
