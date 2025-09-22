@@ -7,7 +7,8 @@ cinephoria.joeldermont.fr {
     }
     header @assets Cache-Control "public, max-age=31536000, immutable"
 
-    @home { path_regexp home ^/$
+    @home {
+        path_regexp home ^/$
     }
     redir @home /accueil 301
 
