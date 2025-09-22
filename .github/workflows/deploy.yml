@@ -93,7 +93,7 @@ jobs:
           rm: true
           debug: true
 
-      - name: SSH deploy (sudo docker, safe & verbose)
+      - name: SSH deploy (sudo docker, diagnose config)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -111,21 +111,22 @@ jobs:
 
             cd "$APP_DIR"
 
-            # .env sécurisé
+            # Écrire .env et normaliser (éliminer CRLF éventuels)
             umask 177
             cat > .env <<'EOF'
             ${{ secrets.PROD_ENV }}
             EOF
             chmod 600 .env
+            tr -d '\r' < .env > .env.tmp && mv .env.tmp .env
 
             # Fichiers attendus
             test -f "$COMPOSE_FILE"  || { echo "Compose manquant: $COMPOSE_FILE"; exit 2; }
             test -f "Caddyfile.prod" || { echo "Caddyfile.prod manquant"; exit 2; }
 
-            # Auth GHCR (root, car on appelle sudo docker)
+            # Auth GHCR (root)
             echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
-            # Choix de compose
+            # Choix compose
             if sudo docker compose version >/dev/null 2>&1; then
               COMPOSE="sudo docker compose"
             elif command -v docker-compose >/dev/null 2>&1; then
@@ -135,11 +136,28 @@ jobs:
               exit 1
             fi
 
-            # Valider la config puis pull (logs clairs) puis up
+            # Valider la config: si ça échoue, afficher l'erreur détaillée puis quitter
+            set +e
             $COMPOSE -f "$COMPOSE_FILE" --env-file .env config -q
+            cfg_rc=$?
+            set -e
+            if [ $cfg_rc -ne 0 ]; then
+              echo "==== docker compose config (détaillé) ===="
+              $COMPOSE -f "$COMPOSE_FILE" --env-file .env config || true
+              echo "==== Aperçu du .env (lignes non vides, 1ères 30) ===="
+              grep -v '^[[:space:]]*$' .env | sed -n '1,30p' || true
+              echo "==== Fin diagnostic config. Abandon. ===="
+              exit $cfg_rc
+            fi
+
+            # Pull explicite (affichera les 401/404 si souci d'image)
             $COMPOSE -f "$COMPOSE_FILE" --env-file .env pull
+
+            # UP détaché
             $COMPOSE -f "$COMPOSE_FILE" --env-file .env up -d --remove-orphans --no-ansi
 
             # Contrôles & nettoyage
             $COMPOSE -f "$COMPOSE_FILE" --env-file .env ps
             sudo docker image prune -f || true
+
+            echo "DEPLOY OK"
