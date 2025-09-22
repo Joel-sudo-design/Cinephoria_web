@@ -98,7 +98,9 @@ jobs:
               COMPOSE="sudo docker-compose"
             fi
 
-            $COMPOSE -f docker-compose.prod.yml --env-file .env config -q
-            $COMPOSE -f docker-compose.prod.yml --env-file .env pull
-            $COMPOSE -f docker-compose.prod.yml --env-file .env up -d --remove-orphans
+            cp -f docker-compose.prod.yml docker-compose.yml
+
+            $COMPOSE --env-file .env config -q
+            $COMPOSE --env-file .env pull
+            $COMPOSE --env-file .env up -d --remove-orphans
             sudo docker image prune -f || true
