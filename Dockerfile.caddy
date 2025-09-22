@@ -1,0 +1,4 @@
+
+FROM ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG:-latest} AS app
+FROM caddy:2
+COPY --from=app /var/www/Cinephoria_web/public /var/www/Cinephoria_web/public

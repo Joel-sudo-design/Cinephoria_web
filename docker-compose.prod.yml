@@ -1,6 +1,6 @@
 services:
   reverse-proxy:
-    image: caddy:2
+    image: ghcr.io/joel-sudo-design/cinephoria_web/caddy:${APP_TAG:-latest}
     restart: unless-stopped
     ports:
       - "80:80"
@@ -9,7 +9,6 @@ services:
       - ./Caddyfile.prod:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
-      - app_public:/var/www/Cinephoria_web/public:ro
     networks: [web, backend]
     depends_on:
       - app
@@ -82,4 +81,3 @@ volumes:
   mongodb_data: {}
   caddy_data: {}
   caddy_config: {}
-  app_public: {}
