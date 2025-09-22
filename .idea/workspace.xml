@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -545,23 +543,7 @@
       <workItem from="1758465264610" duration="5677000" />
       <workItem from="1758471098785" duration="81000" />
       <workItem from="1758524480322" duration="2612000" />
-      <workItem from="1758530555947" duration="4235000" />
-    </task>
-    <task id="LOCAL-00256" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1743348180835</created>
-      <option name="number" value="00256" />
-      <option name="presentableId" value="LOCAL-00256" />
-      <option name="project" value="LOCAL" />
-      <updated>1743348180835</updated>
-    </task>
-    <task id="LOCAL-00257" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1758099340069</created>
-      <option name="number" value="00257" />
-      <option name="presentableId" value="LOCAL-00257" />
-      <option name="project" value="LOCAL" />
-      <updated>1758099340070</updated>
+      <workItem from="1758530555947" duration="4731000" />
     </task>
     <task id="LOCAL-00258" summary="Upgrade cross-spawn et nanoid">
       <option name="closed" value="true" />
@@ -939,7 +921,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758534443317</updated>
     </task>
-    <option name="localTasksCounter" value="305" />
+    <task id="LOCAL-00305" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758534871727</created>
+      <option name="number" value="00305" />
+      <option name="presentableId" value="LOCAL-00305" />
+      <option name="project" value="LOCAL" />
+      <updated>1758534871727</updated>
+    </task>
+    <task id="LOCAL-00306" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758534938469</created>
+      <option name="number" value="00306" />
+      <option name="presentableId" value="LOCAL-00306" />
+      <option name="project" value="LOCAL" />
+      <updated>1758534938470</updated>
+    </task>
+    <option name="localTasksCounter" value="307" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
