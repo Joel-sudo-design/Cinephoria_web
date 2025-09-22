@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "Attente du port 3306..."
-/wait-for-it.sh db:3306 -t 60
+/wait-for-it.sh db:3306 -t 180
 
 echo "Création de la base si nécessaire..."
 php bin/console doctrine:database:create --if-not-exists

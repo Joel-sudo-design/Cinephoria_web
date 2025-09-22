@@ -98,37 +98,17 @@ jobs:
               COMPOSE="sudo docker-compose"
             fi
 
-            # Compose file actif
             cp -f docker-compose.prod.yml docker-compose.yml
-            rm -f docker-compose.prod.yml
 
             $COMPOSE --env-file .env config -q
             $COMPOSE --env-file .env pull
-
-            # -------- Copie des assets pour Caddy --------
+            # s'assure que le volume existe
             sudo docker volume create app_public >/dev/null
             set -a && . .env 2>/dev/null || true && set +a
             APP_IMAGE="ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG:-latest}"
-
             sudo docker run --rm \
-              -v app_public:/target \
-              "$APP_IMAGE" \
-              sh -c 'rm -rf /target/* && cp -a /var/www/Cinephoria_web/public/. /target/'
-            # ---------------------------------------------
-
-            # Démarre d'abord les bases pour éviter le timeout wait-for-it
-            $COMPOSE --env-file .env up -d db mongo
-
-            echo "Attente de MariaDB (db:3306)..."
-            for i in $(seq 1 90); do
-              if $COMPOSE exec -T db mysqladmin ping -h127.0.0.1 --silent; then
-                echo "MariaDB OK."; break
-              fi
-              sleep 2
-            done
-
-            # Démarre le reste des services
-            $COMPOSE --env-file .env up -d --remove-orphans reverse-proxy app phpmyadmin mongo-express
-
+            -v app_public:/target \
+            "$APP_IMAGE" \
+            sh -c 'rm -rf /target/* && cp -a /var/www/Cinephoria_web/public/. /target/'
+            $COMPOSE --env-file .env up -d --remove-orphans
             sudo docker image prune -f || true
-          

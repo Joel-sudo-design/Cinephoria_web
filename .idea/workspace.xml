@@ -7,6 +7,7 @@
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/entrypoint.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -550,15 +551,7 @@
       <workItem from="1758530555947" duration="10451000" />
       <workItem from="1758542407802" duration="12000" />
       <workItem from="1758542850889" duration="99000" />
-      <workItem from="1758543735345" duration="3141000" />
-    </task>
-    <task id="LOCAL-00270" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1758187462829</created>
-      <option name="number" value="00270" />
-      <option name="presentableId" value="LOCAL-00270" />
-      <option name="project" value="LOCAL" />
-      <updated>1758187462829</updated>
+      <workItem from="1758543735345" duration="3560000" />
     </task>
     <task id="LOCAL-00271" summary="Upgrade cross-spawn et nanoid">
       <option name="closed" value="true" />
@@ -944,7 +937,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758546000549</updated>
     </task>
-    <option name="localTasksCounter" value="319" />
+    <task id="LOCAL-00319" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758546870321</created>
+      <option name="number" value="00319" />
+      <option name="presentableId" value="LOCAL-00319" />
+      <option name="project" value="LOCAL" />
+      <updated>1758546870321</updated>
+    </task>
+    <option name="localTasksCounter" value="320" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
