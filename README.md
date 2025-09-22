@@ -6,7 +6,7 @@ Application Symfony pour présenter les films du cinéma **"Le Cinéphoria"**.
 - **Employé** : gérer des films et valider les avis.
 - **Visiteur** : créer un compte, réserver en ligne, accéder à ses commandes une fois connecté.
 
-Backend : Symfony (PHP 8.2)  
+Backend : Symfony (PHP 8.3)  
 Frontend : HTML5, CSS, Bootstrap, JS (jQuery, Axios)  
 Bases de données : MariaDB (SQL) + MongoDB (NoSQL)  
 Déploiement local : Docker
@@ -46,7 +46,9 @@ Si vous êtes sur **Windows**, activez **WSL2** (Windows Subsystem for Linux) po
    wsl --set-default-version 2
    ```
 
-4. Installez une distribution Linux depuis le **Microsoft Store** (ex : Ubuntu 22.04 LTS).
+4. Installez une distribution Linux depuis PowerShell en admin (ex : Ubuntu 22.04 LTS) :
+    ```powershell
+    wsl --install -d Ubuntu-22.04
 
 5. Vérifiez que tout fonctionne :
    ```powershell
@@ -62,7 +64,7 @@ Si vous êtes sur **Windows**, activez **WSL2** (Windows Subsystem for Linux) po
 
 ## Installation et Configuration
 
-Clonez le dépôt :
+Dans Ubuntu (WSL), clonez le dépôt :
 
 ```bash
 git clone https://github.com/Joel-sudo-design/Cinephoria_web.git
@@ -93,10 +95,30 @@ Les données sont insérées en **une seule transaction** grâce au fichier `tra
 
 ## Utilisation
 
-- Application : http://localhost
-- phpMyAdmin (MariaDB) : http://localhost:8081
-- Mongo Express : http://localhost:8082
-- MailHog : http://localhost:8025
+### Accès aux services
+- **Application web** : [http://localhost](http://localhost)
+- **phpMyAdmin (MariaDB)** : [http://localhost:8081](http://localhost:8081)
+- **Mongo Express (MongoDB)** : [http://localhost:8082](http://localhost:8082)
+- **MailHog (boîte mail de test)** : [http://localhost:8025](http://localhost:8025)
+
+---
+
+### Inscription et tests avec MailHog
+Lors de l’inscription sur l’application, vous pouvez utiliser n’importe quelle adresse email fictive, par exemple :  
+`user@cinephoria.fr`
+
+Les emails envoyés vers cette adresse seront interceptés et consultables directement dans l’interface **MailHog**.  
+Cela permet de tester le système de notifications sans configuration SMTP externe.
+
+---
+
+### Gestion des rôles utilisateurs
+Pour modifier le rôle d’un utilisateur via **phpMyAdmin** :
+1. Accéder à la table `user`.
+2. Éditer l’entrée de l’utilisateur concerné.
+3. Modifier le champ `roles` avec l’une des valeurs suivantes :
+    - `ROLE_ADMIN` → Administrateur (accès complet)
+    - `ROLE_EMPLOYE` → Employé (accès restreint)
 
 Logs applicatifs :
 ```bash

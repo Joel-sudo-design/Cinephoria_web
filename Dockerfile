@@ -1,7 +1,7 @@
 ##########################
 # Stage 1 : Builder
 ##########################
-FROM php:8.2-fpm AS builder
+FROM php:8.3-fpm AS builder
 
 ARG APP_ENV=dev
 
@@ -38,7 +38,7 @@ COPY . .
 ##########################
 # Stage 2 : Image finale
 ##########################
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # Libs runtime + extensions PHP
 RUN apt-get update && apt-get install -y --no-install-recommends \
