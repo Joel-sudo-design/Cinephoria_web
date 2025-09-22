@@ -73,20 +73,37 @@ jobs:
             set -Eeuo pipefail
             mkdir -p /home/debian/apps/cinephoria
 
-      - name: Upload compose & Caddyfile
+      - name: Upload compose & Caddyfile.prod
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: debian
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "docker-compose.prod.yml,Caddyfile"
+          source: |
+            docker-compose.prod.yml
+            Caddyfile.prod
           target: "/home/debian/apps/cinephoria/"
           overwrite: true
           rm: true
           debug: true
 
-      - name: SSH deploy (sudo docker, debug)
+      - name: Rename Caddyfile.prod -> Caddyfile
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: debian
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script_stop: true
+          script: |
+            set -Eeuo pipefail
+            if [ -f /home/debian/apps/cinephoria/Caddyfile.prod ]; then
+              mv -f /home/debian/apps/cinephoria/Caddyfile.prod /home/debian/apps/cinephoria/Caddyfile
+            fi
+            ls -la /home/debian/apps/cinephoria
+
+      - name: SSH deploy (sudo docker)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -97,48 +114,35 @@ jobs:
           envs: GITHUB_TOKEN
           script: |
             set -Eeuo pipefail
-            set -x
+            cd /home/debian/apps/cinephoria
 
-            APP_DIR="/home/debian/apps/cinephoria"
-            COMPOSE_FILE="docker-compose.prod.yml"
-
-            # Vérifs dossiers/fichiers
-            ls -la "$APP_DIR" || true
-            mkdir -p "$APP_DIR"
-            cd "$APP_DIR"
-            test -f "$COMPOSE_FILE" || { echo "Compose manquant: $COMPOSE_FILE"; exit 2; }
-            test -f "Caddyfile"     || { echo "Caddyfile manquant"; exit 2; }
-
-            # .env (sécurisé)
+            # .env sécurisé (contenu multiligne depuis secret)
             umask 177
             cat > .env <<'EOF'
             ${{ secrets.PROD_ENV }}
             EOF
             chmod 600 .env
-            head -n 1 .env || true
 
-            # Vérifier docker côté root + compose dispo
-            sudo docker version
+            # Sanity checks
+            test -f docker-compose.prod.yml || { echo "Compose manquant"; exit 2; }
+            test -f Caddyfile || { echo "Caddyfile manquant"; exit 2; }
+
+            # Login GHCR (root, car on appelle sudo docker)
+            echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+            # docker compose (ou docker-compose si legacy)
             if sudo docker compose version >/dev/null 2>&1; then
               COMPOSE="sudo docker compose"
             elif command -v docker-compose >/dev/null 2>&1; then
               COMPOSE="sudo docker-compose"
             else
-              echo "Ni 'docker compose' ni 'docker-compose' pour root." >&2
-              sudo ls -l /usr/lib/docker/cli-plugins || true
-              sudo ls -l /usr/libexec/docker/cli-plugins || true
-              exit 3
+              echo "Erreur: ni 'docker compose' ni 'docker-compose' n'est installé." >&2
+              exit 1
             fi
 
-            # Login GHCR en root
-            echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-
             # Déploiement
-            $COMPOSE -f "$COMPOSE_FILE" --env-file .env up -d --pull always --remove-orphans
+            $COMPOSE -f docker-compose.prod.yml --env-file .env up -d --pull always --remove-orphans
 
-            # Contrôles
+            # Contrôles & nettoyage
             $COMPOSE ps
             sudo docker image prune -f || true
-
-            echo "DEPLOY OK"
-
