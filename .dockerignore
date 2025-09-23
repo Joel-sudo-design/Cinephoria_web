@@ -1,3 +1,4 @@
 node_modules
 vendor
 var
+public/build
