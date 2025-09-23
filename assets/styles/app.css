@@ -1476,7 +1476,7 @@ footer #navbarBottom .nav-link {
     top:4rem !important;
   }
 
-  .container-films, #container-films-mobile {
+  .container-films {
     top: 9rem;
     height: calc(100% - 13rem);
   }
@@ -1576,7 +1576,7 @@ footer #navbarBottom .nav-link {
     padding: 0.5rem;
   }
 
-  .container-films, #container-films-mobile{
+  .container-films {
     height: calc(100% - (240px));
   }
 

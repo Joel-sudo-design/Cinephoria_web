@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
-      <change afterPath="$PROJECT_DIR$/.github/dependabot.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/dependabot.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/dependabot.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Caddyfile.dev" beforeDir="false" afterPath="$PROJECT_DIR$/Caddyfile.dev" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -553,15 +552,7 @@
       <workItem from="1758542407802" duration="12000" />
       <workItem from="1758542850889" duration="99000" />
       <workItem from="1758543735345" duration="5776000" />
-      <workItem from="1758608746815" duration="10802000" />
-    </task>
-    <task id="LOCAL-00282" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1758445349950</created>
-      <option name="number" value="00282" />
-      <option name="presentableId" value="LOCAL-00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1758445349950</updated>
+      <workItem from="1758608746815" duration="11492000" />
     </task>
     <task id="LOCAL-00283" summary="Upgrade cross-spawn et nanoid">
       <option name="closed" value="true" />
@@ -947,7 +938,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758618074253</updated>
     </task>
-    <option name="localTasksCounter" value="331" />
+    <task id="LOCAL-00331" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758619902255</created>
+      <option name="number" value="00331" />
+      <option name="presentableId" value="LOCAL-00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1758619902255</updated>
+    </task>
+    <option name="localTasksCounter" value="332" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
