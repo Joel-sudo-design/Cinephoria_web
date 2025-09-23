@@ -24,10 +24,6 @@ fi
 echo "Exécution des scripts post-install"
 composer run-script post-install-cmd || true
 
-echo "Installation front (yarn install) et build des assets (yarn build)"
-yarn install
-yarn build
-
 echo "Ajustement des permissions"
 chown -R www-data:www-data var public || true
 
