@@ -1,11 +1,19 @@
-:80 {
+{
+    auto_https off
+}
+
+http://localhost:80 {
     root * /var/www/Cinephoria_web/public
     encode zstd gzip
+
+    header {
+        -Strict-Transport-Security
+    }
 
     @home {
         path_regexp home ^/$
     }
-    redir @home /accueil 302
+    redir @home http://localhost/accueil 302
 
     php_fastcgi app:9000
     file_server
