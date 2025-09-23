@@ -7,6 +7,7 @@ services:
     volumes:
       - ./Caddyfile.dev:/etc/caddy/Caddyfile:ro
       - ./:/var/www/Cinephoria_web:ro
+      - public_build:/var/www/Cinephoria_web/public/build
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
