@@ -21,7 +21,7 @@
     "mongodb/mongodb": "^2.0",
     "symfony/browser-kit": "7.1.*",
     "symfony/console": "7.1.*",
-    "symfony/dotenv": "7.1.*",
+    "symfony/dotenv": "7.3.*",
     "symfony/flex": "^2",
     "symfony/form": "7.1.*",
     "symfony/framework-bundle": "7.1.*",
