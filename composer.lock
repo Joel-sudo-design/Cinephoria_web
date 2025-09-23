@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3422aadb125755bd130dc2dad8787409",
+    "content-hash": "6970b6b3ab50dc96c04c12caa115d1e4",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4555,16 +4555,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v7.1.8",
+            "version": "v7.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "e56b243fc0afa5a12bd11dace4002ada5a7d99f8"
+                "reference": "754d5ad02c889e380efc5a74fa3f6cfe56b7454d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/e56b243fc0afa5a12bd11dace4002ada5a7d99f8",
-                "reference": "e56b243fc0afa5a12bd11dace4002ada5a7d99f8",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/754d5ad02c889e380efc5a74fa3f6cfe56b7454d",
+                "reference": "754d5ad02c889e380efc5a74fa3f6cfe56b7454d",
                 "shasum": ""
             },
             "require": {
@@ -4621,7 +4621,7 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/symfony/intl/tree/v7.1.8"
+                "source": "https://github.com/symfony/intl/tree/v7.3.3"
             },
             "funding": [
                 {
@@ -4633,11 +4633,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-08T15:46:42+00:00"
+            "time": "2025-08-19T14:06:46+00:00"
         },
         {
             "name": "symfony/mailer",
