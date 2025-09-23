@@ -1472,14 +1472,14 @@ footer #navbarBottom .nav-link {
 
 @media (max-width: 992px) and (orientation: landscape) {
 
-    #reservation-filter {
+  #reservation-filter {
     top:4rem !important;
   }
 
-    .container-films, #container-films-mobile {
-        top: 9rem;
-        height: calc(100% - 13rem);
-    }
+  .container-films {
+    top: 9rem;
+    height: calc(100% - 13rem);
+  }
 
   #navFilterFilm {
     top:4rem !important;
@@ -1576,12 +1576,15 @@ footer #navbarBottom .nav-link {
     padding: 0.5rem;
   }
 
-    .container-films, #container-films-mobile {
-        top: 9rem;
-        height: calc(100% - (240px));
-    }
+  .container-films {
+    height: calc(100% - (240px));
+  }
 
-    #navFilterFilm {
+  #container-films-mobile {
+      height: calc(100% - (240px));
+  }
+
+  #navFilterFilm {
     top:4.5rem !important;
   }
 
