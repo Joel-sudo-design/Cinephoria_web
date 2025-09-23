@@ -1,6 +1,6 @@
 services:
   reverse-proxy:
-    image: ghcr.io/joel-sudo-design/cinephoria_web/caddy:${APP_TAG:-latest}
+    image: ghcr.io/joel-sudo-design/cinephoria_web/caddy:${APP_TAG}
     restart: unless-stopped
     ports:
       - "80:80"
@@ -14,7 +14,7 @@ services:
       - app
 
   app:
-    image: ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG:-latest}
+    image: ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG}
     restart: unless-stopped
     environment:
       APP_ENV: prod

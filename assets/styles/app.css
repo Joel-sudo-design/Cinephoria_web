@@ -1582,7 +1582,7 @@ footer #navbarBottom .nav-link {
 
     #container-films-mobile {
         top: 9rem !important;
-        height: calc(100% - (240px));
+        height: calc(100% - (13rem));
     }
 
   #navFilterFilm {

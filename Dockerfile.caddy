@@ -1,4 +1,7 @@
+ARG APP_TAG
 
-FROM ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG:-latest} AS app
+FROM ghcr.io/joel-sudo-design/cinephoria_web/app:${APP_TAG} AS app
+
 FROM caddy:2
+# copie du /public préparé dans l'image app
 COPY --from=app /var/www/Cinephoria_web/public /var/www/Cinephoria_web/public

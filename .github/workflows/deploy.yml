@@ -12,6 +12,7 @@ concurrency:
 env:
   IMAGE_NAME: ghcr.io/joel-sudo-design/cinephoria_web/app
   CADDY_IMAGE_NAME: ghcr.io/joel-sudo-design/cinephoria_web/caddy
+  DEPLOY_TAG: ${{ github.sha }}
 
 jobs:
   build-and-push:
@@ -30,32 +31,17 @@ jobs:
 
       - uses: docker/setup-buildx-action@v3
 
-      - id: meta_app
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-            type=sha
-
       - name: Build & Push APP
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile.prod
           push: true
-          tags: ${{ steps.meta_app.outputs.tags }}
-          labels: ${{ steps.meta_app.outputs.labels }}
+          tags: ${{ env.IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
           build-args: |
             APP_ENV=prod
-
-      - id: meta_caddy
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.CADDY_IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-            type=sha
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build & Push CADDY
         uses: docker/build-push-action@v6
@@ -63,10 +49,11 @@ jobs:
           context: .
           file: ./Dockerfile.caddy
           push: true
-          tags: ${{ steps.meta_caddy.outputs.tags }}
-          labels: ${{ steps.meta_caddy.outputs.labels }}
+          tags: ${{ env.CADDY_IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
           build-args: |
-            APP_TAG=latest
+            APP_TAG=${{ env.DEPLOY_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     runs-on: ubuntu-latest
@@ -100,12 +87,13 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         env:
           PROD_ENV: ${{ secrets.PROD_ENV }}
+          DEPLOY_TAG: ${{ github.sha }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: debian
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          envs: GITHUB_TOKEN,PROD_ENV
+          envs: GITHUB_TOKEN,PROD_ENV,DEPLOY_TAG
           script: |
             set -e
             APP_DIR="/home/debian/apps/cinephoria"
@@ -122,6 +110,8 @@ jobs:
             else
               COMPOSE="sudo docker-compose"
             fi
+
+            echo "APP_TAG=${DEPLOY_TAG}" >> .env
 
             cp -f docker-compose.prod.yml docker-compose.yml
             rm -f docker-compose.prod.yml
