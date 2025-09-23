@@ -1476,7 +1476,7 @@ footer #navbarBottom .nav-link {
     top:4rem !important;
   }
 
-  .container-films {
+  .container-films, #container-films-mobile{
     top: 9rem;
     height: calc(100% - 13rem);
   }

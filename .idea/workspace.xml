@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
-      <change beforePath="$PROJECT_DIR$/Dockerfile.prod" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile.prod" afterDir="false" />
-    </list>
+    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -550,15 +548,7 @@
       <workItem from="1758542407802" duration="12000" />
       <workItem from="1758542850889" duration="99000" />
       <workItem from="1758543735345" duration="5776000" />
-      <workItem from="1758608746815" duration="17985000" />
-    </task>
-    <task id="LOCAL-00289" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1758454549355</created>
-      <option name="number" value="00289" />
-      <option name="presentableId" value="LOCAL-00289" />
-      <option name="project" value="LOCAL" />
-      <updated>1758454549355</updated>
+      <workItem from="1758608746815" duration="18322000" />
     </task>
     <task id="LOCAL-00290" summary="Upgrade cross-spawn et nanoid">
       <option name="closed" value="true" />
@@ -944,7 +934,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758629203585</updated>
     </task>
-    <option name="localTasksCounter" value="338" />
+    <task id="LOCAL-00338" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758629590260</created>
+      <option name="number" value="00338" />
+      <option name="presentableId" value="LOCAL-00338" />
+      <option name="project" value="LOCAL" />
+      <updated>1758629590260</updated>
+    </task>
+    <option name="localTasksCounter" value="339" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
