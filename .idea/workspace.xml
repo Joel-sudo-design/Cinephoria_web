@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile.prod" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile.prod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/entrypoint.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -553,15 +550,7 @@
       <workItem from="1758542407802" duration="12000" />
       <workItem from="1758542850889" duration="99000" />
       <workItem from="1758543735345" duration="5776000" />
-      <workItem from="1758608746815" duration="17205000" />
-    </task>
-    <task id="LOCAL-00287" summary="Upgrade cross-spawn et nanoid">
-      <option name="closed" value="true" />
-      <created>1758451323618</created>
-      <option name="number" value="00287" />
-      <option name="presentableId" value="LOCAL-00287" />
-      <option name="project" value="LOCAL" />
-      <updated>1758451323618</updated>
+      <workItem from="1758608746815" duration="17625000" />
     </task>
     <task id="LOCAL-00288" summary="Upgrade cross-spawn et nanoid">
       <option name="closed" value="true" />
@@ -947,7 +936,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758621630065</updated>
     </task>
-    <option name="localTasksCounter" value="336" />
+    <task id="LOCAL-00336" summary="Déploiement">
+      <option name="closed" value="true" />
+      <created>1758628667508</created>
+      <option name="number" value="00336" />
+      <option name="presentableId" value="LOCAL-00336" />
+      <option name="project" value="LOCAL" />
+      <updated>1758628667508</updated>
+    </task>
+    <option name="localTasksCounter" value="337" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
