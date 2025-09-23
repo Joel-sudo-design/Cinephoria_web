@@ -1,9 +1,12 @@
 version: 2
 updates:
-  # PHP (Composer)
+
   - package-ecosystem: "composer"
     directory: "/"
-    schedule: { interval: "weekly", time: "06:00" }
+    schedule:
+      interval: "weekly"
+      time: "06:00"
+      timezone: "Europe/Paris"
     rebase-strategy: "auto"
     open-pull-requests-limit: 10
     versioning-strategy: increase-if-necessary
@@ -15,10 +18,12 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
 
-  # JavaScript (npm/yarn)
   - package-ecosystem: "npm"
     directory: "/"
-    schedule: { interval: "weekly", time: "06:05" }
+    schedule:
+      interval: "weekly"
+      time: "06:05"
+      timezone: "Europe/Paris"
     rebase-strategy: "auto"
     open-pull-requests-limit: 10
     versioning-strategy: increase-if-necessary
@@ -29,17 +34,31 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
 
-  # Docker (images de base des Dockerfiles à la racine)
   - package-ecosystem: "docker"
     directory: "/"
-    schedule: { interval: "weekly", time: "06:10" }
+    schedule:
+      interval: "weekly"
+      time: "06:10"
+      timezone: "Europe/Paris"
     rebase-strategy: "auto"
     groups:
-      runtime:  { patterns: ["php*", "caddy*"] }
+      runtime:
+        patterns:
+          - "php*"
+          - "caddy*"
+      databases-and-tools:
+        patterns:
+          - "mariadb*"
+          - "mysql*"
+          - "mongo*"
+          - "mongo-express*"
+          - "phpmyadmin*"
       security: { applies-to: security-updates }
 
-  # GitHub Actions (workflows dans .github/workflows/)
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule: { interval: "weekly", time: "06:15" }
+    schedule:
+      interval: "weekly"
+      time: "06:15"
+      timezone: "Europe/Paris"
     rebase-strategy: "auto"
