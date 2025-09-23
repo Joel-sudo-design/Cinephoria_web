@@ -1,0 +1,45 @@
+version: 2
+updates:
+  # PHP (Composer)
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule: { interval: "weekly", time: "06:00" }
+    rebase-strategy: "auto"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase-if-necessary
+    groups:
+      security: { applies-to: security-updates }
+      symfony:  { patterns: ["symfony/*"] }
+      doctrine: { patterns: ["doctrine/*", "doctrine/*-*"] }
+      others-minor-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  # JavaScript (npm/yarn)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule: { interval: "weekly", time: "06:05" }
+    rebase-strategy: "auto"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase-if-necessary
+    groups:
+      security: { applies-to: security-updates }
+      build-tools: { patterns: ["@symfony/webpack-encore*", "webpack*", "babel*"] }
+      front-minor-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  # Docker (images de base des Dockerfiles à la racine)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule: { interval: "weekly", time: "06:10" }
+    rebase-strategy: "auto"
+    groups:
+      runtime:  { patterns: ["php*", "caddy*"] }
+      security: { applies-to: security-updates }
+
+  # GitHub Actions (workflows dans .github/workflows/)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: { interval: "weekly", time: "06:15" }
+    rebase-strategy: "auto"
