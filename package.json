@@ -6,9 +6,9 @@
         "core-js": "^3.38.0",
         "file-loader": "^6.2.0",
         "regenerator-runtime": "^0.13.9",
-        "sass": "^1.80.3",
+        "sass": "^1.93.2",
         "sass-loader": "^16.0.1",
-        "webpack": "^5.74.0",
+        "webpack": "^5.102.0",
         "webpack-cli": "^5.1.0",
         "webpack-notifier": "^1.15.0"
     },
@@ -22,15 +22,15 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
-        "axios": "1.12.0",
+        "axios": "1.12.2",
         "bootstrap": "^5.3.3",
         "bootstrap-datepicker": "^1.10.0",
         "bootstrap-icons": "^1.11.3",
-        "cross-spawn": "7.0.5",
+        "cross-spawn": "7.0.6",
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
         "jquery-ui": "^1.14.1",
-        "nanoid": "3.3.8",
+        "nanoid": "5.1.6",
         "popper.js": "^1.16.1"
     }
 }
