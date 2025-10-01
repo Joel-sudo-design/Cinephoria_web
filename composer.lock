@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fef540bf0cc70c4a9936154040ae701",
+    "content-hash": "b84a1a86853ad498b703d1a5c648e1c9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -6079,16 +6079,16 @@
         },
         {
             "name": "symfony/runtime",
-            "version": "v7.1.7",
+            "version": "v7.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/runtime.git",
-                "reference": "9889783c17e8a68fa5e88c8e8a1a85e802558dba"
+                "reference": "3550e2711e30bfa5d808514781cd52d1cc1d9e9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/runtime/zipball/9889783c17e8a68fa5e88c8e8a1a85e802558dba",
-                "reference": "9889783c17e8a68fa5e88c8e8a1a85e802558dba",
+                "url": "https://api.github.com/repos/symfony/runtime/zipball/3550e2711e30bfa5d808514781cd52d1cc1d9e9f",
+                "reference": "3550e2711e30bfa5d808514781cd52d1cc1d9e9f",
                 "shasum": ""
             },
             "require": {
@@ -6138,7 +6138,7 @@
                 "runtime"
             ],
             "support": {
-                "source": "https://github.com/symfony/runtime/tree/v7.1.7"
+                "source": "https://github.com/symfony/runtime/tree/v7.3.4"
             },
             "funding": [
                 {
@@ -6150,11 +6150,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-05T16:45:54+00:00"
+            "time": "2025-09-11T15:31:28+00:00"
         },
         {
             "name": "symfony/security-bundle",
