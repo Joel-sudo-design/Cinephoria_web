@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Déploiement">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+    <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Modifs workflow">
+      <change afterPath="$PROJECT_DIR$/public/image_film/avatar.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/image_film/ghosted.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/image_film/killer.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -555,15 +557,8 @@
       <workItem from="1758879229495" duration="745000" />
       <workItem from="1759323198317" duration="1175000" />
       <workItem from="1759386361159" duration="52000" />
-      <workItem from="1759396849904" duration="12000" />
-    </task>
-    <task id="LOCAL-00298" summary="Modifications">
-      <option name="closed" value="true" />
-      <created>1758530961154</created>
-      <option name="number" value="00298" />
-      <option name="presentableId" value="LOCAL-00298" />
-      <option name="project" value="LOCAL" />
-      <updated>1758530961155</updated>
+      <workItem from="1759396849904" duration="107000" />
+      <workItem from="1759733727613" duration="1362000" />
     </task>
     <task id="LOCAL-00299" summary="Modifications">
       <option name="closed" value="true" />
@@ -949,7 +944,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759323449138</updated>
     </task>
-    <option name="localTasksCounter" value="347" />
+    <task id="LOCAL-00347" summary="Modifs workflow">
+      <option name="closed" value="true" />
+      <created>1759396875989</created>
+      <option name="number" value="00347" />
+      <option name="presentableId" value="LOCAL-00347" />
+      <option name="project" value="LOCAL" />
+      <updated>1759396875989</updated>
+    </task>
+    <option name="localTasksCounter" value="348" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -968,7 +971,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Modification formulaire et modal conditions" />
     <MESSAGE value="Modifications pas de connexion + erreurs" />
     <MESSAGE value="Modifications diverses" />
     <MESSAGE value="Création table salle" />
@@ -993,7 +995,8 @@
     <MESSAGE value="Upgrade cross-spawn et nanoid" />
     <MESSAGE value="Modifications" />
     <MESSAGE value="Déploiement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Déploiement" />
+    <MESSAGE value="Modifs workflow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifs workflow" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
