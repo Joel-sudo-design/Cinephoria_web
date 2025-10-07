@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Modifs workflow">
-      <change afterPath="$PROJECT_DIR$/public/image_film/avatar.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/image_film/ghosted.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/image_film/killer.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -250,8 +247,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-PS-252.26199.163" />
-        <option value="bundled-php-predefined-a98d8de5180a-f0a8ef430dfa-com.jetbrains.php.sharedIndexes-PS-252.26199.163" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PS-252.26830.95" />
+        <option value="bundled-php-predefined-a98d8de5180a-9b563d34894c-com.jetbrains.php.sharedIndexes-PS-252.26830.95" />
       </set>
     </attachedChunks>
   </component>
@@ -558,15 +555,8 @@
       <workItem from="1759323198317" duration="1175000" />
       <workItem from="1759386361159" duration="52000" />
       <workItem from="1759396849904" duration="107000" />
-      <workItem from="1759733727613" duration="1362000" />
-    </task>
-    <task id="LOCAL-00299" summary="Modifications">
-      <option name="closed" value="true" />
-      <created>1758531719192</created>
-      <option name="number" value="00299" />
-      <option name="presentableId" value="LOCAL-00299" />
-      <option name="project" value="LOCAL" />
-      <updated>1758531719192</updated>
+      <workItem from="1759733727613" duration="1974000" />
+      <workItem from="1759748119547" duration="254000" />
     </task>
     <task id="LOCAL-00300" summary="Déploiement">
       <option name="closed" value="true" />
@@ -952,7 +942,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759396875989</updated>
     </task>
-    <option name="localTasksCounter" value="348" />
+    <task id="LOCAL-00348" summary="Modifs workflow">
+      <option name="closed" value="true" />
+      <created>1759735100993</created>
+      <option name="number" value="00348" />
+      <option name="presentableId" value="LOCAL-00348" />
+      <option name="project" value="LOCAL" />
+      <updated>1759735100993</updated>
+    </task>
+    <option name="localTasksCounter" value="349" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
