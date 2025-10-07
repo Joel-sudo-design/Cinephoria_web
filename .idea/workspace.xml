@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Modifs workflow">
+      <change beforePath="$PROJECT_DIR$/.github/dependabot.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/dependabot.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -557,14 +558,8 @@
       <workItem from="1759396849904" duration="107000" />
       <workItem from="1759733727613" duration="1974000" />
       <workItem from="1759748119547" duration="254000" />
-    </task>
-    <task id="LOCAL-00300" summary="Déploiement">
-      <option name="closed" value="true" />
-      <created>1758532263880</created>
-      <option name="number" value="00300" />
-      <option name="presentableId" value="LOCAL-00300" />
-      <option name="project" value="LOCAL" />
-      <updated>1758532263880</updated>
+      <workItem from="1759817977843" duration="46000" />
+      <workItem from="1759826024152" duration="343000" />
     </task>
     <task id="LOCAL-00301" summary="Déploiement">
       <option name="closed" value="true" />
@@ -950,7 +945,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759735100993</updated>
     </task>
-    <option name="localTasksCounter" value="349" />
+    <task id="LOCAL-00349" summary="Modifs workflow">
+      <option name="closed" value="true" />
+      <created>1759818014930</created>
+      <option name="number" value="00349" />
+      <option name="presentableId" value="LOCAL-00349" />
+      <option name="project" value="LOCAL" />
+      <updated>1759818014930</updated>
+    </task>
+    <option name="localTasksCounter" value="350" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

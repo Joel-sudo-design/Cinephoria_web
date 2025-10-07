@@ -11,37 +11,51 @@ updates:
     open-pull-requests-limit: 10
     versioning-strategy: increase-if-necessary
     groups:
-      security: { applies-to: security-updates }
-      symfony:  { patterns: ["symfony/*"] }
-      doctrine: { patterns: ["doctrine/*", "doctrine/*-*"] }
-      others-minor-patch:
+      security:
+        applies-to: security-updates
         patterns: ["*"]
+      symfony:
+        patterns: ["symfony/*"]
+      doctrine:
+        patterns: ["doctrine/*", "doctrine/*-*"]
+      others-minor-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        exclude-patterns: ["symfony/*", "doctrine/*", "doctrine/*-*"]
         update-types: ["minor", "patch"]
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
       time: "06:05"
       timezone: "Europe/Paris"
     rebase-strategy: "auto"
     open-pull-requests-limit: 10
     versioning-strategy: increase-if-necessary
     groups:
-      security: { applies-to: security-updates }
-      build-tools: { patterns: ["@symfony/webpack-encore*", "webpack*", "babel*"] }
-      front-minor-patch:
+      security:
+        applies-to: security-updates
         patterns: ["*"]
+      build-tools:
+        patterns: ["@symfony/webpack-encore*", "webpack*", "babel*"]
+      front-minor-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        exclude-patterns: ["@symfony/webpack-encore*", "webpack*", "babel*"]
         update-types: ["minor", "patch"]
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
       time: "06:10"
       timezone: "Europe/Paris"
     rebase-strategy: "auto"
     groups:
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
       runtime:
         patterns:
           - "php*"
@@ -53,12 +67,11 @@ updates:
           - "mongo*"
           - "mongo-express*"
           - "phpmyadmin*"
-      security: { applies-to: security-updates }
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
       time: "06:15"
       timezone: "Europe/Paris"
     rebase-strategy: "auto"
