@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5731122d094eff65a6721d537be8f24",
+    "content-hash": "be640ed7689bfd27c8b6c3aa8c2875ae",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2627,16 +2627,16 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v7.1.6",
+            "version": "v7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "714becc9ba9b20115ffededc58f6b7172dc394cf"
+                "reference": "f0b889b73a845cddef1d25fe207b37fd04cb5419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/714becc9ba9b20115ffededc58f6b7172dc394cf",
-                "reference": "714becc9ba9b20115ffededc58f6b7172dc394cf",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/f0b889b73a845cddef1d25fe207b37fd04cb5419",
+                "reference": "f0b889b73a845cddef1d25fe207b37fd04cb5419",
                 "shasum": ""
             },
             "require": {
@@ -2675,7 +2675,7 @@
             "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/browser-kit/tree/v7.1.6"
+                "source": "https://github.com/symfony/browser-kit/tree/v7.3.2"
             },
             "funding": [
                 {
@@ -2687,11 +2687,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-25T15:11:02+00:00"
+            "time": "2025-07-10T08:47:49+00:00"
         },
         {
             "name": "symfony/cache",
@@ -3373,16 +3377,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v7.1.11",
+            "version": "v7.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "7361d8f7e7eecbca17efe68ca1ee677bf23cfe5a"
+                "reference": "efa076ea0eeff504383ff0dcf827ea5ce15690ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/7361d8f7e7eecbca17efe68ca1ee677bf23cfe5a",
-                "reference": "7361d8f7e7eecbca17efe68ca1ee677bf23cfe5a",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/efa076ea0eeff504383ff0dcf827ea5ce15690ba",
+                "reference": "efa076ea0eeff504383ff0dcf827ea5ce15690ba",
                 "shasum": ""
             },
             "require": {
@@ -3420,7 +3424,7 @@
             "description": "Eases DOM navigation for HTML and XML documents",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dom-crawler/tree/v7.1.11"
+                "source": "https://github.com/symfony/dom-crawler/tree/v7.3.3"
             },
             "funding": [
                 {
@@ -3432,11 +3436,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-27T10:57:12+00:00"
+            "time": "2025-08-06T20:13:54+00:00"
         },
         {
             "name": "symfony/dotenv",
