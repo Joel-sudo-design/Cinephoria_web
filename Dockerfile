@@ -1,7 +1,7 @@
 ##########################
 # Stage 1 : Builder
 ##########################
-FROM php:8.3-fpm AS builder
+FROM php:8.4-fpm AS builder
 
 ARG APP_ENV=dev
 
@@ -43,7 +43,7 @@ RUN yarn install && yarn build
 ##########################
 # Stage 2 : Image finale
 ##########################
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 # Libs runtime + extensions PHP
 RUN apt-get update && apt-get install -y --no-install-recommends \
