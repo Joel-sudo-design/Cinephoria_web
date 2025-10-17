@@ -7,10 +7,12 @@ ARG APP_ENV=dev
 
 # Dépendances système + extensions PHP nécessaires au build
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev zip unzip git curl gnupg2 ca-certificates libssl-dev pkg-config \
+    libzip-dev zip unzip git curl gnupg2 ca-certificates \
+    libssl-dev pkg-config \
     libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+    libxml2-dev \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
- && docker-php-ext-install -j"$(nproc)" gd zip pdo pdo_mysql \
+ && docker-php-ext-install -j"$(nproc)" gd zip pdo pdo_mysql dom xml simplexml \
  && pecl install mongodb && docker-php-ext-enable mongodb \
  && rm -rf /var/lib/apt/lists/*
 
@@ -22,18 +24,21 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# wait-for-it (plus de vhost Apache ici)
+# wait-for-it
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
 WORKDIR /var/www/Cinephoria_web
 
-# Dépendances PHP
+# Dépendances PHP (pas d'auto-scripts pendant le build)
 COPY composer.json composer.lock ./
 RUN composer install --no-interaction --prefer-dist --no-scripts
 
 # Code source
 COPY . .
+
+# Build des assets (ajouté)
+RUN yarn install && yarn build
 
 ##########################
 # Stage 2 : Image finale
@@ -43,19 +48,22 @@ FROM php:8.3-fpm
 # Libs runtime + extensions PHP
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
+    libssl-dev pkg-config \
     libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+    libxml2-dev \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
- && docker-php-ext-install -j"$(nproc)" gd zip pdo pdo_mysql \
+ && docker-php-ext-install -j"$(nproc)" gd zip pdo pdo_mysql dom xml simplexml \
  && pecl install mongodb && docker-php-ext-enable mongodb \
  && rm -rf /var/lib/apt/lists/*
 
-# Node + Yarn (si tu builds les assets au runtime en DEV)
+# Node + Yarn (utile seulement si build d'assets au runtime en DEV)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
  && apt-get install -y nodejs \
  && npm install -g yarn
 
-# Copier depuis le builder
 WORKDIR /var/www/Cinephoria_web
+
+# Copier depuis le builder (vendor + code)
 COPY --from=builder /var/www/Cinephoria_web /var/www/Cinephoria_web
 COPY --from=builder /usr/bin/composer /usr/bin/composer
 

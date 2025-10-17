@@ -24,6 +24,7 @@ services:
       - .:/var/www/Cinephoria_web:delegated
       - public_build:/var/www/Cinephoria_web/public/build
       - /var/www/Cinephoria_web/vendor
+      - jwt_keys:/var/www/Cinephoria_web/config/jwt
     depends_on:
       - db
       - mongodb
@@ -98,3 +99,4 @@ volumes:
   public_build:
   caddy_data:
   caddy_config:
+  jwt_keys: {}
