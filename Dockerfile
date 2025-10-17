@@ -5,24 +5,25 @@ FROM php:8.4-fpm AS builder
 
 ARG APP_ENV=dev
 
-# Dépendances système + extensions PHP nécessaires au build
+# Dépendances système
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev zip unzip git curl gnupg2 ca-certificates \
-    libssl-dev pkg-config \
+    libzip-dev zip unzip git curl gnupg2 ca-certificates libssl-dev pkg-config \
     libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
-    libxml2-dev \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
- && docker-php-ext-install -j"$(nproc)" gd zip pdo pdo_mysql dom xml simplexml \
- && pecl install mongodb && docker-php-ext-enable mongodb \
+ && docker-php-ext-install -j"$(nproc)" gd \
  && rm -rf /var/lib/apt/lists/*
 
-# Node.js + Yarn (build assets en dev/CI)
+# Extensions PHP (mêmes que PROD, pas de dom/xml/simplexml)
+RUN docker-php-ext-install zip pdo pdo_mysql
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+
+# Node.js + Yarn
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
- && apt-get install -y nodejs \
- && npm install -g yarn
+    && apt-get install -y nodejs \
+    && npm install -g yarn
 
 # Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # wait-for-it
 COPY wait-for-it.sh /wait-for-it.sh
@@ -30,40 +31,45 @@ RUN chmod +x /wait-for-it.sh
 
 WORKDIR /var/www/Cinephoria_web
 
-# Dépendances PHP (pas d'auto-scripts pendant le build)
+# Dépendances PHP (DEV : on garde les paquets dev, pas d'auto-scripts)
 COPY composer.json composer.lock ./
 RUN composer install --no-interaction --prefer-dist --no-scripts
 
 # Code source
 COPY . .
 
-# Build des assets (ajouté)
-RUN yarn install && yarn build
+# Build des assets
+RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else npm ci; fi
+RUN sh -lc 'if [ -f yarn.lock ]; then yarn build || true; else npm run build || true; fi'
 
 ##########################
 # Stage 2 : Image finale
 ##########################
 FROM php:8.4-fpm
 
-# Libs runtime + extensions PHP
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev \
-    libssl-dev pkg-config \
-    libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
-    libxml2-dev \
- && docker-php-ext-configure gd --with-freetype --with-jpeg \
- && docker-php-ext-install -j"$(nproc)" gd zip pdo pdo_mysql dom xml simplexml \
- && pecl install mongodb && docker-php-ext-enable mongodb \
- && rm -rf /var/lib/apt/lists/*
-
-# Node + Yarn (utile seulement si build d'assets au runtime en DEV)
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
- && apt-get install -y nodejs \
- && npm install -g yarn
-
 WORKDIR /var/www/Cinephoria_web
 
-# Copier depuis le builder (vendor + code)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libzip-dev \
+    libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+ && docker-php-ext-configure gd --with-freetype --with-jpeg \
+ && docker-php-ext-install -j"$(nproc)" gd \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install zip pdo pdo_mysql
+RUN pecl install mongodb && docker-php-ext-enable mongodb
+
+# OPcache (optionnel en DEV; garde si tu veux reproduire prod)
+RUN { \
+  echo "opcache.enable=1"; \
+  echo "opcache.enable_cli=1"; \
+  echo "opcache.jit=1255"; \
+  echo "opcache.jit_buffer_size=64M"; \
+  echo "opcache.memory_consumption=256"; \
+  echo "opcache.max_accelerated_files=20000"; \
+} > /usr/local/etc/php/conf.d/opcache.ini
+
+# Copier depuis le builder
 COPY --from=builder /var/www/Cinephoria_web /var/www/Cinephoria_web
 COPY --from=builder /usr/bin/composer /usr/bin/composer
 
@@ -71,10 +77,10 @@ COPY --from=builder /usr/bin/composer /usr/bin/composer
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
-# Entrypoint
+EXPOSE 9000
+
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh \
- && chmod +x /usr/local/bin/entrypoint.sh
+    && chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 9000
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
