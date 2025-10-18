@@ -119,10 +119,23 @@ jobs:
 
             $COMPOSE --env-file .env config -q
 
+            # Pull les images à jour
             $COMPOSE --env-file .env pull app reverse-proxy
-            $COMPOSE --env-file .env up -d --no-deps app reverse-proxy
-            
-            $COMPOSE --env-file .env exec -T app bash -lc '
+
+            # Recrée les conteneurs avec les nouvelles variables d'env
+            $COMPOSE --env-file .env up -d --no-deps --force-recreate app reverse-proxy
+
+            # Vérif / debug rapide (affiche la passphrase côté compose sans la valeur)
+            echo "---- Vérification de JWT_PASSPHRASE ----"
+            grep -E '^JWT_PASSPHRASE=' .env || true
+            $COMPOSE --env-file .env config | grep -E 'JWT_PASSPHRASE' || true
+            echo "----------------------------------------"
+
+            # Extraction de la passphrase du .env pour l'injecter explicitement
+            PASS="$(grep -E '^JWT_PASSPHRASE=' .env | cut -d= -f2- | tr -d '\r')"
+
+            # Génération des clés JWT dans le volume s'il n'y en a pas
+            $COMPOSE --env-file .env exec -T -e JWT_PASSPHRASE="$PASS" app bash -lc '
               set -e
               cd /var/www/Cinephoria_web
               mkdir -p config/jwt
@@ -134,10 +147,12 @@ jobs:
                 chown -R www-data:www-data config/jwt
                 chmod 640 config/jwt/private.pem || true
                 chmod 644 config/jwt/public.pem || true
-                echo "JWT keys generated in volume."
+                echo "✅ JWT keys generated in volume."
               else
-                echo "JWT keys already present in volume."
+                echo "ℹ️ JWT keys already present in volume."
               fi
             '
 
+            # Nettoyage des vieilles images
             sudo docker image prune -f || true
+
