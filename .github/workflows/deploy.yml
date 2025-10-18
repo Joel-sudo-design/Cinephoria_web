@@ -101,6 +101,7 @@ jobs:
 
             umask 177
             printf '%s\n' "$PROD_ENV" | tr -d '\r' > .env
+            echo "JWT_PASSPHRASE=${{ secrets.JWT_PASSPHRASE }}" >> .env
             chmod 600 .env
 
             echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
@@ -120,5 +121,23 @@ jobs:
 
             $COMPOSE --env-file .env pull app reverse-proxy
             $COMPOSE --env-file .env up -d --no-deps app reverse-proxy
+            
+            $COMPOSE --env-file .env exec -T app bash -lc '
+              set -e
+              cd /var/www/Cinephoria_web
+              mkdir -p config/jwt
+              if [ ! -f config/jwt/private.pem ] || [ ! -f config/jwt/public.pem ]; then
+                if [ -z "$JWT_PASSPHRASE" ]; then
+                  echo "ERROR: JWT_PASSPHRASE not set"; exit 1
+                fi
+                php bin/console lexik:jwt:generate-keypair --env=prod --overwrite -n
+                chown -R www-data:www-data config/jwt
+                chmod 640 config/jwt/private.pem || true
+                chmod 644 config/jwt/public.pem || true
+                echo "JWT keys generated in volume."
+              else
+                echo "JWT keys already present in volume."
+              fi
+            '
 
             sudo docker image prune -f || true

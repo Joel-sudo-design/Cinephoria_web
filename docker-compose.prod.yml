@@ -26,6 +26,8 @@ services:
       JWT_PUBLIC_KEY: /var/www/Cinephoria_web/config/jwt/public.pem
       JWT_PASSPHRASE: ${JWT_PASSPHRASE}
       JWT_TOKEN_TTL: ${JWT_TOKEN_TTL:-3600}
+    volumes:
+      - jwt_keys:/var/www/Cinephoria_web/config/jwt
     depends_on:
       db:
         condition: service_started
@@ -85,3 +87,4 @@ volumes:
   mongodb_data: {}
   caddy_data: {}
   caddy_config: {}
+  jwt_keys: {}
