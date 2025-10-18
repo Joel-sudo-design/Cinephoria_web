@@ -125,12 +125,6 @@ jobs:
             # Recrée les conteneurs avec les nouvelles variables d'env
             $COMPOSE --env-file .env up -d --no-deps --force-recreate app reverse-proxy
 
-            # Vérif / debug rapide (affiche la passphrase côté compose sans la valeur)
-            echo "---- Vérification de JWT_PASSPHRASE ----"
-            grep -E '^JWT_PASSPHRASE=' .env || true
-            $COMPOSE --env-file .env config | grep -E 'JWT_PASSPHRASE' || true
-            echo "----------------------------------------"
-
             # Extraction de la passphrase du .env pour l'injecter explicitement
             PASS="$(grep -E '^JWT_PASSPHRASE=' .env | cut -d= -f2- | tr -d '\r')"
 
