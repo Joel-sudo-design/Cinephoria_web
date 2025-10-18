@@ -24,7 +24,7 @@ services:
       MAILER_DSN: ${MAILER_DSN}
       JWT_SECRET_KEY: /var/www/Cinephoria_web/config/jwt/private.pem
       JWT_PUBLIC_KEY: /var/www/Cinephoria_web/config/jwt/public.pem
-      WT_PASSPHRASE: ${JWT_PASSPHRASE}
+      JWT_PASSPHRASE: ${JWT_PASSPHRASE}
       JWT_TOKEN_TTL: ${JWT_TOKEN_TTL:-3600}
     depends_on:
       db:
