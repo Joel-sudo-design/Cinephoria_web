@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Modifs workflow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -567,15 +568,7 @@
       <workItem from="1760603467286" duration="6325000" />
       <workItem from="1760620023486" duration="10853000" />
       <workItem from="1760689249895" duration="11955000" />
-      <workItem from="1760792527001" duration="5241000" />
-    </task>
-    <task id="LOCAL-00312" summary="Déploiement">
-      <option name="closed" value="true" />
-      <created>1758537901385</created>
-      <option name="number" value="00312" />
-      <option name="presentableId" value="LOCAL-00312" />
-      <option name="project" value="LOCAL" />
-      <updated>1758537901385</updated>
+      <workItem from="1760792527001" duration="7476000" />
     </task>
     <task id="LOCAL-00313" summary="Déploiement">
       <option name="closed" value="true" />
@@ -961,7 +954,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760796709654</updated>
     </task>
-    <option name="localTasksCounter" value="361" />
+    <task id="LOCAL-00361" summary="Modifs workflow">
+      <option name="closed" value="true" />
+      <created>1760799198803</created>
+      <option name="number" value="00361" />
+      <option name="presentableId" value="LOCAL-00361" />
+      <option name="project" value="LOCAL" />
+      <updated>1760799198803</updated>
+    </task>
+    <option name="localTasksCounter" value="362" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
