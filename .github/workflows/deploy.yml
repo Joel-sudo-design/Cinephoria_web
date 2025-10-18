@@ -101,7 +101,6 @@ jobs:
 
             umask 177
             printf '%s\n' "$PROD_ENV" | tr -d '\r' > .env
-            echo "JWT_PASSPHRASE=${{ secrets.JWT_PASSPHRASE }}" >> .env
             chmod 600 .env
 
             echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ghcr.io -u "${{ github.actor }}" --password-stdin
