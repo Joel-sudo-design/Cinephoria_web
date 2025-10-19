@@ -27,7 +27,7 @@ services:
       JWT_PASSPHRASE: ${JWT_PASSPHRASE}
       JWT_TOKEN_TTL: ${JWT_TOKEN_TTL:-3600}
     volumes:
-      - jwt_keys:/var/www/Cinephoria_web/config/jwt
+      - jwt_keys:/var/www/Cinephoria_web/config/jwt:ro
     depends_on:
       db:
         condition: service_started
@@ -50,9 +50,16 @@ services:
   mongo:
     image: mongo:7
     restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DB}
+      ME_USER: ${ME_USER}
+      ME_PASS: ${ME_PASS}
     volumes:
       - mongodb_data:/data/db
-    networks: [backend]
+      - ./001-user.js:/docker-entrypoint-initdb.d/001-user.js:ro
+    networks: [ backend ]
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5

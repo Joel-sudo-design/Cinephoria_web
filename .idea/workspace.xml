@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7841c5b1-40bd-4ed4-8eef-f362bac692a0" name="Changes" comment="Modifs workflow">
+      <change afterPath="$PROJECT_DIR$/001-user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer_backup.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.prod.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -571,15 +569,8 @@
       <workItem from="1760603467286" duration="6325000" />
       <workItem from="1760620023486" duration="10853000" />
       <workItem from="1760689249895" duration="11955000" />
-      <workItem from="1760792527001" duration="13106000" />
-    </task>
-    <task id="LOCAL-00317" summary="Déploiement">
-      <option name="closed" value="true" />
-      <created>1758543892932</created>
-      <option name="number" value="00317" />
-      <option name="presentableId" value="LOCAL-00317" />
-      <option name="project" value="LOCAL" />
-      <updated>1758543892932</updated>
+      <workItem from="1760792527001" duration="13200000" />
+      <workItem from="1760862725799" duration="3721000" />
     </task>
     <task id="LOCAL-00318" summary="Déploiement">
       <option name="closed" value="true" />
@@ -965,7 +956,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760805717372</updated>
     </task>
-    <option name="localTasksCounter" value="366" />
+    <task id="LOCAL-00366" summary="Modifs workflow">
+      <option name="closed" value="true" />
+      <created>1760807012043</created>
+      <option name="number" value="00366" />
+      <option name="presentableId" value="LOCAL-00366" />
+      <option name="project" value="LOCAL" />
+      <updated>1760807012043</updated>
+    </task>
+    <option name="localTasksCounter" value="367" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
