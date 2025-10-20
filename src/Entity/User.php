@@ -53,9 +53,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    #[ORM\Column(length: 255, unique: true, nullable: true)]
-    private ?string $apiToken = null;
-
     /**
      * @var Collection<int, Seance>
      */
@@ -76,18 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->avis = new ArrayCollection();
         $this->reservation = new ArrayCollection();
-    }
-
-    public function getApiToken(): ?string
-    {
-        return $this->apiToken;
-    }
-
-    public function setApiToken(?string $apiToken): self
-    {
-        $this->apiToken = $apiToken;
-
-        return $this;
     }
 
     public function getId(): ?int
