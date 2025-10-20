@@ -13,6 +13,7 @@ env:
   IMAGE_NAME: ghcr.io/joel-sudo-design/cinephoria_web/app
   CADDY_IMAGE_NAME: ghcr.io/joel-sudo-design/cinephoria_web/caddy
   DEPLOY_TAG: ${{ github.sha }}
+  DOCKER_BUILDKIT: 1  # ✅ active BuildKit du daemon (driver docker)
 
 jobs:
   build-and-push:
@@ -29,7 +30,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # ✅ plus d'image BuildKit à tirer (évite 503/UNAUTHORIZED Docker Hub)
       - uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker
+          install: true
 
       - name: Build & Push APP
         uses: docker/build-push-action@v6
@@ -37,11 +42,14 @@ jobs:
           context: .
           file: ./Dockerfile.prod
           push: true
-          tags: ${{ env.IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
+            ${{ env.IMAGE_NAME }}:latest
           build-args: |
             APP_ENV=prod
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # ✅ cache compatible driver docker
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:latest
+          cache-to: type=inline
 
       - name: Build & Push CADDY
         uses: docker/build-push-action@v6
@@ -49,11 +57,13 @@ jobs:
           context: .
           file: ./Dockerfile.caddy
           push: true
-          tags: ${{ env.CADDY_IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
+          tags: |
+            ${{ env.CADDY_IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
+            ${{ env.CADDY_IMAGE_NAME }}:latest
           build-args: |
             APP_TAG=${{ env.DEPLOY_TAG }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ env.CADDY_IMAGE_NAME }}:latest
+          cache-to: type=inline
 
   deploy:
     runs-on: ubuntu-latest
@@ -124,10 +134,8 @@ jobs:
             # Recrée les conteneurs avec les nouvelles variables d'env
             $COMPOSE --env-file .env up -d --no-deps --force-recreate app reverse-proxy
 
-            # Extraction de la passphrase du .env pour l'injecter explicitement
             PASS="$(grep -E '^JWT_PASSPHRASE=' .env | cut -d= -f2- | tr -d '\r')"
 
-            # Génération des clés JWT dans le volume s'il n'y en a pas
             $COMPOSE --env-file .env exec -T -e JWT_PASSPHRASE="$PASS" app bash -lc '
               set -e
               cd /var/www/Cinephoria_web
@@ -146,6 +154,4 @@ jobs:
               fi
             '
 
-            # Nettoyage des vieilles images
             sudo docker image prune -f || true
-
