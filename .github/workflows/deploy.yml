@@ -33,8 +33,7 @@ jobs:
         with:
           driver: docker-container
           driver-opts: |
-            image=ghcr.io/moby/buildkit:v0.15.1
-      
+            image=docker.io/moby/buildkit:v0.15.1
 
       - name: Build & Push APP
         uses: docker/build-push-action@v6
