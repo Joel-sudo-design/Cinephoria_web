@@ -44,8 +44,8 @@ jobs:
           tags: ${{ env.IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
           build-args: |
             APP_ENV=prod
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:latest
+          cache-to: type=inline
 
       - name: Build & Push CADDY
         uses: docker/build-push-action@v6
@@ -56,8 +56,8 @@ jobs:
           tags: ${{ env.CADDY_IMAGE_NAME }}:${{ env.DEPLOY_TAG }}
           build-args: |
             APP_TAG=${{ env.DEPLOY_TAG }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ env.CADDY_IMAGE_NAME }}:latest
+          cache-to: type=inline
 
   deploy:
     runs-on: ubuntu-latest
