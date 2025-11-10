@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v5
 
       - name: Ensure remote dir exists
-        uses: appleboy/ssh-action@v1.2.2
+        uses: appleboy/ssh-action@v1.2.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: debian
@@ -84,7 +84,7 @@ jobs:
           rm: true
 
       - name: SSH deploy
-        uses: appleboy/ssh-action@v1.2.2
+        uses: appleboy/ssh-action@v1.2.3
         env:
           PROD_ENV: ${{ secrets.PROD_ENV }}
           DEPLOY_TAG: ${{ github.sha }}
