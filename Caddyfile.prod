@@ -1,3 +1,7 @@
+www.cinephoria.joeldermont.fr {
+    redir https://cinephoria.joeldermont.fr{uri} 308
+}
+
 cinephoria.joeldermont.fr {
     root * /var/www/Cinephoria_web/public
     encode zstd gzip
