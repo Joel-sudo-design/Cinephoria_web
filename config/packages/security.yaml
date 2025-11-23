@@ -58,6 +58,7 @@ security:
         interval: '15 minutes'
 
   access_control:
+    - { path: ^/api/register$, roles: PUBLIC_ACCESS }
     - { path: ^/api/login_check$, roles: PUBLIC_ACCESS }
     - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/administrateur, roles: ROLE_ADMIN }
