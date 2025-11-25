@@ -141,7 +141,7 @@ class RegistrationController extends AbstractController
         ], 201);
     }
 
-    #[Route('/api/verify/email', name: 'app_verify_email_api', methods: ['GET'])]
+    #[Route('/api/verify/email', name: 'app_verify_email_api')]
     public function verifyUserEmailApi(Request $request, UserRepository $userRepository): JsonResponse
     {
         $id = $request->query->get('id');
