@@ -26,7 +26,7 @@
     "symfony/form": "7.3.*",
     "symfony/framework-bundle": "7.3.*",
     "symfony/http-client": "8.0.*",
-    "symfony/intl": "7.3.*",
+    "symfony/intl": "8.0.*",
     "symfony/mailer": "8.0.*",
     "symfony/monolog-bundle": "^4.0",
     "symfony/property-info": "7.3.*",
