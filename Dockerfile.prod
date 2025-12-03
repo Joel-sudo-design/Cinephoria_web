@@ -52,12 +52,12 @@ WORKDIR /var/www/Cinephoria_web
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+    libssl-dev pkg-config ca-certificates \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
  && docker-php-ext-install -j"$(nproc)" gd \
+ && docker-php-ext-install zip pdo pdo_mysql \
+ && pecl install mongodb && docker-php-ext-enable mongodb \
  && rm -rf /var/lib/apt/lists/*
-
-RUN docker-php-ext-install zip pdo pdo_mysql
-RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 # OPcache (prod)
 RUN { \
