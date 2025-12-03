@@ -71,14 +71,14 @@ jobs:
           script: |
             mkdir -p /home/debian/apps/cinephoria
 
-      - name: Upload compose & Caddyfile.prod
+      - name: Upload compose, Caddyfile & Mongo init script
         uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: debian
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "docker-compose.prod.yml,Caddyfile.prod"
+          source: "docker-compose.prod.yml,Caddyfile.prod,001-user.js"
           target: "/home/debian/apps/cinephoria/"
           overwrite: true
           rm: true
