@@ -1,7 +1,7 @@
 ##########################
 # Stage 1 : Builder
 ##########################
-FROM php:8.4-fpm AS builder
+FROM php:8.5-fpm AS builder
 
 ARG APP_ENV=dev
 
@@ -45,7 +45,7 @@ RUN sh -lc 'if [ -f yarn.lock ]; then yarn build || true; else npm run build || 
 ##########################
 # Stage 2 : Image finale
 ##########################
-FROM php:8.4-fpm
+FROM php:8.5-fpm
 
 WORKDIR /var/www/Cinephoria_web
 
