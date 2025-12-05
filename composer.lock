@@ -7789,32 +7789,32 @@
         },
         {
             "name": "symfonycasts/reset-password-bundle",
-            "version": "v1.23.2",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/reset-password-bundle.git",
-                "reference": "beff941f4d7f8ad7fbd32e482e13acbcefa0dde4"
+                "reference": "8e5f8f821260ccfe8085563a93b418d3ef9af29f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/beff941f4d7f8ad7fbd32e482e13acbcefa0dde4",
-                "reference": "beff941f4d7f8ad7fbd32e482e13acbcefa0dde4",
+                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/8e5f8f821260ccfe8085563a93b418d3ef9af29f",
+                "reference": "8e5f8f821260ccfe8085563a93b418d3ef9af29f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1.10",
-                "symfony/config": "^5.4 | ^6.0 | ^7.0",
-                "symfony/dependency-injection": "^5.4 | ^6.0 | ^7.0",
+                "symfony/config": "^5.4 | ^6.0 | ^7.0 | ^8.0",
+                "symfony/dependency-injection": "^5.4 | ^6.0 | ^7.0 | ^8.0",
                 "symfony/deprecation-contracts": "^2.2 | ^3.0",
-                "symfony/http-kernel": "^5.4 | ^6.0 | ^7.0"
+                "symfony/http-kernel": "^5.4 | ^6.0 | ^7.0 | ^8.0"
             },
             "require-dev": {
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.8",
                 "doctrine/orm": "^2.13",
-                "symfony/framework-bundle": "^5.4 | ^6.0 | ^7.0",
-                "symfony/phpunit-bridge": "^5.4 | ^6.0 | ^7.0",
-                "symfony/process": "^6.4 | ^7.0 | ^7.1",
+                "symfony/framework-bundle": "^5.4 | ^6.0 | ^7.0 | ^8.0",
+                "symfony/phpunit-bridge": "^5.4 | ^6.0 | ^7.0 | ^8.0",
+                "symfony/process": "^6.4 | ^7.0 | ^8.0",
                 "symfonycasts/internal-test-helpers": "dev-main"
             },
             "type": "symfony-bundle",
@@ -7830,37 +7830,37 @@
             "description": "Symfony bundle that adds password reset functionality.",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/reset-password-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.23.2"
+                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.24.0"
             },
-            "time": "2025-06-27T20:32:48+00:00"
+            "time": "2025-11-29T13:26:50+00:00"
         },
         {
             "name": "symfonycasts/verify-email-bundle",
-            "version": "v1.17.4",
+            "version": "v1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
-                "reference": "df6583e59704d37a625a0f583cd8f66bf104d45f"
+                "reference": "ae0e6228c240a3fa20f2df5528f2fed97b806cab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/df6583e59704d37a625a0f583cd8f66bf104d45f",
-                "reference": "df6583e59704d37a625a0f583cd8f66bf104d45f",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/ae0e6228c240a3fa20f2df5528f2fed97b806cab",
+                "reference": "ae0e6228c240a3fa20f2df5528f2fed97b806cab",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/config": "^5.4 | ^6.0 | ^7.0",
-                "symfony/dependency-injection": "^5.4 | ^6.0 | ^7.0",
+                "symfony/config": "^5.4 | ^6.0 | ^7.0 | ^8.0",
+                "symfony/dependency-injection": "^5.4 | ^6.0 | ^7.0 | ^8.0",
                 "symfony/deprecation-contracts": "^2.2 | ^3.0",
-                "symfony/http-kernel": "^5.4 | ^6.0 | ^7.0",
-                "symfony/routing": "^5.4 | ^6.0 | ^7.0"
+                "symfony/http-kernel": "^5.4 | ^6.0 | ^7.0 | ^8.0",
+                "symfony/routing": "^5.4 | ^6.0 | ^7.0 | ^8.0"
             },
             "require-dev": {
                 "doctrine/orm": "^2.7",
                 "doctrine/persistence": "^2.0",
-                "symfony/framework-bundle": "^5.4 | ^6.0 | ^7.0",
-                "symfony/phpunit-bridge": "^5.4 | ^6.0 | ^7.0"
+                "symfony/framework-bundle": "^5.4 | ^6.0 | ^7.0 | ^8.0",
+                "symfony/phpunit-bridge": "^5.4 | ^6.0 | ^7.0 | ^8.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -7875,9 +7875,9 @@
             "description": "Simple, stylish Email Verification for Symfony",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.17.4"
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.18.0"
             },
-            "time": "2025-08-15T14:29:56+00:00"
+            "time": "2025-11-29T11:53:37+00:00"
         },
         {
             "name": "twig/extra-bundle",
@@ -8714,16 +8714,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.4.5",
+            "version": "12.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "5af317802efd27d5b9cbe048e3760d4a2f687f45"
+                "reference": "fef037fe50d20ce826cdbd741b7a2afcdec5f45b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5af317802efd27d5b9cbe048e3760d4a2f687f45",
-                "reference": "5af317802efd27d5b9cbe048e3760d4a2f687f45",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fef037fe50d20ce826cdbd741b7a2afcdec5f45b",
+                "reference": "fef037fe50d20ce826cdbd741b7a2afcdec5f45b",
                 "shasum": ""
             },
             "require": {
@@ -8737,7 +8737,7 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.3",
-                "phpunit/php-code-coverage": "^12.4.0",
+                "phpunit/php-code-coverage": "^12.5.0",
                 "phpunit/php-file-iterator": "^6.0.0",
                 "phpunit/php-invoker": "^6.0.0",
                 "phpunit/php-text-template": "^5.0.0",
@@ -8759,7 +8759,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "12.4-dev"
+                    "dev-main": "12.5-dev"
                 }
             },
             "autoload": {
@@ -8791,7 +8791,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.4.5"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.0"
             },
             "funding": [
                 {
@@ -8815,7 +8815,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-01T07:40:15+00:00"
+            "time": "2025-12-05T04:59:40+00:00"
         },
         {
             "name": "sebastian/cli-parser",
