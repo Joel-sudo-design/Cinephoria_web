@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && docker-php-ext-install -j"$(nproc)" gd \
  && rm -rf /var/lib/apt/lists/*
 
-# Extensions PHP (mêmes que PROD, pas de dom/xml/simplexml)
+# Extensions PHP
 RUN docker-php-ext-install zip pdo pdo_mysql
 RUN pecl install mongodb && docker-php-ext-enable mongodb
 
@@ -35,12 +35,15 @@ WORKDIR /var/www/Cinephoria_web
 COPY composer.json composer.lock ./
 RUN composer install --no-interaction --prefer-dist --no-scripts
 
+# Dépendances Node.js
+COPY package.json yarn.lock* package-lock.json* ./
+RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; elif [ -f package-lock.json ]; then npm ci; else npm install; fi
+
 # Code source
 COPY . .
 
 # Build des assets
-RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; else npm ci; fi
-RUN sh -lc 'if [ -f yarn.lock ]; then yarn build || true; else npm run build || true; fi'
+RUN if [ -f yarn.lock ]; then yarn build || true; else npm run build || true; fi
 
 ##########################
 # Stage 2 : Image finale
@@ -49,17 +52,23 @@ FROM php:8.4-fpm
 
 WORKDIR /var/www/Cinephoria_web
 
+# Dépendances système + Node.js
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libjpeg62-turbo-dev libpng-dev libfreetype6-dev \
+    curl gnupg2 ca-certificates \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
  && docker-php-ext-install -j"$(nproc)" gd \
+ && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+ && apt-get install -y nodejs \
+ && npm install -g yarn \
  && rm -rf /var/lib/apt/lists/*
 
+# Extensions PHP
 RUN docker-php-ext-install zip pdo pdo_mysql
 RUN pecl install mongodb && docker-php-ext-enable mongodb
 
-# OPcache (optionnel en DEV; garde si tu veux reproduire prod)
+# OPcache
 RUN { \
   echo "opcache.enable=1"; \
   echo "opcache.enable_cli=1"; \
@@ -69,9 +78,14 @@ RUN { \
   echo "opcache.max_accelerated_files=20000"; \
 } > /usr/local/etc/php/conf.d/opcache.ini
 
-# Copier depuis le builder
-COPY --from=builder /var/www/Cinephoria_web /var/www/Cinephoria_web
+# Copier Composer
 COPY --from=builder /usr/bin/composer /usr/bin/composer
+
+# Copier l'application depuis le builder
+COPY --from=builder /var/www/Cinephoria_web /var/www/Cinephoria_web
+
+# Copier explicitement node_modules pour s'assurer qu'ils sont présents
+COPY --from=builder /var/www/Cinephoria_web/node_modules ./node_modules
 
 # wait-for-it
 COPY wait-for-it.sh /wait-for-it.sh

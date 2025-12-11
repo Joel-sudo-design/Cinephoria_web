@@ -50,7 +50,7 @@
             {% if reservations is not empty %}
                 {% for reservation in reservations %}
                     <div class="row justify-content-center align-items-center mb-4">
-                        <div class="col-5">
+                        <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-5">
                             <div class="row" style="background-color: #6A73AB">
                                 <div class="col-4 p-4 text-white">
                                     <div class="row">
@@ -100,12 +100,12 @@
                                             </div>
                                         </div>
                                         <div class="row mt-4">
-                                            <div class="col-6 text-center">
+                                            <div class="col col-sm-6 text-center">
                                                 <!-- QR Code -->
                                                 <img src="{{ reservation.seance.qrCode }}" alt="QR Code" style="width: 160px; height: 160px;">
                                             </div>
-                                            <div class="col-6 d-flex flex-column justify-content-center">
-                                                <div class="text-white fs-5 text-center">Prix: {{ reservation.seance.price }}€</div>
+                                            <div class="col col-sm-6 d-flex flex-column justify-content-center">
+                                                <div class="text-white fs-5 text-center p-3">Prix: {{ reservation.seance.price }}€</div>
                                                 <div id="avis-{{ reservation.reservation_id }}" class="col-auto text-center mt-3 commande-avis">
                                                     {% if reservation.seance.avis is not empty %}
                                                         <button type="button"

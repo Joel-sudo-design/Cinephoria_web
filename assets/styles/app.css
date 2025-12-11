@@ -90,8 +90,6 @@ html, body {margin: 0;padding: 0; height: 100%; font-family: 'Inter', sans-serif
 
 #navbarTop { height: 6rem;}
 
-.titre-mes-commandes {height: 5rem; top: 6rem}
-
   /* Navbar Bottom Footer */
 .border-white {
   border: 1px solid #FFFFFF;
@@ -1369,6 +1367,8 @@ footer #navbarBottom .nav-link {
   color: #6A73AB;
 }
 
+.titre-mes-commandes {height: 5rem; top: 6rem}
+
 .btn-commandes-avis{
   background-color: white;
   color: #6A73AB;
@@ -1455,6 +1455,15 @@ footer #navbarBottom .nav-link {
 }
 
 @media (max-width: 992px) {
+
+  #container-commandes {
+    top: 9rem;
+    height: calc(100% - 13rem);
+  }
+
+  #navbarTop { height: 4rem;}
+
+  .titre-mes-commandes {top: 4rem}
 
   #container-accueil, #container-contact { top:4rem; bottom:4rem; }
 
