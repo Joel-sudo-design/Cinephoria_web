@@ -17,6 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: builder
       args:
         APP_ENV: dev
     container_name: symfony_app
