@@ -12,7 +12,7 @@
     "ext-mongodb": "^2.0",
     "doctrine/dbal": "^4",
     "doctrine/doctrine-bundle": "^3.0",
-    "doctrine/doctrine-migrations-bundle": "^3.3",
+    "doctrine/doctrine-migrations-bundle": "^4.0",
     "doctrine/mongodb-odm": "^2.11",
     "doctrine/mongodb-odm-bundle": "^5.3",
     "doctrine/orm": "^3.3",
