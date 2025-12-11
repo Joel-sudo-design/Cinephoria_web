@@ -162,7 +162,7 @@ axios.defaults.withCredentials = true;
                             if (seancesForSelectedDate && seancesForSelectedDate.seances.length > 0) {
                                 // Afficher les séances
                                 seancesContainer.html(seancesForSelectedDate.seances.map(seance => `
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="uniform-block fs-5">
                                             <div id="btn-modal-reservation-${seance.id}" class="btn-modal-reservation" style="cursor: pointer">
                                                 <div class="row justify-content-center align-items-center p-3">

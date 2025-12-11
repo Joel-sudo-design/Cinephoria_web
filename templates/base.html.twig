@@ -10,7 +10,7 @@
         {% endblock %}
     </head>
     <body>
-        <nav id="navbarTop" class="navbar navbar-expand-lg navbar-light fixed-top" style="height: 6rem; z-index: 1100">
+        <nav id="navbarTop" class="navbar navbar-expand-lg navbar-light fixed-top" style="z-index: 1100">
             <div class="container-fluid">
                 <button id="navbar-togglerTop" class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarTop" aria-controls="offcanvasNavbarTop" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -61,23 +61,23 @@
                         <div class="text-start fs-4 mb-3" style="color: #6A73AB; font-family: Courgette, sans-serif">
                             Les sorties du mercredi
                         </div>
-                            <div class="carousel-inner">
-                                {% for film in films %}
-                                    {% if loop.index % 7 == 1 %}
-                                        <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                        <div class="row justify-content-center">
-                                    {% endif %}
+                        <div class="carousel-inner">
+                            {% for film in films %}
+                                {% if loop.index % 7 == 1 %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="row justify-content-center">
+                                {% endif %}
 
-                                    <div class="image-carousel col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl">
-                                        <img src="{{ asset(film.image) }}" alt="{{ film.name }}">
+                                <div class="image-carousel col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl">
+                                    <img src="{{ asset(film.image) }}" alt="{{ film.name }}" class="img-fluid">
+                                </div>
+
+                                {% if loop.index % 7 == 0 or loop.last %}
                                     </div>
-
-                                    {% if loop.index % 7 == 0 or loop.last %}
-                                        </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                             <button class="carousel-control-prev custom-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                 <span class="custom-icon-prev" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>

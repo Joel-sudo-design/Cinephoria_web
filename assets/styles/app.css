@@ -1548,6 +1548,20 @@ footer #navbarBottom .nav-link {
 
 @media (max-width: 576px) {
 
+  #carouselExample {
+    padding: 0 20px;
+  }
+
+  #carouselExample .carousel-inner .row {
+    flex-wrap: wrap; /* Permet le retour à la ligne */
+  }
+
+  #carouselExample .carousel-inner .image-carousel {
+    flex: 0 0 50%; /* 2 colonnes */
+    max-width: 50%;
+    margin-bottom: 15px; /* Espace entre les rows */
+  }
+
   #reservation-mobile {
     padding: 0.5rem !important;
   }
@@ -1618,6 +1632,4 @@ footer #navbarBottom .nav-link {
   #navbarBottom {
     height: 4rem !important;
   }
-
 }
-
