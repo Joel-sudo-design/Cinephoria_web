@@ -1,0 +1,49 @@
+# Environnement
+.env
+.env.local
+.env.*.local
+.env.prod
+.env.test
+secrets.env
+
+# Dépendances
+/vendor/
+/node_modules/
+
+# Symfony runtime
+/var/
+!.gitkeep
+
+# Assets build
+/public/build/
+
+# Uploads locaux
+/public/ticket_image/
+
+# Logs
+*.log
+
+# IDE
+.idea/
+
+# Tests / cache
+.phpunit.result.cache
+/.phpunit.cache/
+
+# Temp
+*.tmp
+*.bak
+*.cache
+/tmp/
+/temp/
+
+# Secrets/keys
+*.pem
+*.key
+id_rsa*
+deploy_key*
+
+# Dumps
+*.sql
+*.sql.gz
+*.dump

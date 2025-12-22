@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Environnements locaux
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+
+# Dépendances locales
+node_modules/
+
+# Cache & logs runtime
+var/log/*
+var/cache/*
+var/sessions/*
+!var/log/.gitkeep
+!var/cache/.gitkeep
+!var/sessions/.gitkeep
+
+# Fichiers temporaires
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# CI
+.github/
+
+# Clés / secrets
+*.pem
+*.key
+id_rsa*
+deploy_key*
