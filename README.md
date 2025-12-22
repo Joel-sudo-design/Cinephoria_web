@@ -57,8 +57,8 @@ Si vous êtes sur **Windows**, l’utilisation de **WSL2** est fortement recomma
    ```
 
 6. Activer l’intégration Docker avec WSL :
-    - Docker Desktop → Settings → Resources → WSL Integration
-    - Activer la distribution Linux utilisée
+   - Docker Desktop → Settings → Resources → WSL Integration
+   - Activer la distribution Linux utilisée
 
 ---
 
@@ -152,7 +152,75 @@ Arrêt de l’environnement :
 docker compose down
 ```
 
+
 ---
+
+## Gestion des rôles utilisateurs (phpMyAdmin)
+
+La gestion des rôles n’est pas exposée via l’interface graphique.  
+Elle se fait directement en base de données via **phpMyAdmin**.
+
+### Étapes
+
+1. Accéder à **phpMyAdmin** :  
+   http://localhost:8081
+
+2. Sélectionner la base de données **cinephoria**.
+
+3. Ouvrir la table `user`.
+
+4. Éditer l’utilisateur concerné.
+
+5. Modifier le champ `roles` avec l’une des valeurs suivantes :
+
+["ROLE_ADMIN"]
+
+["ROLE_EMPLOYE"]
+
+["ROLE_USER"]
+
+6. Enregistrer les modifications.
+
+---
+
+## Insertion des données – `transaction.sql`
+
+Un fichier **`transaction.sql`** est fourni à la racine du projet pour initialiser rapidement l’application avec des données de test :
+
+- Films
+- Cinéma
+- Genre
+- Salles
+- Séances
+- Réservations
+
+### Import du fichier SQL
+
+#### Méthode 1 – Via phpMyAdmin (recommandée)
+
+1. Ouvrir **phpMyAdmin** : http://localhost:8081
+2. Sélectionner la base **cinephoria**
+3. Onglet **Importer**
+4. Sélectionner le fichier `transaction.sql`
+5. Cliquer sur **Exécuter**
+
+#### Méthode 2 – En ligne de commande
+
+```bash
+docker compose exec db mysql -u root -proot cinephoria < transaction.sql
+```
+
+### Remarques importantes
+
+- L’import doit être effectué **après** les migrations Doctrine.
+- Si des données existent déjà, il est recommandé de vider la base avant import.
+- Le fichier peut être réutilisé pour :
+   - Réinitialiser l’environnement
+   - Démonstrations
+   - Tests fonctionnels
+
+---
+
 
 ## Auteur
 
