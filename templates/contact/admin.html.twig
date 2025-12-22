@@ -1,0 +1,54 @@
+{% extends 'baseContact.html.twig' %}
+
+{% block title %}Contact admin{% endblock %}
+
+{% block extra_content_bouton_accueil %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center" aria-current="page" href="{{ path('app_accueil_admin') }}">
+            <i class="bi bi-house fs-3 ms-2"></i><span class="mx-2">Accueil</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_films %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a id="btn-films" class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_films_admin') }}">
+            <i class="bi bi-camera-video fs-3 ms-2"></i><span class="mx-2">Films</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_reservation %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_reservation') }}">
+            <i class="bi bi-ticket-perforated fs-3 ms-2"></i><span class="mx-2">Réservation</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_admin_employe %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_administration') }}">
+            <i class="bi bi-person-lines-fill fs-3 ms-2"></i><span class="mx-2">Administration</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_contact %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center active" href="{{ path('app_contact_admin') }}">
+            <i class="bi bi-envelope fs-3 ms-2"></i><span class="mx-2">Contact</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_mon_espace %}
+    <li><a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ path('app_commandes_admin') }}">
+            <i class="bi bi-bag-check fs-4 ms-2 mb-1"></i><span class="mx-2">Commandes</span>
+        </a>
+    </li>
+    <li><a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ path('app_logout') }}">
+            <i class="bi bi-box-arrow-left fs-4 ms-2"></i><span class="mx-2">Déconnexion</span>
+        </a>
+    </li>
+{% endblock %}

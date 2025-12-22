@@ -1,0 +1,9 @@
+# config/packages/csrf.yaml
+framework:
+  form:
+    csrf_protection:
+      enabled: true
+      field_name: _token  # champ CSRF côté formulaires
+
+  csrf_protection:
+    enabled: true         # active CSRF globalement pour le web

@@ -1,0 +1,4 @@
+# config/routes/lexik_jwt_authentication.yaml
+api_login_check:
+  path: /api/login_check
+

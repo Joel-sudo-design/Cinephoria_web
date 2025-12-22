@@ -1,0 +1,60 @@
+{% extends 'baseMonEspace.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div id="container-accueil" class="container-fluid align-content-center">
+        <div class="row justify-content-center my-3">
+            <div class="col-11 col-sm-8 col-md-7 col-lg-5 col-xl-5 col-xxl-3 align-content-center border-register">
+                <div class="row text-center justify-content-center my-3">
+                    <div class="col-9 text-center title-connexion">Connexion</div>
+                </div>
+                <div class="row text-center justify-content-center">
+                    <div class="col-9 text-center mb-4 title-happy">Nous sommes heureux de vous revoir!</div>
+                </div>
+                <div class="row text-center justify-content-center">
+                    <div class="col-9 text-danger text-center">
+                        {% if app.session.get('authentication_error') %}
+                            {{ app.session.get('authentication_error') }}
+                            {% set _ = app.session.remove('authentication_error') %}
+                        {% endif %}
+                    </div>
+                </div>
+                <form method="post">
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            <input type="email" value="{{ last_email }}" name="email" id="email" class="form-control" autocomplete="email" placeholder="" required autofocus>
+                            <label class="custom-label" for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            <i class="bi bi-eye-slash" id="togglePassword" style="cursor: pointer"></i>
+                            <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" placeholder="" required>
+                            <label class="custom-label" for="password">Mot de passe</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 text-end p-0">
+                            <a class="link-reset-password" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center my-3">
+                        <div class="col-9 form-floating text-center p-0">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button class="btn-connexion w-100 fs-5" type="submit">CONNEXION</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 text-center p-0 mb-3">
+                            <div>Pas encore de compte?</div><a class="link-register" href="{{ path('app_register') }}">Inscrivez-vous</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-11 col-sm-8 col-md-7 col-lg-5 col-xl-5 col-xxl-3 border-register-img p-0">
+                <img class="img-fluid" src="{{ asset('build/images/cinema.webp')}}" alt="cinéma">
+            </div>
+        </div>
+    </div>
+{% endblock %}

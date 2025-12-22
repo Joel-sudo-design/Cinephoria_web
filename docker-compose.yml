@@ -1,0 +1,102 @@
+name: cinephoria
+
+services:
+  app:
+    image: ghcr.io/joel-sudo-design/cinephoria:latest
+    container_name: cinephoria
+    restart: always
+    volumes:
+      - ./public/image_film:/app/public/image_film:delegated
+      - ./.env:/app/.env:ro
+      - ./config/jwt:/app/config/jwt:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - db
+      - mongodb
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_DEBUG: ${APP_DEBUG}
+      APP_SECRET: ${APP_SECRET}
+
+      SERVER_NAME: ${SERVER_NAME}
+      FRANKENPHP_CONFIG: "num_threads 4"
+
+      DATABASE_URL: mysql://${DB_USER}:${DB_PASSWORD}@db:3306/${DB_NAME}?charset=utf8mb4
+
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DB: ${MONGODB_DB}
+
+      MAILER_DSN: ${MAILER_DSN}
+
+      TRUSTED_HOSTS: ${TRUSTED_HOSTS}
+
+    networks:
+      - app_network
+
+  db:
+    image: mariadb:11.4
+    container_name: symfony_db_cinephoria
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    networks:
+      - app_network
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongo_cinephoria
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_cinephoria
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "127.0.0.1:8081:80"
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express_cinephoria
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    ports:
+      - "127.0.0.1:8082:8081"
+    depends_on:
+      - mongodb
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+  mongodb_data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,65 @@
+{% extends 'baseMonEspace.html.twig' %}
+
+{% block title %}Modifier votre mot de passe{% endblock %}
+
+{% block body %}
+    <div id="container-accueil" class="container-fluid align-content-center">
+        <div class="row justify-content-center my-3">
+            <div class="col-11 col-sm-8 col-md-7 col-lg-5 col-xl-5 col-xxl-3 align-content-center border-register">
+                <div class="row text-center justify-content-center">
+                    <div class="col-9 text-center my-3 title-reset">Modification du mot de passe</div>
+                </div>
+                {{ form_start(resetForm) }}
+                    <div class="row justify-content-center">
+                        <div class="col-9 text-center p-0 text-danger">
+                            {% for message in app.flashes('reset_password_error') %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            <i class="bi bi-eye-slash" id="toggleProvisionalPassword" style="cursor: pointer"></i>
+                            <input type="password" name="{{ field_name(resetForm.provisionalPassword) }}" id="provisional-password" class="form-control" autocomplete="provisional-password" placeholder="" required autofocus>
+                            <label class="custom-label" for="provisional-password">Mot de passe provisoire</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            <i class="bi bi-eye-slash" id="togglePassword" style="cursor: pointer"></i>
+                            <input type="password" name="{{ field_name(resetForm.plainPassword.first) }}" class="form-control" id="password" placeholder="" autocomplete="password" required />
+                            <label class="custom-label" for="password">Mot de passe</label>
+                        </div>
+                        <div class="col-9 p-0">
+                            {% for error in resetForm.plainPassword.first.vars.errors %}
+                                <div class="text-danger text-center" role="alert">{{ error.message }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            <i class="bi bi-eye-slash" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                            <input type="password" name="{{ field_name(resetForm.plainPassword.second) }}" class="form-control" id="confirmPassword" placeholder="" autocomplete="confirm-password" required />
+                            <label class="custom-label" for="confirmPassword">Confirmez le mot de passe</label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 p-0">
+                            {% for error in resetForm.plainPassword.second.vars.errors %}
+                                <div class="text-danger text-center" role="alert">{{ error.message }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center my-3">
+                        <div class="col-9 form-floating text-center p-0">
+                            <button class="btn-connexion w-100 fs-5">MODIFIER</button>
+                        </div>
+                    </div>
+                {{ form_end(resetForm) }}
+            </div>
+            <div class="col-11 col-sm-8 col-md-7 col-lg-5 col-xl-5 col-xxl-3 border-register-img p-0">
+                <img class="img-fluid" src="{{ asset('build/images/cinema.webp')}}" alt="cinéma">
+            </div>
+        </div>
+    </div>
+{% endblock %}

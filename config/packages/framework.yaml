@@ -1,0 +1,38 @@
+# config/packages/framework.yaml
+framework:
+  secret: '%env(APP_SECRET)%'
+  default_locale: fr
+
+  session:
+    cookie_secure: true
+    cookie_httponly: true
+    cookie_samesite: 'lax'
+    handler_id: null
+
+  translator:
+    default_path: '%kernel.project_dir%/translations'
+    fallbacks: ['fr']
+
+  trusted_proxies: '172.16.0.0/12,192.168.0.0/16,10.0.0.0/8'
+  trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-host']
+
+  rate_limiter:
+    api_global:
+      policy: sliding_window
+      limit: 300
+      interval: '1 minute'
+
+when@test:
+  framework:
+    test: true
+    session:
+      storage_factory_id: session.storage.factory.mock_file
+
+when@dev:
+  web_profiler:
+    toolbar: false
+    intercept_redirects: false
+  framework:
+    profiler:
+      enabled: false
+      collect: false

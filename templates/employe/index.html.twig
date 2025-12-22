@@ -1,0 +1,19 @@
+{% extends 'baseEmploye.html.twig' %}
+
+{% block title %}Employé: création et modifications de films{% endblock %}
+
+{% block extra_content_bouton_creation_film %}
+    <button id="btn-plus-employe" class="btn bi bi-plus-circle-dotted fs-1 mx-3"></button>
+    <a class="btn-admin mx-3 justify-content-center text-decoration-none" href="{{ path('app_employe_avis') }}">Validation avis</a>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid container-films">
+        <div id="loading-spinner" class="d-flex justify-content-center align-items-center position-fixed d-none" style="width: 100%; height: 100%; top: 0; left: 0;z-index: 1050;">
+            <div class="spinner-border" role="status" style="color: #6A73AB; width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div id="card-container" class="row justify-content-center px-5 py-3" style="gap: 0 3rem"></div>
+    </div>
+{% endblock %}

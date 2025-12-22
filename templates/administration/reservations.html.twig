@@ -1,0 +1,25 @@
+{% extends 'baseAdministration.html.twig' %}
+
+{% block title %}Administration: données réservations{% endblock %}
+
+{% block extra_content_bouton_creation_film %}
+    <a class="btn-admin mx-3 justify-content-center text-decoration-none" href="{{ path('app_administration') }}">Création film</a>
+    <a class="btn-admin mx-3 justify-content-center text-decoration-none" href="{{ path('app_administration_account_employe') }}">Compte employé</a>
+    <button id="btn-reservations" class="btn-admin mx-3 justify-content-center text-decoration-none active" >Données réservations</button>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid align-content-start container-films">
+        <div class="row justify-content-center my-3">
+            <div class=" col-8 d-flex justify-content-center">
+                <div class="position-relative">
+                    <input type="text" class="btn-date" id="datepicker_reservations" placeholder="Date" readonly>
+                    <label for="datepicker_reservations" class="d-none"></label>
+                    <span class="bi bi-calendar" id="icon-calendar-reservations"></span>
+                    <span class="bi bi-x-circle close-icon-reservations d-none"></span>
+                </div>
+            </div>
+        </div>
+        <div id="reservations-container"></div>
+    </div>
+{% endblock %}

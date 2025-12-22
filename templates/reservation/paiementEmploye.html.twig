@@ -1,0 +1,58 @@
+{% extends 'baseReservation.html.twig' %}
+
+{% block title %}Paiement employe{% endblock %}
+
+{% block extra_content_bouton_accueil %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center" aria-current="page" href="{{ path('app_accueil_employe') }}">
+            <i class="bi bi-house fs-3 ms-2"></i><span class="mx-2">Accueil</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_films %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a id="btn-films" class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_films_employe') }}">
+            <i class="bi bi-camera-video fs-3 ms-2"></i><span class="mx-2">Films</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_reservation %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center active" href="{{ path('app_reservation_employe') }}">
+            <i class="bi bi-ticket-perforated fs-3 ms-2"></i><span class="mx-2">Réservation</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_bouton_contact %}
+    <li class="nav-item mx-4 my-4 text-white">
+        <a class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_contact_employe') }}">
+            <i class="bi bi-envelope fs-3 ms-2"></i><span class="mx-2">Contact</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block extra_content_mon_espace %}
+    <li><a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ path('app_commandes_employe') }}">
+            <i class="bi bi-bag-check fs-4 ms-2 mb-1"></i><span class="mx-2">Commandes</span>
+        </a>
+    </li>
+    <li><a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ path('app_logout') }}">
+            <i class="bi bi-box-arrow-left fs-4 ms-2"></i><span class="mx-2">Déconnexion</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    <div id="container-accueil" class="container-fluid align-content-center">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-sm-7 col-md-6 col-lg-6 col-xl-4 col-xxl-4 text-center p-4" style="background-color: #6A73AB">
+                <i class="bi bi-check-circle-fill text-white fs-1"></i>
+                <div class="text-center text-white py-3 fs-5">Paiement effectué avec succès!</div>
+                <a href="{{ path('app_commandes_employe') }}" class="btn btn-account-created text-white fs-6 p-0" style="font-size: 0.9rem; color: #6A73AB">Voir les commandes</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

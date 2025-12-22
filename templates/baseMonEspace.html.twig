@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <nav id="navbarTop" class="navbar navbar-expand-lg navbar-light fixed-top" style="z-index: 1050">
+            <div class="container-fluid">
+                <button id="navbar-togglerTop" class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarTop" aria-controls="offcanvasNavbarTop" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarTop" aria-labelledby="offcanvasNavbarLabelTop">
+                    <div class="offcanvas-header">
+                        <img src="{{ asset('build/images/logo.svg')}}" class="img-fluid" style="width: 6rem; height: auto" alt="logo" />
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div id="offcanvas-bodyTop" class="row offcanvas-body align-items-center justify-content-center">
+                        <ul id="navbarLeft" class="col-5 navbar-nav align-items-center justify-content-center p-0">
+                            <li class="nav-item mx-4 my-4 text-white">
+                                <a class="nav-link d-flex align-items-center justify-content-center" aria-current="page" href="{{ path('app_accueil') }}">
+                                    <i class="bi bi-house fs-3 ms-2"></i><span class="mx-2">Accueil</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-4 my-4 text-white">
+                                <a id="btn-films" class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_films') }}">
+                                    <i class="bi bi-camera-video fs-3 ms-2"></i><span class="mx-2">Films</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-4 my-4 text-white">
+                                <a class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_reservation') }}">
+                                    <i class="bi bi-ticket-perforated fs-3 ms-2"></i><span class="mx-2">Réservation</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <img id="logo" src="{{ asset('build/images/logo.svg')}}" class="col-2 img-fluid" style="width: 7.5rem; height: auto" alt="logo" />
+                        <ul id="navbarRight" class="col-5 navbar-nav align-items-center justify-content-center p-0">
+                            <li class="nav-item mx-4 my-4 text-white">
+                                <a class="nav-link d-flex align-items-center justify-content-center" href="{{ path('app_contact') }}">
+                                    <i class="bi bi-envelope fs-3 ms-2"></i><span class="mx-2">Contact</span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown mx-3 my-3 text-white">
+                                <a id="btn-mon-espace" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center active pe-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle fs-3 ms-2"></i><span class="mx-2">Mon espace</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end p-0">
+                                    <li><a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ path('app_login') }}">
+                                            <i id="btn-connexion-inscription" class="bi bi-box-arrow-in-right fs-4 ms-2"></i><span class="ms-2 me-3">Connexion</span>
+                                        </a>
+                                    </li>
+                                    <li><a class="dropdown-item d-flex align-items-center justify-content-start" href="{{ path('app_register') }}">
+                                            <i id="btn-connexion-inscription" class="bi bi-person-add fs-4 ms-2"></i><span class="ms-2 me-3">Inscription</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <footer>
+            <nav id="navbarBottom" class="navbar navbar-expand-lg navbar-light fixed-bottom" style="height: 8rem">
+                <div class="container-fluid">
+                    <button id="navbar-togglerBottom" class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarBottom" aria-controls="offcanvasNavbarBottom" aria-label="Toggle navigation">
+                        <i class="bi bi-pin-map me-2"></i><span class="ms-2">Nous localiser</span>
+                    </button>
+                    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasNavbarBottom" aria-labelledby="offcanvasNavbarLabelBottom">
+                        <div class="offcanvas-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div id="offcanvas-bodyBottom" class="row offcanvas-body align-items-center justify-content-center">
+                            <ul id="col-5-bottom" class="col-5 navbar-nav d-block text-center align-content-center p-0">
+                                <li class="nav-item text-white">
+                                    <div class="nav-link">
+                                        <i class="bi bi-facebook fs-4 mx-4"></i>
+                                        <i class="bi bi-twitter-x fs-4 mx-4"></i>
+                                        <i class="bi bi-pinterest fs-4 mx-4"></i>
+                                        <i class="bi bi-linkedin fs-4 mx-4"></i>
+                                        <i class="bi bi-youtube fs-4 mx-4"></i>
+                                    </div>
+                                </li>
+                                <li class="nav-item text-white">
+                                    <div class="nav-link">372 Place de Paris - Toulouse, VT / 56826</div>
+                                </li>
+                                <li class="nav-item text-white">
+                                    <div class="nav-link">
+                                        <i class="bi bi-telephone fs-6 me-2"></i>
+                                        02 98 51 38 10
+                                    </div>
+                                </li>
+                            </ul>
+                            <div id="col-2-bottom" class="col-2" style="width: 7.5rem"></div>
+                            <div class="col-5 text-center align-content-center p-0">
+                                <div id="horaires" class="text-center text-white mb-3" style="font-size: 1.1rem">
+                                    Horaires du lundi au dimanche :
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <ul class="navbar-nav d-block text-center align-content-center mx-2">
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">8h00 - 12h00</div>
+                                        </li>
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">12h30 - 14h30</div>
+                                        </li>
+                                    </ul>
+                                    <div class="border-white"></div>
+                                    <ul class="navbar-nav d-block text-center align-content-center mx-2">
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">15h00 - 17h00</div>
+                                        </li>
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">17h30 - 23h30</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </body>
+</html>

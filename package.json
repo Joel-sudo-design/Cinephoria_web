@@ -1,0 +1,36 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.28.4",
+        "@babel/preset-env": "^7.16.0",
+        "@symfony/webpack-encore": "^5.2.0",
+        "core-js": "^3.45.1",
+        "file-loader": "^6.2.0",
+        "regenerator-runtime": "^0.14.1",
+        "sass": "^1.93.2",
+        "sass-loader": "^16.0.5",
+        "webpack": "^5.102.0",
+        "webpack-cli": "^6.0.1",
+        "webpack-notifier": "^1.15.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.8",
+        "axios": "1.13.2",
+        "bootstrap": "^5.3.3",
+        "bootstrap-datepicker": "^1.10.1",
+        "bootstrap-icons": "^1.13.1",
+        "cross-spawn": "7.0.6",
+        "flatpickr": "^4.6.13",
+        "jquery": "^3.7.1",
+        "jquery-ui": "^1.14.1",
+        "nanoid": "5.1.6",
+        "popper.js": "^1.16.1"
+    }
+}

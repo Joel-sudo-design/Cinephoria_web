@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <nav id="navbarTop" class="navbar navbar-expand-lg navbar-light fixed-top" style="z-index: 1100">
+            <div class="container-fluid">
+                <button id="navbar-togglerTop" class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarTop" aria-controls="offcanvasNavbarTop" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarTop" aria-labelledby="offcanvasNavbarLabelTop">
+                    <div class="offcanvas-header">
+                        <img src="{{ asset('build/images/logo.svg')}}" class="img-fluid" style="width: 6rem; height: auto" alt="logo" />
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div id="offcanvas-bodyTop" class="row offcanvas-body align-items-center justify-content-center">
+                        <ul id="navbarLeft" class="col-5 navbar-nav align-items-center justify-content-center p-0">
+                            {% block extra_content_bouton_accueil %}{% endblock %}
+                            {% block extra_content_bouton_films %}{% endblock %}
+                            {% block extra_content_bouton_reservation %}{% endblock %}
+                        </ul>
+                        <img id="logo" src="{{ asset('build/images/logo.svg')}}" class="col-2 img-fluid" style="width: 7.5rem; height: auto" alt="logo" />
+                        <ul id="navbarRight" class="col-5 navbar-nav align-items-center justify-content-center p-0">
+                            {% block extra_content_bouton_admin_employe %}{% endblock %}
+                            {% block extra_content_bouton_contact %}{% endblock %}
+                            <li class="nav-item dropdown mx-3 my-3 text-white">
+                                <a id="btn-mon-espace" class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle fs-3 ms-2"></i><span class="mx-2">Mon espace</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end p-0">
+                                    {% block extra_content_mon_espace %}{% endblock %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="container-accueil" class="container-fluid text-center align-content-center">
+            <div class="row py-3">
+                <div id="welcome" class="col-12">
+                    <div class="mb-3">Bienvenue sur le site du célèbre cinéma</div>
+                    <div>“le cinéphoria”!</div>
+                </div>
+            </div>
+            <div class="row py-4">
+                <div class="col">
+                    {% if films is empty %}
+                    <div class="text-center fs-4" style="color: #6A73AB; font-family: Courgette, sans-serif">
+                        Aucun film sorti ce dernier mercredi
+                    </div>
+                    {% else %}
+                    <div id="carouselExample" class="carousel slide mx-auto">
+                        <div class="text-start fs-4 mb-3" style="color: #6A73AB; font-family: Courgette, sans-serif">
+                            Les sorties du mercredi
+                        </div>
+                        <div class="carousel-inner">
+                            {% for film in films %}
+                                {% if loop.index % 7 == 1 %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="row justify-content-center">
+                                {% endif %}
+
+                                <div class="image-carousel col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl">
+                                    <img src="{{ asset(film.image) }}" alt="{{ film.name }}" class="img-fluid">
+                                </div>
+
+                                {% if loop.index % 7 == 0 or loop.last %}
+                                    </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                            <button class="carousel-control-prev custom-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                <span class="custom-icon-prev" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next custom-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                <span class="custom-icon-next" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <footer>
+            <nav id="navbarBottom" class="navbar navbar-expand-lg navbar-light fixed-bottom" style="height: 8rem; padding: 0">
+                <div class="container-fluid">
+                    <button id="navbar-togglerBottom" class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarBottom" aria-controls="offcanvasNavbarBottom" aria-label="Toggle navigation">
+                        <i class="bi bi-pin-map me-2"></i><span class="ms-2">Nous localiser</span>
+                    </button>
+                    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasNavbarBottom" aria-labelledby="offcanvasNavbarLabelBottom">
+                        <div class="offcanvas-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div id="offcanvas-bodyBottom" class="row offcanvas-body align-items-center justify-content-center">
+                            <ul id="col-5-bottom" class="col-5 navbar-nav d-block text-center align-content-center p-0">
+                                <li class="nav-item text-white">
+                                    <div class="nav-link">
+                                        <i class="bi bi-facebook fs-4 mx-4"></i>
+                                        <i class="bi bi-twitter-x fs-4 mx-4"></i>
+                                        <i class="bi bi-pinterest fs-4 mx-4"></i>
+                                        <i class="bi bi-linkedin fs-4 mx-4"></i>
+                                        <i class="bi bi-youtube fs-4 mx-4"></i>
+                                    </div>
+                                </li>
+                                <li class="nav-item text-white">
+                                    <div class="nav-link">372 Place de Paris - Toulouse, VT / 56826</div>
+                                </li>
+                                <li class="nav-item text-white">
+                                    <div class="nav-link">
+                                        <i class="bi bi-telephone fs-6 me-2"></i>
+                                        02 98 51 38 10
+                                    </div>
+                                </li>
+                            </ul>
+                            <div id="col-2-bottom" class="col-2" style="width: 7.5rem"></div>
+                            <div class="col-5 text-center align-content-center p-0">
+                                <div id="horaires" class="text-center text-white mb-3" style="font-size: 1.1rem">
+                                    Horaires du lundi au dimanche :
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <ul class="navbar-nav d-block text-center align-content-center mx-2">
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">8h00 - 12h00</div>
+                                        </li>
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">12h30 - 14h30</div>
+                                        </li>
+                                    </ul>
+                                    <div class="border-white"></div>
+                                    <ul class="navbar-nav d-block text-center align-content-center mx-2">
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">15h00 - 17h00</div>
+                                        </li>
+                                        <li class="nav-item text-white">
+                                            <div class="nav-link p-0">17h30 - 23h30</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </body>
+</html>

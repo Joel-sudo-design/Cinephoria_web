@@ -1,0 +1,29 @@
+{
+    admin off
+    email joeldermont@gmail.com
+}
+
+cinephoria.joeldermont.fr, www.cinephoria.joeldermont.fr {
+
+    @www host www.cinephoria.joeldermont.fr
+    redir @www https://cinephoria.joeldermont.fr{uri} permanent
+
+    root * /app/public
+    php_server
+    encode gzip
+    file_server
+
+    # Cache assets
+    @static path *.css *.js *.jpg *.jpeg *.png *.gif *.ico *.svg *.woff *.woff2
+    header @static Cache-Control "public, max-age=31536000"
+
+    # Sécurité
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        Strict-Transport-Security "max-age=31536000"
+    }
+
+    # Health check
+    respond /health 200
+}

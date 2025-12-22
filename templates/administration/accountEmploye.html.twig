@@ -1,0 +1,92 @@
+{% extends 'baseAdministration.html.twig' %}
+
+{% block title %}Administration: création compte employé{% endblock %}
+
+{% block extra_content_bouton_creation_film %}
+    <a class="btn-admin mx-3 justify-content-center text-decoration-none" href="{{ path('app_administration') }}">Création film</a>
+    <a class="btn-admin mx-3 justify-content-center text-decoration-none active" href="{{ path('app_administration_account_employe') }}">Compte employé</a>
+    <a class="btn-admin mx-3 justify-content-center text-decoration-none" href="{{ path('app_administration_reservations') }}">Données réservations</a>
+{% endblock %}
+
+{% block body %}
+    <div id="container-accueil" class="container-fluid align-content-center">
+        <div class="row justify-content-center my-3">
+            <div class="col-11 col-sm-8 col-md-7 col-lg-5 col-xl-5 col-xxl-3 border-register align-content-center">
+                <div class="row justify-content-center my-3">
+                    <div class="col-9 title-nouveau-compte text-center p-0 fs-3">Création compte employé</div>
+                </div>
+                {{ form_start(employeForm) }}
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            {{ form_widget(employeForm.email, {'attr': {'class': 'form-control', 'placeholder': '', 'autocomplete': 'email'}}) }}
+                            <label class="custom-label" for="email">Email</label>
+                        </div>
+                        <div class="col-9 p-0">
+                            {% for error in employeForm.email.vars.errors %}
+                                <div class="text-danger text-center" role="alert">{{ error.message }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-group p-0">
+                            <i class="bi bi-eye-slash" id="toggleEmployePassword" style="cursor: pointer"></i>
+                            <input type="password" name="{{ field_name(employeForm.password) }}" class="form-control" id="employePassword" placeholder="" autocomplete="password" required />
+                            <label class="custom-label" for="employePassword">Mot de passe</label>
+                        </div>
+                        <div class="col-9 p-0">
+                            {% for error in employeForm.password.vars.errors %}
+                                <div class="text-danger text-center" role="alert">{{ error.message }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-9 form-floating text-center p-0">
+                            <button type="submit" class="w-100 btn-account-employe fs-5">CREATION</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-9 text-center p-0" style="color: #6A73AB">
+                            {% for message in app.flashes('success') %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {{ form_end(employeForm) }}
+                <div class="row justify-content-center align-items-center mb-3 mt-2">
+                    <div class="col-9 title-nouveau-compte text-center align-content-center p-0 fs-3">Réinitialiser mot de passe</div>
+                </div>
+                <form method="post">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-7 p-0" style="margin-bottom: 12px">
+                            <div class="custom-dropdown">
+                                <button class="btn-films custom-select-btn-employe">Choix employé</button>
+                                <div class="custom-options-employe">
+                                    {% for employe in employes %}
+                                        <div class="custom-option-employe" data-value="{{ employe.id }}">{{ employe.email }}</div>
+                                    {% endfor %}
+                                </div>
+                                <input type="hidden" name="employe_id" id="employe-input">
+                                <span class="bi bi-x-circle d-none close-icon-employe"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center align-items-center mb-3">
+                        <div class="col-7 p-0">
+                            <button type="submit" id="btn-account-employe" class="w-100 btn-account-employe">REINITIALISER</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-9 text-center p-0" style="color: #6A73AB">
+                            {% for message in app.flashes('successReset') %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-11 col-sm-8 col-md-7 col-lg-5 col-xl-5 col-xxl-3 border-register-img p-0">
+                <img class="img-fluid" src="{{ asset('build/images/cinema.webp')}}" alt="cinéma">
+            </div>
+        </div>
+    </div>
+{% endblock %}
