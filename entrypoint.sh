@@ -3,7 +3,7 @@ set -e
 
 echo "🚀 Démarrage de l'application en production..."
 
-# Copie les images films depuis image docker vers image dans dossier public
+# Restaure les images de films depuis le seed Docker vers le dossier public
 SEED_SRC="/app/image_film_seed"
 UPLOAD_DIR="/app/public/image_film"
 

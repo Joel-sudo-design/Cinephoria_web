@@ -21,7 +21,8 @@ RUN install-php-extensions \
     mongodb \
     opcache \
     apcu \
-    intl
+    intl \
+    gd
 
 # Copier Composer depuis l'image officielle
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -70,7 +71,8 @@ RUN install-php-extensions \
     mongodb \
     opcache \
     apcu \
-    intl
+    intl \
+    gd
 
 # Configuration OPcache optimisée pour 8GB RAM + JIT
 RUN { \
@@ -138,7 +140,7 @@ COPY --from=builder /app/vendor ./vendor
 # Copier le code source
 COPY . .
 
-# Copier les images des films vers un dossier dans image docker
+# Copie des images de films comme seed d’assets dans l’image Docker
 RUN mkdir -p /app/image_film_seed \
  && cp -a public/image_film/. /app/image_film_seed/ || true
 
