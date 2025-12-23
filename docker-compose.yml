@@ -2,7 +2,7 @@ name: cinephoria
 
 services:
   app:
-    image: ghcr.io/joel-sudo-design/cinephoria:latest
+    image: ghcr.io/joel-sudo-design/cinephoria_web:latest
     container_name: cinephoria
     restart: always
     volumes:
