@@ -3,6 +3,21 @@ set -e
 
 echo "🚀 Démarrage de l'application en production..."
 
+# Copie les images films depuis image docker vers image dans dossier public
+SEED_SRC="/app/image_film_seed"
+UPLOAD_DIR="/app/public/image_film"
+
+mkdir -p "$UPLOAD_DIR"
+
+if [ -d "$SEED_SRC" ] && [ -z "$(ls -A "$UPLOAD_DIR" 2>/dev/null)" ]; then
+    echo "🖼️  Seed des images de base dans public/image_film..."
+    cp -a "$SEED_SRC"/. "$UPLOAD_DIR"/ 2>/dev/null || true
+fi
+
+# Permissions pour permettre l'upload
+chown -R www-data:www-data "$UPLOAD_DIR" 2>/dev/null || true
+chmod -R 775 "$UPLOAD_DIR" 2>/dev/null || true
+
 # Vérifier les variables obligatoires
 if [ -z "$APP_SECRET" ] || [ ${#APP_SECRET} -lt 32 ]; then
     echo "❌ ERREUR: APP_SECRET manquant ou trop court (min 32 chars)"

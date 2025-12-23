@@ -138,6 +138,10 @@ COPY --from=builder /app/vendor ./vendor
 # Copier le code source
 COPY . .
 
+# Copier les images des films vers un dossier dans image docker
+RUN mkdir -p /app/image_film_seed \
+ && cp -a public/image_film/. /app/image_film_seed/ || true
+
 # Créer les répertoires nécessaires
 RUN mkdir -p \
     var/cache/prod \
@@ -145,7 +149,7 @@ RUN mkdir -p \
     var/sessions \
     public/image_film \
  && chmod -R 755 var \
- && chmod -R 755 public/image_film
+ && chmod -R 775 public/image_film
 
 # Copier entrypoint et Caddyfile
 COPY --chmod=755 entrypoint.sh /entrypoint.sh
