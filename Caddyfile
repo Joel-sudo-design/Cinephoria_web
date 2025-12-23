@@ -3,10 +3,10 @@
     email joeldermont@gmail.com
 }
 
-cinephoria.joeldermont.fr, www.cinephoria.joeldermont.fr {
+cine.joeldermont.fr, www.cine.joeldermont.fr {
 
-    @www host www.cinephoria.joeldermont.fr
-    redir @www https://cinephoria.joeldermont.fr{uri} permanent
+    @www host www.cine.joeldermont.fr
+    redir @www https://cine.joeldermont.fr{uri} permanent
 
     root * /app/public
     php_server
