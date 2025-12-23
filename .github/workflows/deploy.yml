@@ -1,0 +1,220 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environnement de déploiement"
+        required: true
+        default: "production"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies and build assets
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+          echo "✅ Assets buildés avec succès"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Copy docker-compose.yml to deploy folder
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "docker-compose.yml"
+          target: ${{ secrets.DEPLOY_PATH }}
+          overwrite: true
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            JWT_DIR="${{ secrets.DEPLOY_PATH }}/config/jwt"
+            PRIVATE_KEY="${JWT_DIR}/private.pem"
+            PUBLIC_KEY="${JWT_DIR}/public.pem"
+            
+            mkdir -p "${JWT_DIR}"
+
+            if [ ! -f "${PRIVATE_KEY}" ] || [ ! -f "${PUBLIC_KEY}" ]; then
+              echo "🔐 Génération des clés JWT dans ${JWT_DIR} (absentes détectées)"
+              rm -f "${PRIVATE_KEY}" "${PUBLIC_KEY}"
+            
+              openssl genpkey -algorithm RSA -out "${PRIVATE_KEY}" -aes-256-cbc -pkeyopt rsa_keygen_bits:4096 -pass pass:"${{ secrets.PASSPHRASE }}"
+              openssl pkey -in "${PRIVATE_KEY}" -passin pass:"${{ secrets.PASSPHRASE }}" -pubout -out "${PUBLIC_KEY}"
+            
+              chmod 600 "${PRIVATE_KEY}"
+              chmod 644 "${PUBLIC_KEY}"
+
+              echo "✅ Clés JWT générées"
+            else
+              echo "✅ Clés JWT déjà présentes, on ne régénère pas"
+              chmod 600 "${PRIVATE_KEY}" || true
+              chmod 644 "${PUBLIC_KEY}" || true
+            fi
+            
+            cat > .env << EOF
+            APP_ENV=${{ secrets.APP_ENV }}
+            APP_DEBUG=${{ secrets.APP_DEBUG }}
+            APP_SECRET=${{ secrets.APP_SECRET }}
+            SERVER_NAME=${{ secrets.SERVER_NAME }}
+            DB_NAME=${{ secrets.DB_NAME }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}
+            MONGODB_DB=${{ secrets.MONGODB_DB }}
+            MAILER_DSN=${{ secrets.MAILER_DSN }}
+            TRUSTED_HOSTS=${{ secrets.TRUSTED_HOSTS }}
+            TICKET_URL=${{ secrets.TICKET_URL }}
+            JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}
+            JWT_PUBLIC_KEY=${{ secrets.JWT_PUBLIC_KEY }}
+            JWT_PASSPHRASE=${{ secrets.JWT_PASSPHRASE }}
+            JWT_TOKEN_TTL=${{ secrets.JWT_TOKEN_TTL }}
+            EOF
+
+            chmod 600 .env
+
+            docker compose -f docker-compose.yml pull app
+            docker compose -f docker-compose.yml up -d app
+
+            docker compose -f docker-compose.yml ps
+
+            docker image prune -af --filter "until=24h"
+
+            echo "✅ Déploiement terminé avec succès !"
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v1.2.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -e
+
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            # Vérification que les conteneurs sont actifs
+            if docker compose -f docker-compose.yml ps | grep -q "Up"; then
+              echo "✅ Les conteneurs sont actifs"
+            else
+              echo "❌ Erreur: Les conteneurs ne sont pas actifs"
+              docker compose -f docker-compose.yml logs --tail=100
+              exit 1
+            fi
+
+            # Attendre que l'application soit complètement démarrée
+            echo "⏳ Attente du démarrage complet de l'application..."
+            sleep 65
+
+            # Health check avec retry logic
+            max_attempts=5
+            attempt=1
+            health_check_passed=false
+
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔍 Tentative $attempt/$max_attempts du health check..."
+            
+              code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1/health || true)
+            
+              if [ "$code" = "200" ] || [ "$code" = "308" ]; then
+                echo "✅ Health check OK"
+                health_check_passed=true
+                break
+              fi
+            
+              if [ $attempt -lt $max_attempts ]; then
+                echo "⚠️  Tentative échouée, nouvelle tentative dans 5 secondes..."
+                sleep 5
+              fi
+            
+              attempt=$((attempt + 1))
+            done
+
+            if [ "$health_check_passed" = false ]; then
+              echo "❌ Health check échoué après $max_attempts tentatives"
+              echo "📋 Logs des dernières lignes:"
+              docker compose -f docker-compose.yml logs --tail=100
+              exit 1
+            fi
+
+            # Vérification finale du statut des conteneurs
+            echo "📊 État final des conteneurs:"
+            docker compose -f docker-compose.yml ps
+
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "🚀 Déploiement réussi sur ${{ secrets.SSH_HOST }}"
+          echo "🌐 Application accessible sur: ${{ secrets.SERVER_NAME }}"
+
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "❌ Le déploiement a échoué"
+          echo "Consultez les logs pour plus de détails"

@@ -1,0 +1,104 @@
+version: 2
+
+updates:
+  # ==========================================
+  # Backend PHP/Symfony
+  # ==========================================
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Paris"
+    groups:
+      symfony:
+        patterns:
+          - "symfony/*"
+        update-types:
+          - "minor"
+          - "patch"
+      dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "symfony/*"
+        update-types:
+          - "patch"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "composer"
+    ignore:
+      - dependency-name: "symfony/*"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: "chore(deps)"
+
+  # ==========================================
+  # Frontend NPM
+  # ==========================================
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Paris"
+    groups:
+      frontend:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "frontend"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    commit-message:
+      prefix: "chore(npm)"
+
+  # ==========================================
+  # Docker
+  # ==========================================
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Paris"
+    groups:
+      docker-images:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
+
+  # ==========================================
+  # GitHub Actions
+  # ==========================================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(ci)"
