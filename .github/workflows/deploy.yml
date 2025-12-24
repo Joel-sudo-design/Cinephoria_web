@@ -104,8 +104,8 @@ jobs:
               echo "🔐 Génération des clés JWT dans ${JWT_DIR} (absentes détectées)"
               rm -f "${PRIVATE_KEY}" "${PUBLIC_KEY}"
             
-              openssl genpkey -algorithm RSA -out "${PRIVATE_KEY}" -aes-256-cbc -pkeyopt rsa_keygen_bits:4096 -pass pass:"${{ secrets.PASSPHRASE }}"
-              openssl pkey -in "${PRIVATE_KEY}" -passin pass:"${{ secrets.PASSPHRASE }}" -pubout -out "${PUBLIC_KEY}"
+              openssl genpkey -algorithm RSA -out "${PRIVATE_KEY}" -aes-256-cbc -pkeyopt rsa_keygen_bits:4096 -pass pass:"${{ secrets.JWT_PASSPHRASE }}"
+              openssl pkey -in "${PRIVATE_KEY}" -passin pass:"${{ secrets.JWT_PASSPHRASE }}" -pubout -out "${PUBLIC_KEY}"
             
               chmod 600 "${PRIVATE_KEY}"
               chmod 644 "${PUBLIC_KEY}"
