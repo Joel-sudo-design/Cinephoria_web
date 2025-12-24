@@ -34,6 +34,8 @@ services:
 
       TRUSTED_HOSTS: ${TRUSTED_HOSTS}
 
+      JWT_PASSPHRASE: ${JWT_PASSPHRASE}
+
     networks:
       - app_network
 
