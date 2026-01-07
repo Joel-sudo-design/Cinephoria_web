@@ -77,7 +77,9 @@ class AccueilController extends AbstractController
     private function getFilmsArray(FilmRepository $filmRepository): array
     {
         $lastWednesday = $this->getLastWednesday();
-        $films = $filmRepository->findFilmsWithLastWednesdayBetweenDates($lastWednesday);
+        // $films = $filmRepository->findFilmsWithLastWednesdayBetweenDates($lastWednesday);
+
+        $films = $filmRepository->findAll();
 
         $filmsArray = [];
         foreach ($films as $film) {
