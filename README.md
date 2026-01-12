@@ -1,4 +1,4 @@
-# Cinephoria_web
+# Cinephoria web
 
 Application Symfony pour la gestion et la présentation des films du cinéma **"Le Cinéphoria"**.
 
