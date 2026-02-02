@@ -112,111 +112,17 @@
             "time": "2025-09-16T12:23:56+00:00"
         },
         {
-            "name": "doctrine/cache",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/cache.git",
-                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/1ca8f21980e770095a31456042471a57bc4c68fb",
-                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~7.1 || ^8.0"
-            },
-            "conflict": {
-                "doctrine/common": ">2.2,<2.4"
-            },
-            "require-dev": {
-                "cache/integration-tests": "dev-master",
-                "doctrine/coding-standard": "^9",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "psr/cache": "^1.0 || ^2.0 || ^3.0",
-                "symfony/cache": "^4.4 || ^5.4 || ^6",
-                "symfony/var-exporter": "^4.4 || ^5.4 || ^6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
-                },
-                {
-                    "name": "Roman Borschel",
-                    "email": "roman@code-factory.org"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
-                },
-                {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                }
-            ],
-            "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
-            "homepage": "https://www.doctrine-project.org/projects/cache.html",
-            "keywords": [
-                "abstraction",
-                "apcu",
-                "cache",
-                "caching",
-                "couchdb",
-                "memcached",
-                "php",
-                "redis",
-                "xcache"
-            ],
-            "support": {
-                "issues": "https://github.com/doctrine/cache/issues",
-                "source": "https://github.com/doctrine/cache/tree/2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcache",
-                    "type": "tidelift"
-                }
-            ],
-            "abandoned": true,
-            "time": "2022-05-20T20:07:39+00:00"
-        },
-        {
             "name": "doctrine/collections",
-            "version": "2.5.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "6108e0cd57d7ef125fb84696346a68860403a25d"
+                "reference": "7713da39d8e237f28411d6a616a3dce5e20d5de2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/6108e0cd57d7ef125fb84696346a68860403a25d",
-                "reference": "6108e0cd57d7ef125fb84696346a68860403a25d",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/7713da39d8e237f28411d6a616a3dce5e20d5de2",
+                "reference": "7713da39d8e237f28411d6a616a3dce5e20d5de2",
                 "shasum": ""
             },
             "require": {
@@ -273,7 +179,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/collections/issues",
-                "source": "https://github.com/doctrine/collections/tree/2.5.0"
+                "source": "https://github.com/doctrine/collections/tree/2.6.0"
             },
             "funding": [
                 {
@@ -289,7 +195,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-07T17:26:56+00:00"
+            "time": "2026-01-15T10:01:58+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -654,16 +560,16 @@
         },
         {
             "name": "doctrine/event-manager",
-            "version": "2.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/event-manager.git",
-                "reference": "b680156fa328f1dfd874fd48c7026c41570b9c6e"
+                "reference": "dda33921b198841ca8dbad2eaa5d4d34769d18cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/b680156fa328f1dfd874fd48c7026c41570b9c6e",
-                "reference": "b680156fa328f1dfd874fd48c7026c41570b9c6e",
+                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/dda33921b198841ca8dbad2eaa5d4d34769d18cf",
+                "reference": "dda33921b198841ca8dbad2eaa5d4d34769d18cf",
                 "shasum": ""
             },
             "require": {
@@ -673,10 +579,10 @@
                 "doctrine/common": "<2.9"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12",
-                "phpstan/phpstan": "^1.8.8",
-                "phpunit/phpunit": "^10.5",
-                "vimeo/psalm": "^5.24"
+                "doctrine/coding-standard": "^14",
+                "phpdocumentor/guides-cli": "^1.4",
+                "phpstan/phpstan": "^2.1.32",
+                "phpunit/phpunit": "^10.5.58"
             },
             "type": "library",
             "autoload": {
@@ -725,7 +631,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/event-manager/issues",
-                "source": "https://github.com/doctrine/event-manager/tree/2.0.1"
+                "source": "https://github.com/doctrine/event-manager/tree/2.1.1"
             },
             "funding": [
                 {
@@ -741,7 +647,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-22T20:47:39+00:00"
+            "time": "2026-01-29T07:11:08+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1084,21 +990,20 @@
         },
         {
             "name": "doctrine/mongodb-odm",
-            "version": "2.15.3",
+            "version": "2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "83a4f4398eed6a52bcf9ef3159e6c09e2601fb0a"
+                "reference": "b34f2dce3ca5b2de8903419a31ad48837d852b74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/83a4f4398eed6a52bcf9ef3159e6c09e2601fb0a",
-                "reference": "83a4f4398eed6a52bcf9ef3159e6c09e2601fb0a",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/b34f2dce3ca5b2de8903419a31ad48837d852b74",
+                "reference": "b34f2dce3ca5b2de8903419a31ad48837d852b74",
                 "shasum": ""
             },
             "require": {
-                "doctrine/cache": "^1.11 || ^2.0",
-                "doctrine/collections": "^1.5 || ^2.0",
+                "doctrine/collections": "^2.1",
                 "doctrine/event-manager": "^1.0 || ^2.0",
                 "doctrine/instantiator": "^1.1 || ^2",
                 "doctrine/persistence": "^3.2 || ^4",
@@ -1110,19 +1015,23 @@
                 "psr/cache": "^1.0 || ^2.0 || ^3.0",
                 "symfony/console": "^5.4 || ^6.4 || ^7.0 || ^8.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0",
+                "symfony/polyfill-php84": "^1.33",
                 "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0 || ^8.0",
                 "symfony/var-exporter": "^6.4.1 || ^7.0 || ^8.0"
             },
             "conflict": {
-                "doctrine/annotations": "<1.12 || >=3.0"
+                "doctrine/annotations": "<1.12 || >=3.0",
+                "doctrine/cache": "<1.11",
+                "doctrine/mongodb-odm-bundle": "<5"
             },
             "require-dev": {
                 "doctrine/annotations": "^1.12 || ^2.0",
+                "doctrine/cache": "^2.0",
                 "doctrine/coding-standard": "^14.0",
                 "doctrine/orm": "^3.2",
                 "ext-bcmath": "*",
                 "jmikola/geojson": "^1.0",
-                "phpbench/phpbench": "^1.0.0",
+                "phpbench/phpbench": "^1.4.0",
                 "phpstan/phpstan": "^2.1",
                 "phpstan/phpstan-deprecation-rules": "^2.0",
                 "phpstan/phpstan-phpunit": "^2.0",
@@ -1180,7 +1089,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/mongodb-odm/issues",
-                "source": "https://github.com/doctrine/mongodb-odm/tree/2.15.3"
+                "source": "https://github.com/doctrine/mongodb-odm/tree/2.16.1"
             },
             "funding": [
                 {
@@ -1196,20 +1105,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-18T09:40:43+00:00"
+            "time": "2026-01-29T11:33:08+00:00"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
-            "version": "5.5.1",
+            "version": "5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
-                "reference": "502f2c0102d44de3d6a207833a6a475e54e1ba02"
+                "reference": "72a40244a4d4e13a54cb8d839ad73df4050b71e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/502f2c0102d44de3d6a207833a6a475e54e1ba02",
-                "reference": "502f2c0102d44de3d6a207833a6a475e54e1ba02",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/72a40244a4d4e13a54cb8d839ad73df4050b71e7",
+                "reference": "72a40244a4d4e13a54cb8d839ad73df4050b71e7",
                 "shasum": ""
             },
             "require": {
@@ -1282,9 +1191,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineMongoDBBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineMongoDBBundle/tree/5.5.1"
+                "source": "https://github.com/doctrine/DoctrineMongoDBBundle/tree/5.6.0"
             },
-            "time": "2025-11-19T13:25:47+00:00"
+            "time": "2026-01-26T10:21:57+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -3321,16 +3230,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v8.0.1",
+            "version": "v8.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "f57b37e61ab378bca98ffa038a786a24d574bec6"
+                "reference": "0d07589d03ed7db1833bfe943635872a2e8aebb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/f57b37e61ab378bca98ffa038a786a24d574bec6",
-                "reference": "f57b37e61ab378bca98ffa038a786a24d574bec6",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/0d07589d03ed7db1833bfe943635872a2e8aebb2",
+                "reference": "0d07589d03ed7db1833bfe943635872a2e8aebb2",
                 "shasum": ""
             },
             "require": {
@@ -3399,7 +3308,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v8.0.1"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v8.0.4"
             },
             "funding": [
                 {
@@ -3419,7 +3328,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-04T18:17:06+00:00"
+            "time": "2026-01-23T11:07:10+00:00"
         },
         {
             "name": "symfony/dotenv",
