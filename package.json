@@ -1,7 +1,7 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.28.6",
-        "@babel/preset-env": "^7.28.6",
+        "@babel/core": "^7.29.0",
+        "@babel/preset-env": "^7.29.0",
         "@symfony/webpack-encore": "^5.2.0",
         "core-js": "^3.48.0",
         "file-loader": "^6.2.0",
@@ -22,14 +22,14 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
-        "axios": "1.13.3",
+        "axios": "1.13.4",
         "bootstrap": "^5.3.3",
         "bootstrap-datepicker": "^1.10.1",
         "bootstrap-icons": "^1.13.1",
         "cross-spawn": "7.0.6",
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
-        "jquery-ui": "^1.14.1",
+        "jquery-ui": "^1.14.2",
         "nanoid": "5.1.6",
         "popper.js": "^1.16.1"
     }
