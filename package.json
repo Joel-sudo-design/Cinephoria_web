@@ -6,7 +6,7 @@
         "core-js": "^3.48.0",
         "file-loader": "^6.2.0",
         "regenerator-runtime": "^0.14.1",
-        "sass": "^1.97.3",
+        "sass": "^1.98.0",
         "sass-loader": "^16.0.7",
         "webpack": "^5.105.4",
         "webpack-cli": "^6.0.1",
@@ -30,7 +30,7 @@
         "flatpickr": "^4.6.13",
         "jquery": "^3.7.1",
         "jquery-ui": "^1.14.2",
-        "nanoid": "5.1.6",
+        "nanoid": "5.1.7",
         "popper.js": "^1.16.1"
     }
 }
