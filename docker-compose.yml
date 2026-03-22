@@ -80,7 +80,7 @@ services:
       - app_network
 
   mongo-express:
-    image: mongo-express:1.0.2
+    image: mongo-express:1-18
     container_name: mongo_express_cinephoria
     restart: always
     environment:
