@@ -31,12 +31,13 @@ updates:
       - "composer"
     ignore:
       - dependency-name: "symfony/*"
-        update-types: ["version-update:semver-major"]
+        update-types:
+          - "version-update:semver-major"
     commit-message:
       prefix: "chore(deps)"
 
   # ==========================================
-  # Frontend NPM
+  # Frontend NPM (React / Vite / Webpack / Encore)
   # ==========================================
   - package-ecosystem: "npm"
     directory: "/"
@@ -58,12 +59,13 @@ updates:
       - "frontend"
     ignore:
       - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+        update-types:
+          - "version-update:semver-major"
     commit-message:
       prefix: "chore(npm)"
 
   # ==========================================
-  # Docker
+  # Dockerfile images
   # ==========================================
   - package-ecosystem: "docker"
     directory: "/"
@@ -85,6 +87,22 @@ updates:
       - "docker"
     commit-message:
       prefix: "chore(docker)"
+
+  # ==========================================
+  # Docker Compose images
+  # ==========================================
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Paris"
+    labels:
+      - "dependencies"
+      - "docker-compose"
+    commit-message:
+      prefix: "chore(docker-compose)"
 
   # ==========================================
   # GitHub Actions

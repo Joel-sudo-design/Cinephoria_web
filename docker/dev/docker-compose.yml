@@ -27,7 +27,7 @@ services:
       - "host.docker.internal:host-gateway"
 
   db:
-    image: mariadb:11.4
+    image: mariadb:12.2.2
     container_name: symfony_db_cinephoria
     restart: unless-stopped
     environment:
@@ -42,7 +42,7 @@ services:
       --collation-server=utf8mb4_unicode_ci
 
   mongodb:
-    image: mongo:7.0
+    image: mongo:8.0
     container_name: mongo_cinephoria
     restart: unless-stopped
     ports:
@@ -60,7 +60,7 @@ services:
       driver: none
 
   phpmyadmin:
-    image: phpmyadmin:latest
+    image: phpmyadmin:5.2.3-apache
     container_name: phpmyadmin_cinephoria
     environment:
       PMA_HOST: db
@@ -72,7 +72,7 @@ services:
       - db
 
   mongo-express:
-    image: mongo-express:latest
+    image: mongo-express:1.0.2
     container_name: mongo_express_cinephoria
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/

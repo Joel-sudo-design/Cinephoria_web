@@ -36,3 +36,6 @@ temp/
 *.key
 id_rsa*
 deploy_key*
+
+# Docker dev
+docker/
