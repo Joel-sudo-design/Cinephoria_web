@@ -57,7 +57,7 @@ services:
       - app_network
 
   mongodb:
-    image: mongo:8.2
+    image: mongo:7
     container_name: mongo_cinephoria
     restart: always
     volumes:
