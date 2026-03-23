@@ -42,7 +42,7 @@ services:
       --collation-server=utf8mb4_unicode_ci
 
   mongodb:
-    image: mongo:8.0
+    image: mongo:7.0
     container_name: mongo_cinephoria
     restart: unless-stopped
     ports:
