@@ -40,7 +40,7 @@ services:
       - app_network
 
   db:
-    image: mariadb:12.2.2
+    image: mariadb:12.3.2
     container_name: symfony_db_cinephoria
     restart: always
     environment:
@@ -48,6 +48,9 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+      # L'image officielle met à niveau les tables système quand un volume
+      # existant est ouvert avec une nouvelle version de MariaDB.
+      MARIADB_AUTO_UPGRADE: "1"
     volumes:
       - db_data:/var/lib/mysql
     command: >
