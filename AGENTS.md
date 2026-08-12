@@ -33,6 +33,7 @@
 - Dependabot couvre Composer, npm, Docker, Docker Compose et GitHub Actions.
 - Toute proposition doit réussir la CI et les vérifications locales pertinentes avant fusion.
 - Les mises à niveau majeures de MariaDB ou MongoDB exigent une sauvegarde vérifiée, un test de migration local et une procédure de retour arrière avant toute utilisation sur un serveur contenant des données.
+- MongoDB est épinglé sur la série `8.0` pour respecter le chemin de migration depuis `7.0`. Ne pas utiliser le tag flottant `mongo:8`, qui peut pointer vers `8.2` ; conserver temporairement la FCV `7.0` après le changement de binaire, puis n'activer la FCV `8.0` qu'après une période de validation qui rend le retour arrière inutile.
 - Les mises à niveau majeures de Symfony ou d'un composant applicatif doivent être regroupées et testées fonctionnellement avant fusion.
 - Le bundle `endroid/qr-code-bundle` version 7 utilise `endroid_qr_code.builders.default`; ses routes sont enregistrées automatiquement et aucun fichier dédié sous `config/routes/` n'est nécessaire.
 - L'image de production doit conserver `opcache.save_comments=1`, requis par la compilation de configuration Symfony, et `.dockerignore` doit exclure `vendor/` afin de préserver les dépendances construites dans l'image.
