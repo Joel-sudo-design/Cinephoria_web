@@ -17,7 +17,7 @@
 - Valider Compose : `docker compose config`.
 - Construire l'image complète : `docker build --tag application_web_cinephoria:local .`.
 - Lancer l'environnement : `docker compose up -d --build`.
-- Exécuter les tests PHP dans un environnement contenant les dépendances de développement : `php bin/phpunit`.
+- Exécuter les tests PHP dans un environnement contenant les dépendances de développement : `php vendor/bin/phpunit --bootstrap vendor/autoload.php tests`. Le dépôt ne contient pas de `phpunit.xml` ni de lanceur `bin/phpunit` ; l'environnement `test` ajoute le suffixe `_test` au nom de la base, dont le schéma doit donc être préparé avant l'exécution.
 - Après une modification d'interface, vérifier obligatoirement l'application locale sur ordinateur, tablette et mobile avec le navigateur de contrôle, puis contrôler la console et les requêtes réseau.
 
 ## CI et déploiement
@@ -36,6 +36,8 @@
 - Les mises à niveau majeures de Symfony ou d'un composant applicatif doivent être regroupées et testées fonctionnellement avant fusion.
 - Le bundle `endroid/qr-code-bundle` version 7 utilise `endroid_qr_code.builders.default`; ses routes sont enregistrées automatiquement et aucun fichier dédié sous `config/routes/` n'est nécessaire.
 - L'image de production doit conserver `opcache.save_comments=1`, requis par la compilation de configuration Symfony, et `.dockerignore` doit exclure `vendor/` afin de préserver les dépendances construites dans l'image.
+- Les notifications de build Webpack restent désactivées : `webpack-notifier` dépend d'une branche `uuid` vulnérable et n'est pas nécessaire à la compilation ni au fonctionnement du site.
+- Les scripts shell, notamment `entrypoint.sh`, doivent rester en fins de ligne LF ; `.gitattributes` impose ce format afin que leur shebang soit exécutable dans Linux.
 
 ## Données et contenu
 
