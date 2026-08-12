@@ -83,7 +83,9 @@ RUN { \
     echo 'opcache.max_accelerated_files=20000'; \
     echo 'opcache.validate_timestamps=0'; \
     echo 'opcache.revalidate_freq=0'; \
-    echo 'opcache.save_comments=0'; \
+    # Symfony lit les PHPDoc du framework pendant la compilation de sa configuration.
+    # Conserver les commentaires évite un échec propre au conteneur de production.
+    echo 'opcache.save_comments=1'; \
     echo 'opcache.fast_shutdown=1'; \
     echo 'opcache.enable_file_override=1'; \
     echo 'opcache.max_wasted_percentage=10'; \
