@@ -23,6 +23,10 @@ updates:
           - "*"
         exclude-patterns:
           - "symfony/*"
+          # MongoDB publishes parallel maintained release lines. Keeping it
+          # outside the catch-all group prevents an apparent update from
+          # replacing the newer 2.2.x line with an older 2.1.x release.
+          - "mongodb/mongodb"
         update-types:
           - "patch"
     open-pull-requests-limit: 5
