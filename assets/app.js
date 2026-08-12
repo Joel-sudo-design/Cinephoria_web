@@ -1,4 +1,7 @@
 import './styles/app.css';
+// La police de titrage est empaquetée avec l'application afin que l'interface
+// ne dépende pas d'un CDN tiers au chargement.
+import '@fontsource/courgette/400.css';
 
 // Active Bootstrap
 import 'bootstrap';
