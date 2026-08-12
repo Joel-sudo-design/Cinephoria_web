@@ -12,6 +12,7 @@
 
 # Dépendances locales
 node_modules/
+vendor/
 
 # Cache & logs runtime
 var/log/*
