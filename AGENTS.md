@@ -8,7 +8,7 @@
 - Environnement local Docker Compose défini dans `docker-compose.yml`.
 - Nom Compose existant : `cinephoria`.
 - Conteneurs existants : `cinephoria`, `symfony_db_cinephoria`, `mongo_cinephoria`, `phpmyadmin_cinephoria` et `mongo_express_cinephoria`.
-- URLs locales documentées : application `http://localhost:8000`, phpMyAdmin `http://localhost:8081`, Mongo Express `http://localhost:8082` et MailHog `http://localhost:8025`.
+- Le Compose actuel publie l'application sur les ports hôte `80` et `443`, phpMyAdmin sur `127.0.0.1:8081` et Mongo Express sur `127.0.0.1:8082`. Aucun service MailHog ou Mailpit n'y est actuellement défini.
 
 ## Vérifications
 
@@ -34,6 +34,8 @@
 - Toute proposition doit réussir la CI et les vérifications locales pertinentes avant fusion.
 - Les mises à niveau majeures de MariaDB ou MongoDB exigent une sauvegarde vérifiée, un test de migration local et une procédure de retour arrière avant toute utilisation sur un serveur contenant des données.
 - Les mises à niveau majeures de Symfony ou d'un composant applicatif doivent être regroupées et testées fonctionnellement avant fusion.
+- Le bundle `endroid/qr-code-bundle` version 7 utilise `endroid_qr_code.builders.default`; ses routes sont enregistrées automatiquement et aucun fichier dédié sous `config/routes/` n'est nécessaire.
+- L'image de production doit conserver `opcache.save_comments=1`, requis par la compilation de configuration Symfony, et `.dockerignore` doit exclure `vendor/` afin de préserver les dépendances construites dans l'image.
 
 ## Données et contenu
 
