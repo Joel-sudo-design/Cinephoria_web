@@ -62,7 +62,7 @@ services:
   mongodb:
     # Le passage depuis MongoDB 7 doit s'arrêter sur la série 8.0 avant toute
     # montée vers 8.2 ; une version exacte évite qu'un redéploiement saute une étape.
-    image: mongo:8.0.28
+    image: mongo:8.3.8
     container_name: mongo_cinephoria
     restart: always
     volumes:
